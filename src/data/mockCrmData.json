@@ -1,0 +1,106 @@
+{
+  "value": [
+    
+    {
+      "@odata.etag": "W/\"2272\"",
+   "ava_ifanumbertext": 1468,  
+   "firstname": "Masoud",
+      "lastname": "EBR",
+      "ava_birthdate": "25.05.2013",
+      "ava_mothertongue": "fa_af",
+      "ava_age": 16,
+      "gendercode": "maennlich",
+      "familystatuscode": "ledig",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+    },
+
+    {
+      "@odata.etag": "W/\"2273\"",
+      "contactid": "p2",
+      "firstname": "Ahmed",
+      "lastname": "MOHAMMED",
+      "ava_ifanumbertext": 11223344556,
+      "ava_birthdate": "08.01.2003",
+      "ava_mothertongue": "fa_af",
+      "ava_age": 23,
+      "gendercode": "maennlich",
+      "familystatuscode": "verheiratet",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+    },
+
+    {
+      "@odata.etag": "W/\"2274\"",
+      "contactid": "p3",
+      "firstname": "Ben",
+      "lastname": "KABEL",
+      "ava_ifanumbertext": 123456999,
+      "ava_birthdate": "04.12.2024",
+      "ava_mothertongue": "fa_af",
+      "ava_age": 1,
+      "gendercode": "maennlich",
+      "familystatuscode": "ledig",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+    },
+
+    {
+      "@odata.etag": "W/\"2275\"",
+      "contactid": "p4",
+      "firstname": "Ahmad",
+      "lastname": "MUSTAFA",
+      "ava_ifanumbertext": 8111,
+      "ava_birthdate": "03.03.1978",
+      "ava_mothertongue": "fa_af",
+      "ava_age": 47,
+      "gendercode": "maennlich",
+      "familystatuscode": "verheiratet",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+    },
+
+    {
+      "@odata.etag": "W/\"2276\"",
+      "contactid": "p5",
+      "firstname": "Ben",
+      "lastname": "Jamil",
+      "ava_ifanumbertext": 125656999,
+      "ava_birthdate": "04.12.2024",
+      "ava_mothertongue": " fa_af",
+      "ava_age": 1,
+      "gendercode": "maennlich",
+      "familystatuscode": "ledig",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+    },
+
+    {
+      "@odata.etag": "W/\"2277\"",
+      "contactid": "p6",
+      "firstname": "Ahmad",
+      "lastname": "Kofta",
+      "ava_ifanumbertext": 87711,
+      "ava_birthdate": "03.06.1998",
+      "ava_mothertongue": "fa_af",
+      "ava_age": 27,
+      "gendercode": "maennlich",
+      "familystatuscode": "verheiratet",
+      "_ava_familyid_value": "FAMILY1",
+      "ava_clientgroup": "Familie",
+      "ava_nationalitystateid": "ITAKA",
+      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024)"
+    }
+
+  ]
+}

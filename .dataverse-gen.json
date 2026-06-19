@@ -1,0 +1,6 @@
+{
+  "adapter": "dataverse",
+  "tables": [
+    "contact"
+  ]
+}

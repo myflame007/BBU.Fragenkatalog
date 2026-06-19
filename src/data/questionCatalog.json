@@ -1,0 +1,4432 @@
+{
+  "questions": {
+    "001": {
+      "id": "001",
+      "category": "begruessung",
+      "type": "Sprechtext",
+      "text": {
+        "de": "•\tGuten Tag. Mein Name ist … und ich arbeite hier in der Betreuung in der BBE …. Ich führe heute das Gespräch mit Ihnen. Dieses Gespräch dient dazu, gemeinsam festzustellen, ob Sie besondere Bedürfnisse haben und Unterstützung benötigen. \n•\tOptional (falls Dolmetscher*in anwesend): Die Dolmetschung unterstützt uns dabei, das Gespräch gut und klar zu führen. Bitte sagen Sie, wenn etwas unklar ist oder anders erklärt werden soll.\n•\tIch führe dieses Gespräch mit Ihnen. Für manche Menschen ist es wichtig, ein Gespräch mit einer Person eines bestimmten Geschlechts zu führen. Wenn Sie dies wünschen, teilen Sie es mir bitte jetzt mit. \n•\tWir stellen Ihnen einige persönliche oder gesundheitliche Fragen, damit wir beurteilen können, ob Sie besondere Bedürfnisse haben. Ähnliche Fragen haben Sie möglicherweise schon gestellt bekommen, als Sie Ihren Asylantrag gestellt haben. \n•\tWenn Sie etwas nicht verstehen, sagen Sie bitte Bescheid. Wir können die Frage wiederholen oder anders stellen.\n•\tDas Gespräch dauert ungefähr 30 Minuten. Manche Fragen können schwierig sein. Wenn Sie eine Pause brauchen, sagen Sie bitte jederzeit Bescheid.\n•\tBitte beantworten Sie die Fragen mit Ja oder Nein. \n•\tWenn Sie über Ihre Erfahrungen sprechen möchten, empfehlen wir Ihnen ein weiteres Gespräch mit Betreuer*innen, Psycholog*innen oder dem medizinischen Personal. Wenn Sie sich nach dem Gespräch sehr verzweifelt fühlen, geben Sie uns bitte Bescheid. \n•\tOptional: Im Anschluss an unser Gespräch frage ich Sie, ob Sie die Fragen auch noch für Ihre Kinder oder Angehörige beantworten.\n•\tOptional: Wenn Sie eine*n Angehörige*n haben, der*die selbst nicht das Gespräch führen kann, frage ich Sie, ob Sie die Fragen auch noch für Ihre*n Angehörige*n beantworten werden."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "002": {
+      "id": "002",
+      "category": "zustimmung",
+      "type": "Sprechtext",
+      "text": {
+        "de": "•\tDie BBU Grundversorgung ist verpflichtet, diese Beurteilung durchzuführen. Ihre Antworten werden in unserem internen System dokumentiert.\n•\tAn das BFA werden ausschließlich jene Ergebnisse weitergeleitet, die zeigen, welche Bedürfniskategorien betroffen sind, die nach dem Gesetz als besonderes Bedürfnis gelten. Sie erhalten ein Dokument, in dem dieses Ergebnis steht.\n•\tWenn Sie an der Beurteilung nicht teilnehmen möchten, werden wir Sie bitten, dies mit Ihrer Unterschrift zu bestätigen. Das BFA wird über Ihre Ablehnung informiert. "
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "0.1": {
+      "id": "0.1",
+      "category": "Zustimmung des Klienten/der Klientin",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Stimmen Sie der Beurteilung zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "0.1a": {
+      "id": "0.1a",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wer beantwortet die Fragen zu minderjährigen Kindern in Ihrem Familienverband?"
+      },
+      "answerType": "Ja/Nein wenn Ja= Dropdown (Namen Familienrolle \"Erwachsene\")",
+      "condition": "Nur wenn die Beurteilung für ein Kind durchgeführt wird"
+    },
+    "0.2": {
+      "id": "0.2",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Beantworten Sie die Fragen zu minderjährigen Kindern in Ihrem Familienverband?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": "Nur wenn die Beurteilung für ein Kind durchgeführt wird"
+    },
+    "0.3": {
+      "id": "0.3",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Sprechtext",
+      "text": {
+        "de": "Wenn Sie Kinder haben, die über 14 Jahre alt sind, können diese das Gespräch auch mit uns alleine führen"
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "0.3a": {
+      "id": "0.3a",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Stimmen Sie der Beurteilung für Ihr Kind zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": "Nur wenn die Beurteilung für ein Kind durchgeführt wird"
+    },
+    "0.4": {
+      "id": "0.4",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wir führen das Gespräch nun für Ihr Kind NAME: "
+      },
+      "answerType": "Drop down (Namen/alle MJ)",
+      "condition": ""
+    },
+    "0.5": {
+      "id": "0.5",
+      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
+      "type": "Bewertung",
+      "text": {
+        "de": "Der/die Minderjährige ist während des Gesprächs anwesend. "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1a.1": {
+      "id": "1a.1",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind zeigt Anzeichen von Vernachlässigung (z.B. mangelnde Hygiene, wetterunpassende Kleidung, mangelnde Zuwendung, Aufsichtspflichtverletzungen)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1a.2": {
+      "id": "1a.2",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind zeigt Anzeichen von Verletzungen."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1a.3": {
+      "id": "1a.3",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind wirkt ängstlich oder zeigen gefährliches bzw. selbstverletzendes Verhalten."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1a.4": {
+      "id": "1a.4",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Sprechtext",
+      "text": {
+        "de": "In Österreich sind alle Menschen unter 18 Jahren nach dem Gesetz Kinder und Kinder haben das Recht auf besonderen Schutz. Die Verantwortung und der Schutz der Kinder liegen bei den Eltern. Manchmal kann es sein, dass es Eltern schwerfällt für ihre Kinder da zu sein. In dem Fall können gemeinsam Lösungen und Unterstützung gesucht werden."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "1a.5": {
+      "id": "1a.5",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Bewertung",
+      "text": {
+        "de": "Das Gespräch wird mit einem Kind über 14 Jahren geführt."
+      },
+      "answerType": "Ja/Nein",
+      "condition": "",
+      "rule": {
+        "type": "age_min",
+        "value": 14
+      }
+    },
+    "1a.6": {
+      "id": "1a.6",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das dir manchmal schwerfällt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1a.7": {
+      "id": "1a.7",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es Personen oder Situationen, die dich belasten?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1a.8": {
+      "id": "1a.8",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das dir Angst macht oder dich unsicher fühlen lässt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1a.9": {
+      "id": "1a.9",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat ihr Kind Probleme oder besondere Bedürfnisse? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1a.10": {
+      "id": "1a.10",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Ist die Entwicklung Ihres Kindes für das Alter nicht angemessen? Gibt es bezüglich der Entwicklung Ihres Kindes etwas, dass Ihnen Sorge bereitet?"
+      },
+      "answerType": "Ja/Nein wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "1a.11": {
+      "id": "1a.11",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Können Sie die Gesundheit, das Wohlergehen und die Aufsicht über Ihr Kind nicht uneingeschränkt wahrnehmen?"
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1a.12": {
+      "id": "1a.12",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das Sie uns mitteilen möchten, dass sich auf Ihre Fähigkeit auswirkt, für Ihr Kind Sorge zu tragen? z.B. Überlastung, Suchtmittelkonsum, Beziehungsprobleme etc."
+      },
+      "answerType": "Ja/Nein wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "1a.13": {
+      "id": "1a.13",
+      "category": "1a. Begleitete*r Minderjährige*r",
+      "type": "Bewertung",
+      "text": {
+        "de": "Risikofaktoren liegen vor (CMS)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 1a.1 - 1a.11 =>3x ja = ja",
+      "rule": {
+        "type": "count",
+        "range": {
+          "prefix": "1a.",
+          "start": 1,
+          "end": 11
+        },
+        "threshold": 3,
+        "answer": "Ja"
+      }
+    },
+    "1b.1": {
+      "id": "1b.1",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind zeigt Anzeichen von Vernachlässigung (z.B. mangelnde Hygiene, wetterunpassende Kleidung)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1b.2": {
+      "id": "1b.2",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind zeigt Anzeichen von Verletzungen."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1b.3": {
+      "id": "1b.3",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind wirkt ängstlich oder zeigt gefährliches bzw. selbstverletzendes Verhalten."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1b.4": {
+      "id": "1b.4",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Wirkt die Entwicklung des Kindes dem Alter nicht angemessen?"
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1b.5": {
+      "id": "1b.5",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Wird das Kind von einer Person begleitet, bei der das Obsorgeverhältnis ungeklärt ist?"
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "1b.6": {
+      "id": "1b.6",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Sprechtext",
+      "text": {
+        "de": "In Österreich sind alle Menschen unter 18 Jahren Kinder bzw. Jugendliche nach dem Gesetz und haben besondere Rechte. Kinder und Jugendliche, die ohne Eltern in Österreich sind, haben Rechte, die sie besonders schützen. "
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "1b.7": {
+      "id": "1b.7",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du Familienangehörige oder Verwandte in Österreich?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1b.8": {
+      "id": "1b.8",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wie heißen diese Personen und wo wohnen sie?"
+      },
+      "answerType": "Nur Anmerkung",
+      "condition": ""
+    },
+    "1b.9": {
+      "id": "1b.9",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du Familienangehörige oder Verwandte in einem anderen EU-Land?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1b.9.1": {
+      "id": "1b.9.1",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wie heißen diese Personen und wo wohnen sie?"
+      },
+      "answerType": "Nur Anmerkung",
+      "condition": ""
+    },
+    "1b.10": {
+      "id": "1b.10",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Bei Begleitung anderer Erwachsener: Fühlst du dich mit der Person, mit der du hergekommen bist, wohl, wenn du mit ihr zusammen bist?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1b.11": {
+      "id": "1b.11",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das dir manchmal schwerfällt? Gibt es etwas, was dir Sorgen bereitet oder wo du Unterstützung benötigst?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "1b.12": {
+      "id": "1b.12",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du Sorge um deine Sicherheit hier in der Betreuungseinrichtung?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1b.13": {
+      "id": "1b.13",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Weißt du, welche Nummern du anrufen kannst, wenn es einen Notfall gibt und du sehr dringend Hilfe brauchst?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "1b.14": {
+      "id": "1b.14",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Bewertung",
+      "text": {
+        "de": "Risikofaktoren liegen vor (CMS)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 1b.1 - 1b.5 =>2x ja = ja ODER wenn 1b.7-1b.13 => 2x nein = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "count",
+            "range": {
+              "prefix": "1b.",
+              "start": 1,
+              "end": 5
+            },
+            "threshold": 2,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "range": {
+              "prefix": "1b.",
+              "start": 7,
+              "end": 13
+            },
+            "threshold": 2,
+            "answer": "Nein"
+          }
+        ]
+      }
+    },
+    "1b.15": {
+      "id": "1b.15",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Bewertung",
+      "text": {
+        "de": "Verwandte/Bezugspersonen in Österreich"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "If 1b.7 == Ja => Ja",
+      "rule": {
+        "type": "answer",
+        "id": "1b.7",
+        "answer": "Ja"
+      }
+    },
+    "1b.16": {
+      "id": "1b.16",
+      "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "type": "Bewertung",
+      "text": {
+        "de": "Verwandte/Bezugspersonen in EU"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "If 1b.9 == Ja => Ja",
+      "rule": {
+        "type": "answer",
+        "id": "1b.9",
+        "answer": "Ja"
+      }
+    },
+    "5.1": {
+      "id": "5.1",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Sprechtext",
+      "text": {
+        "de": "In manchen Ländern werden Menschen bestraft oder verfolgt, weil sie eine Person gleichen Geschlechts lieben oder weil ihr Geschlecht nicht zu dem passt, das ihnen bei der Geburt zugewiesen wurde. In Österreich darf niemand wegen der sexuellen Orientierung oder Geschlechtsidentität bedroht, verletzt oder diskriminiert werden. Es gibt innerhalb und außerhalb der Betreuungseinrichtung Unterstützungsangebote für LGBTI-Personen. Sollten Sie die nachfolgenden Fragen zum jetzigen Zeitpunkt nicht beantworten wollen, können Sie sich auch im Nachgang vertraulich an eine Betreuerin oder einen Betreuer wenden. "
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "5.2": {
+      "id": "5.2",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Personen, die sich als Angehörige einer sexuellen Minderheit oder als LGBTI identifizieren, können Risiken ausgesetzt sein und besondere Bedürfnisse haben. Betrifft dies Sie?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.3": {
+      "id": "5.3",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Fühlen Sie sich in Ihrem Zimmer mit Ihren Mitbewohner*innen nicht sicher?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.4": {
+      "id": "5.4",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es Probleme mit anderen Bewohner*innen und/oder Mitarbeiter*innen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.5": {
+      "id": "5.5",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie medizinische Bedürfnisse, die besondere Rücksicht erfordern? Nehmen Sie beispielsweise Hormontabletten?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.6": {
+      "id": "5.6",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sind Sie in Begleitung eines Partners/einer Partnerin hier, mit dem/der Sie eine gemeinsame Unterbringung wünschen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.7": {
+      "id": "5.7",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie Angaben ergänzen mit welchen Pronomen oder welchem Namen Sie angesprochen werden möchten?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "5.8": {
+      "id": "5.8",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Bewertung",
+      "text": {
+        "de": "Risikofaktoren liegen vor (CMS)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 5.3-5.5 =>1x ja = ja",
+      "rule": {
+        "type": "count",
+        "ids": [
+          "5.3",
+          "5.4",
+          "5.5"
+        ],
+        "threshold": 1,
+        "answer": "Ja"
+      }
+    },
+    "5.9": {
+      "id": "5.9",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Bewertung",
+      "text": {
+        "de": "Medizinische Einschätzung notwendig"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 5.5 =>1x ja = ja",
+      "rule": {
+        "type": "answer",
+        "id": "5.5",
+        "answer": "Ja"
+      }
+    },
+    "6.1": {
+      "id": "6.1",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Der/die Alleinerziehende wirkt sehr belastet, das zeigt sich etwa dadurch dass die Person schnell aggressiv wird, wenig Gefühle gegenüber dem Kind zeigt oder nicht gut auf die Bedürfnisse des Kindes reagiert – zum Beispiel bei der Körperpflege oder auf Weinen."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "6.2": {
+      "id": "6.2",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Info",
+      "text": {
+        "de": "Alleinerziehende Eltern haben sehr viel Verantwortung. Ihr Alltag kann deswegen besonders anstrengend sein. Manchmal kann zusätzliche Hilfe entlasten, damit sie alles gut schaffen können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "6.3": {
+      "id": "6.3",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Brauchen Sie Hilfe, um Ihre Kinder zu versorgen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "6.4": {
+      "id": "6.4",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es Menschen, die Sie unterstützen können – zum Beispiel Familie, Partner*in oder Bekannte? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "6.5": {
+      "id": "6.5",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Ist es für Sie im Moment schwer, sich um Ihr Kind oder Ihre Kinder zu kümmern?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "6.6": {
+      "id": "6.6",
+      "category": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "type": "Bewertung",
+      "text": {
+        "de": "Unterstützung notwendig (CMS)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 6.1, 6.3, 6.5  =>1x ja = ja",
+      "rule": {
+        "type": "count",
+        "ids": [
+          "6.1",
+          "6.3",
+          "6.5"
+        ],
+        "threshold": 1,
+        "answer": "Ja"
+      }
+    },
+    "7.1": {
+      "id": "7.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Die Person hat ihre Ausweise nicht selbst. Jemand anderer bewahrt die Dokumente auf."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.2": {
+      "id": "7.2",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Die Person hat sehr großes Misstrauen oder große Angst vor Behörden."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.3": {
+      "id": "7.3",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Die Person wirkt abhängig von anderen. Andere bestimmen, wo sie wohnt, mit wem sie sprechen darf oder was sie sagt."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.4": {
+      "id": "7.4",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Die Person zeigt Anzeichen, dass sie von Gewalt von Gewaltandrohungen betroffen war oder ist."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.5": {
+      "id": "7.5",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Die Person macht sich große Sorgen um ihre Familie."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.6": {
+      "id": "7.6",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind fühlt sich unwohl bei den Erwachsenen, die es begleiten und/oder wirkt eingeschüchtert und distanziert."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.7": {
+      "id": "7.7",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Ggf. ist die Beziehung zu den Erwachsenen zweifelhaft oder eine vermeintliche Obsorge nicht nachweisbar. Trifft das auf das Kind zu?"
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.8": {
+      "id": "7.8",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Das Kind zeigt sexuell-explizites Verhalten, das dem Alter des Kindes nicht entspricht (z.B. sexualisierte Sprache, leichte und ggf. altersunangemessene Kleidung, grenzverletzendes Verhalten gegenüber Anderen)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.9": {
+      "id": "7.9",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen haben Angst vor anderen oder werden gezwungen, Dinge zu tun, die sie nicht tun möchten. Zum Beispiel wird ihnen gesagt, dass sie sehr viel Geld für ihre Reise in ein anderes Land bezahlen müssen. Oder sie und ihre Familien werden bedroht oder unter Druck gesetzt. Oft werden diesen Menschen ihre Ausweise weggenommen. Andere kontrollieren dann, wohin sie gehen und mit wem sie sprechen dürfen. Ihnen wird gesagt, dass sie arbeiten müssen, stehlen sollen, auf der Straße betteln sollen oder sexuelle Dienste anbieten müssen. Sie bekommen dafür kein oder nur sehr wenig Geld. Das nennt man „Ausbeutung“ oder auch „Menschenhandel“ oder „Kinderhandel“. Das kann im Herkunftsland passieren, auf der Flucht oder auch in Europa. Betroffene Personen haben besondere Rechte. Es gibt spezielle Organisationen, die ihnen helfen und sie schützen können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "7.10": {
+      "id": "7.10",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Können Sie mir sagen, wo Sie sich gerade befinden? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.11": {
+      "id": "7.11",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Bewertung",
+      "text": {
+        "de": "Klient*in weiß nicht, wo er*sie sich befindet."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.12": {
+      "id": "7.12",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Können Sie mir sagen, wo Sie vor Ihrer Ankunft hier gewesen sind? (Ist die Angabe schlüssig und klar:)"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.13": {
+      "id": "7.13",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Bewertung",
+      "text": {
+        "de": "Klient*in weiß nicht, wo er*sie sich befindet. "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.14": {
+      "id": "7.14",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat jemand Sie angelogen, bedroht, unter Druck gesetzt oder festgehalten, obwohl Sie das nicht wollten?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.15": {
+      "id": "7.15",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat jemand Gewalt, Drohungen oder Abhängigkeit genutzt, um Sie zu etwas zu zwingen oder um Ihre Entscheidungen zu beeinflussen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.16": {
+      "id": "7.16",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat jemand von Ihnen verlangt zu arbeiten oder etwas zu tun, wovon diese Person einen Vorteil hatte?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.17": {
+      "id": "7.17",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es im Moment jemanden, der Sie kontrolliert oder beeinflusst? Fühlen Sie sich unsicher oder bedroht? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.18": {
+      "id": "7.18",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Brauchen Sie Unterstützung?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.19": {
+      "id": "7.19",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sind Sie bereits mit einer Schutzeinrichtung, einer Beratungsstelle oder der Polizei in Kontakt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.20": {
+      "id": "7.20",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es Personen, die Ihr Kind angelogen, bedroht, unter Druck gesetzt oder gegen seinen/ihren Willen festgehalten haben? Trifft dies auf Ihr Kind zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.21": {
+      "id": "7.21",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sind Sie bereits mit einer Schutzeinrichtung, einer Beratungsstelle, der Kinder‑ und Jugendhilfe oder der Polizei in Kontakt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.22": {
+      "id": "7.22",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Bewertung",
+      "text": {
+        "de": "Die gesamte Situation deutet auf einen Verdacht auf Menschenhandel hin"
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.23": {
+      "id": "7.23",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Bewertung",
+      "text": {
+        "de": "Indikatoren erkannt (CMS)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 7.10-7.21 =>3x ja = ja ODER wenn 7.22 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "count",
+            "range": {
+              "prefix": "7.",
+              "start": 10,
+              "end": 21
+            },
+            "threshold": 3,
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "7.22",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "9.1": {
+      "id": "9.1",
+      "category": "9. Person, die an einer krankheitswertigen belastungsabhängigen Störung, einer psychischen Erkrankung von vergleichbarem Gewicht oder einer sonstigen schweren Erkrankung leidet",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen erleben Phasen, in denen ihre Gedanken, Gefühle oder ihr Verhalten sehr belastend ist.  Dann wird der Alltag schwieriger. Genau wie bei körperlichen Krankheiten kann das jede und jeden treffen. Es gibt Hilfe und Unterstützung, die entlasten können. Es ist sehr mutig, um Hilfe zu bitten. Das kann ein erster Schritt, damit es einem langfristig besser geht."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "9a.1": {
+      "id": "9a.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Werden Sie schnell wütend?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.2": {
+      "id": "9a.2",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hatten Sie in den letzten zwei Wochen Probleme mit dem Ein- oder Durchschlafen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.3": {
+      "id": "9a.3",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie im letzten Monat oft Dinge im Alltag vergessen oder Gegenstände verlegt, wie zum Beispiel Ihr Handy oder Ihre ID? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.4": {
+      "id": "9a.4",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie in letzter Zeit das Interesse an Dingen oder an Ihrer Umgebung verloren? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.5": {
+      "id": "9a.5",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "In dem letzten Monat haben Sie sich oft traurig oder einsam gefühlt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.6": {
+      "id": "9a.6",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie sich im letzten Monat schwindelig, kraftlos oder wie gelähmt gefühlt, ohne dass Sie dafür einen medizinischen Grund kennen? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.7": {
+      "id": "9a.7",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie oft Erinnerungen an schmerzhafte oder belastende Ereignisse? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.8": {
+      "id": "9a.8",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "In dem letzten Monat haben Sie häufig Angst gehabt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.9": {
+      "id": "9a.9",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Offensichtliche Gedankengänge brechen ab oder bleiben unvollständig."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.10": {
+      "id": "9a.10",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Auffällige Verlangsamung oder Beschleunigung der Sprache."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.11": {
+      "id": "9a.11",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Auffällig reduzierte Mimik oder wirkt stark zurückgezogen."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.12": {
+      "id": "9a.12",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Auffällige Unruhe (z. B. Nesteln, Aufstehen, Umhergehen)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.13": {
+      "id": "9a.13",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Auffällige Reizbarkeit (häufiges Schimpfen, Abbruchsignale)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.14": {
+      "id": "9a.14",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Akute Desorientierung/Verwirrtheit, die das Gespräch unmöglich macht."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.16": {
+      "id": "9a.16",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Ist Ihnen aufgefallen, dass Ihr Kind in letzter Zeit häufiger traurig, ängstlich oder ungewöhnlich ruhig ist? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.17": {
+      "id": "9a.17",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat Ihr Kind im Alltag Veränderungen gezeigt, zum Beispiel beim Schlafen, beim Spielen oder im Umgang mit anderen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.18": {
+      "id": "9a.18",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das Ihr Kind im Moment stark belastet oder wobei Sie sich Sorgen um sein Wohlergehen machen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.19": {
+      "id": "9a.19",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Auffällige Entwicklungsrückschritte (z.B. Einnässen, Daumenlutschen, Klammern, Babysprache).Kind ist auffällig "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.20": {
+      "id": "9a.20",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Häufige Wutausbrüche, starke Reizbarkeit oder aggressives Verhalten."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9a.21": {
+      "id": "9a.21",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Rückzug, wenig Interesse an Kontakt/Spielen."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "9b.1": {
+      "id": "9b.1",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hatten Sie in dem letzten Monat Suizidgedanken?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.2": {
+      "id": "9b.2",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sehen oder hören Sie manchmal Dinge, die andere nicht sehen oder hören? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.3": {
+      "id": "9b.3",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie manchmal Erinnerungslücken oder werden Sie plötzlich ohnmächtig, ohne dass es einen bekannten medizinischen Grund gibt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.4": {
+      "id": "9b.4",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Fühlen sie sich oft verwirrt, dass sie nicht wissen:  \nWo Sie sind? \nWelcher Tag es ist? \nWie Sie heißen?  \nOder erkennen Sie Menschen um sich nicht?  "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.5": {
+      "id": "9b.5",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Ist im letzten Monat vorgekommen, dass Sie sich absichtlich verletzt haben?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.6": {
+      "id": "9b.6",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie psychische Erkrankungen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.7": {
+      "id": "9b.7",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat ihr Kind schon mal Suizidabsichten geäußert? Trifft dies auf Ihr Kind zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.8": {
+      "id": "9b.8",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat ihr Kind sich schon mal absichtlich selbst verletzt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.9": {
+      "id": "9b.9",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie bei Ihrem Kind Anzeichen auf eine starke psychische Belastung wahrgenommen z.B. häufige Alpträume über einen längeren Zeitraum, unbegründete Ohnmacht, wiederkehrende Schmerzen ohne medizinische Ursache?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.10": {
+      "id": "9b.10",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Bewertung",
+      "text": {
+        "de": "Psychologische Einschätzung notwendig (CMS Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 9a.1-9a.14 => 3x ja = ja, ODER wenn 9a.16 - 9a.21 => 3x ja = ja, ODER wenn 9b.1-9b.6 =>1x ja = ja ODER wenn 9b.7-9b.9 =>1x ja = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "count",
+            "range": {
+              "prefix": "9a.",
+              "start": 1,
+              "end": 14
+            },
+            "threshold": 3,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "range": {
+              "prefix": "9a.",
+              "start": 16,
+              "end": 21
+            },
+            "threshold": 3,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "range": {
+              "prefix": "9b.",
+              "start": 1,
+              "end": 6
+            },
+            "threshold": 1,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "range": {
+              "prefix": "9b.",
+              "start": 7,
+              "end": 9
+            },
+            "threshold": 1,
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10a.1": {
+      "id": "10a.1",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Sprechtext",
+      "text": {
+        "de": "Manche Menschen erleben vor oder während der Flucht sehr schwere Gewalt. Manche werden sogar gefoltert – besonders, wenn sie im Gefängnis waren. Diese Informationen können für Ihr Asylverfahren wichtig sein. Sie entscheiden selbst, ob Sie darüber sprechen möchten und wie viel Sie erzählen. Es kann auch hilfreich sein, wenn Ärztinnen oder Ärzte Verletzungen oder andere Spuren dokumentieren. Das kann Ihre Aussagen im Asylverfahren unterstützen. In Österreich gibt es spezialisierte Stellen, die Menschen mit solchen Erfahrungen professionell helfen können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "10a.2": {
+      "id": "10a.2",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gab es in Ihrem Leben Situationen, in denen Ihnen absichtlich schwere körperliche oder seelische Schmerzen zugefügt wurden – etwa durch staatliche Stellen oder andere Gruppen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.3": {
+      "id": "10a.3",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat Ihr Kind Situationen erlebt, in denen es absichtlich schwere körperliche oder seelische Schmerzen erlitten hat – etwa durch staatliche Stellen oder andere Gruppen? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.4": {
+      "id": "10a.4",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie mit medizinischem Fachpersonal sprechen, damit körperliche Spuren dokumentiert werden können?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.5": {
+      "id": "10a.5",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie mit einer Psychologin oder einem Psychologen sprechen, damit seelische Belastungen oder Spuren dokumentiert werden können?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.6": {
+      "id": "10a.6",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie mit einer speziell geschulten Fachkraft darüber sprechen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.7": {
+      "id": "10a.7",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Bewertung",
+      "text": {
+        "de": "Hinweise liegen vor (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10a.2=>1x ja = ja ODER wenn 10a.3 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "answer",
+            "id": "10a.2",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10a.3",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10a.8": {
+      "id": "10a.8",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Bewertung",
+      "text": {
+        "de": "Psychologische Einschätzung notwendig (CMS Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10a.5=>ja = ja ODER wenn 10a.6 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "answer",
+            "id": "10a.5",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10a.6",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10a.9": {
+      "id": "10a.9",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Bewertung",
+      "text": {
+        "de": "Medizinische Einschätzung notwendig (CMS Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10a.4=>ja",
+      "rule": {
+        "type": "answer",
+        "id": "10a.4",
+        "answer": "Ja"
+      }
+    },
+    "10c.1": {
+      "id": "10c.1",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Info",
+      "text": {
+        "de": "Manchmal erleben Menschen eine sexuelle Handlung, der sie nicht zugestimmt haben. Das ist eine Form von Gewalt und in Österreich strafbar. Eine Vergewaltigung kann sehr belastend sein und Gefühle wie Angst, Scham oder Verwirrung auslösen. Wichtig ist: Die Verantwortung liegt immer bei der Person, die die Gewalt ausgeübt hat, nie bei der betroffenen Person. Es gibt in und außerhalb der Betreuungseinrichtung kompetente Anlaufstellen, die Betroffenen Unterstützung bieten können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "10c.2": {
+      "id": "10c.2",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie sexualisierte Gewalt erlebt, die für Sie heute noch belastend ist?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.3": {
+      "id": "10c.3",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Beeinflussen diese Erlebnisse Ihr Wohlbefinden – zum Beispiel Ihren Schlaf, Ihre Gefühle oder Ihren Alltag? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.4": {
+      "id": "10c.4",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie mit einer speziell geschulten Fachkraft darüber sprechen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.6": {
+      "id": "10c.6",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat Ihr Kind jemals sexualisierte Gewalt erlebt?Trifft dies auf Ihr Kind zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.7": {
+      "id": "10c.7",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Bewertung",
+      "text": {
+        "de": "Hinweise liegen vor (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10c.2=>1x ja = ja ODER wenn 10c.6 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "answer",
+            "id": "10c.2",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10c.6",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10c.8": {
+      "id": "10c.8",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Bewertung",
+      "text": {
+        "de": "Psychologische Betreuung empfohlen (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10c.3=>ja = ja ODER wenn 10c.4 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "answer",
+            "id": "10c.3",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10c.4",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10d.1": {
+      "id": "10d.1",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Der*die Klient*in ist minderjährig und verheiratet."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "10d.2": {
+      "id": "10d.2",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Der*die Klient*in scheint in einer Beziehung zu sein."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "10d.3": {
+      "id": "10d.3",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Beobachtung",
+      "text": {
+        "de": "In der Beziehung gibt es Anzeichen von körperlicher, sexueller oder psychischer Gewalt (z.B. Bedrohungen, Demütigungen)."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "10d.4": {
+      "id": "10d.4",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Beobachtung",
+      "text": {
+        "de": "In der Beziehung wird Kontrolle ausgeübt und Freiheiten eingeschränkt z.B. nicht allein aus dem Haus gehen dürfen, nicht allein sprechen dürfen, Handy wird weggenommen, Kleidung wird vorgeschrieben, oder das Geld wird von der Partnerin/dem Partner verwaltet. "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "10d.5": {
+      "id": "10d.5",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen dürfen nicht selbst entscheiden, ob sie heiraten möchten. Sie werden unter Druck gesetzt oder dazu gezwungen. Das nennt man Zwangsheirat. Zwangsheirat ist eine Form von Gewalt und in Österreich verboten. Manchmal betrifft das auch Kinder oder Jugendliche. In Österreich darf man grundsätzlich erst ab 18 Jahren heiraten. Es gibt spezielle Beratungsstellen, die betroffene Menschen vertraulich unterstützen und ihnen helfen können. "
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "10d.6": {
+      "id": "10d.6",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Betrifft Sie dies?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10d.7": {
+      "id": "10d.7",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Bewertung",
+      "text": {
+        "de": "Hinweise liegen vor (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10d.3-10d.4=>2x ja = ja ODER wenn 10d.6 = ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "count",
+            "ids": [
+              "10d.3",
+              "10d.4"
+            ],
+            "threshold": 2,
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10d.6",
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10e.1": {
+      "id": "10e.1",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen erleben Gewalt oder Missbrauch. Gewalt kann viele Gesichter haben: Sie kann körperlich sein, z.B. wenn jemand gestoßen oder geschlagen wird. Sie kann auch seelisch sein, zum Beispiel wenn jemand beleidigt, erniedrigt oder eingeschüchtert wird. Gewalt kann außerdem passieren, wenn jemand kontrolliert wird oder wichtige Dinge verboten werden. Auch das Wegnehmen von Geld oder das Einsperren gehört dazu. Es ist auch Gewalt, wenn jemand zu sexuellen Handlungen gedrängt oder gezwungen wird, gegen den eigenen Willen. Manche Gewalterfahrungen können schon länger zurückliegen und Menschen trotzdem noch beeinflussen. Diese Erfahrungen können sehr schmerzhaft sein und Sie entscheiden, ob Sie die Fragen beantworten möchten."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "10e.2": {
+      "id": "10e.2",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie Erfahrungen gemacht, bei denen Ihnen absichtlich körperliche Schmerzen oder Verletzungen zugefügt wurden?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.3": {
+      "id": "10e.3",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gab es Situationen, in denen Sie psychisch stark unter Druck gesetzt, bedroht oder eingeschüchtert wurden?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.4": {
+      "id": "10e.4",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Manche Menschen erleben auch Gewalt, die mit ihrem Geschlecht oder ihrer Identität zu tun hat. Möchten Sie mir sagen, ob Sie solche Erfahrungen gemacht haben?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.5": {
+      "id": "10e.5",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie Situationen erlebt, in denen jemand Sie zu sexuellen Handlungen gezwungen hat oder Ihre sexuelle Unversehrtheit verletzt wurde?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.6": {
+      "id": "10e.6",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wurde Ihrem Kind schon einmal absichtlich körperlich wehgetan (z. B. Schlagen, Festhalten, Verletzen)? Trifft dies auf Ihr Kind zu?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.7": {
+      "id": "10e.7",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat Ihr Kind erlebt, dass jemand ihm Angst gemacht, es bedroht oder seelisch schlecht behandelt hat?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.8": {
+      "id": "10e.8",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wurde Ihr Kind wegen seines Geschlechts schlecht behandelt oder zu etwas gezwungen, was es nicht wollte?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.9": {
+      "id": "10e.9",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Beeinträchtigen diese Erlebnisse derzeit Ihr Wohlbefinden – zum Beispiel Ihren Schlaf, Ihre Gefühle oder Ihren Alltag?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.10": {
+      "id": "10e.10",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das wir wissen sollten, um Sie hier besser schützen und unterstützen zu können?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "10e.11": {
+      "id": "10e.11",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchten Sie mit einer Fachperson darüber sprechen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.12": {
+      "id": "10e.12",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Bewertung",
+      "text": {
+        "de": "Hinweise liegen vor (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10e.2-10e.3 =>1x ja UND wenn 10d.4-10d.5 = 1xja ODER 10e.7-10e.8 => 2x ja",
+      "rule": {
+        "type": "or",
+        "rules": [
+          {
+            "type": "and",
+            "rules": [
+              {
+                "type": "count",
+                "ids": [
+                  "10e.2",
+                  "10e.3"
+                ],
+                "threshold": 1,
+                "answer": "Ja"
+              },
+              {
+                "type": "count",
+                "ids": [
+                  "10d.4",
+                  "10d.5"
+                ],
+                "threshold": 1,
+                "answer": "Ja"
+              }
+            ]
+          },
+          {
+            "type": "count",
+            "ids": [
+              "10e.7",
+              "10e.8"
+            ],
+            "threshold": 2,
+            "answer": "Ja"
+          }
+        ]
+      }
+    },
+    "10e.13": {
+      "id": "10e.13",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Bewertung",
+      "text": {
+        "de": "Psychologische Betreuung empfohlen (Anzeige)"
+      },
+      "answerType": "Ja/Nein",
+      "condition": "Wenn 10e.11 => ja",
+      "rule": {
+        "type": "answer",
+        "id": "10e.11",
+        "answer": "Ja"
+      }
+    },
+    "11.1": {
+      "id": "11.1",
+      "category": "Sonstiges",
+      "type": "Info",
+      "text": {
+        "de": "Im Gespräch wurden Ihnen bereits viele Fragen zu verschiedenen Bedürfnissen und zu möglichen Unterstützungen gestellt. Diese Fragen decken jedoch nur bestimmte Bereiche ab. Wenn es weitere Themen gibt, die bisher nicht angesprochen wurden, können Sie diese gerne ergänzen. Wir verstehen, dass es schwierig ist, sich zu einigen der Fragen zu äußern. Sollten Sie erst zu einem späteren Zeitpunkt Ihre Angaben ändern oder ergänzen wollen, stehen Ihnen unsere Betreuer*innen gerne zur Verfügung."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "11.2": {
+      "id": "11.2",
+      "category": "Sonstiges",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie noch Fragen oder gibt es etwas Wichtiges, dass Sie uns mitteilen wollen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "12.1": {
+      "id": "12.1",
+      "category": "Abschluss",
+      "type": "Info",
+      "text": {
+        "de": "Vielen Dank für Ihre Teilnahme an der Bedürfnisbeurteilung. Die Ergebnisse werden dokumentiert und an das BFA übermittelt. Wir sind gesetzlich verpflichtet, Ihnen die Bedürfnisbeurteilung auszuhändigen. Sie können das Dokument voraussichtlich in drei Tagen am Infopoint abholen. Wenn Sie das Dokument aufgrund der sensiblen Daten nur einsehen und nicht mitnehmen möchten, entsorgen wir den Ausdruck. Wenn aus Ihren Angaben weitere Maßnahmen notwendig sind, wird sich eine Betreuerin oder ein Betreuer bei Ihnen melden. Wenn sich Ihre besonderen Bedürfnisse geändert haben, informieren Sie uns bitte. Zum Abschluss haben wir noch 3 Fragen."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "12.2": {
+      "id": "12.2",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Sprechtext",
+      "text": {
+        "de": "Jede Person hat Dinge, die ihr helfen können – zum Beispiel Menschen, die sie unterstützen, Fähigkeiten, die im Alltag helfen, oder persönliche Stärken. Diese Ressourcen sind wichtig, besonders in schwierigen Zeiten. Wir möchten Ihnen dazu ein paar Fragen stellen. "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "12.3": {
+      "id": "12.3",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie im Moment eine Person, bei der Sie sich unterstützt oder bei der Sie sich sicher fühlen z.B. mit der Sie regelmäßig in Kontakt stehen oder die Ihnen im Alltag hilft? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "12.4": {
+      "id": "12.4",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Haben Sie das Gefühl, dass Sie Strategien haben, um mit schwierigen Situationen umzugehen z.B. indem Sie mit jemandem sprechen, sich eine Pause nehmen oder spazieren gehen? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "12.5": {
+      "id": "12.5",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sehen Sie persönliche Stärken in sich, die Ihnen helfen, herausfordernde Situationen zu bewältigen, z.B. erleben Sie sich selbst als eigenständig, geduldig, selbstsicher oder kontaktfreudig? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "12.6": {
+      "id": "12.6",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Bewertung",
+      "text": {
+        "de": "X Punkte"
+      },
+      "answerType": "Niedrig",
+      "condition": ""
+    },
+    "12.7": {
+      "id": "12.7",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Bewertung",
+      "text": {
+        "de": "X Punkte"
+      },
+      "answerType": "Mittel",
+      "condition": ""
+    },
+    "12.8": {
+      "id": "12.8",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Bewertung",
+      "text": {
+        "de": "X Punkte"
+      },
+      "answerType": "Hoch",
+      "condition": ""
+    },
+    "12.9": {
+      "id": "12.9",
+      "category": "Weitere Auffälligkeiten während des Gesprächs",
+      "type": "Beobachtung",
+      "text": {
+        "de": ""
+      },
+      "answerType": "Ja/Nein wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "END": {
+      "id": "END",
+      "category": "System",
+      "type": "Info",
+      "text": {
+        "de": "Vielen Dank. Das Gespräch ist beendet."
+      },
+      "answerType": "None"
+    },
+    "ABBRUCH": {
+      "id": "ABBRUCH",
+      "category": "System",
+      "type": "Info",
+      "text": {
+        "de": "Das Gespräch wurde abgebrochen."
+      },
+      "answerType": "None"
+    },
+    "EINSCHAETZUNG_GENERAL": {
+      "id": "EINSCHAETZUNG_GENERAL",
+      "category": "einschaetzung",
+      "type": "Bewertung",
+      "text": {
+        "de": "X Punkte"
+      },
+      "answerType": "Niedrig",
+      "condition": ""
+    },
+    "AUFFAELLIGKEITEN_GENERAL": {
+      "id": "AUFFAELLIGKEITEN_GENERAL",
+      "category": "sonstiges",
+      "type": "Beobachtung",
+      "text": {
+        "de": ""
+      },
+      "answerType": "Ja/Nein wenn Ja= Anmerkung",
+      "condition": ""
+    }
+  },
+  "flows": {
+    "ARF_ARM": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "0.1",
+        "ja": "5.1",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "5.1",
+        "ja": "5.2",
+        "nein": "5.2"
+      },
+      {
+        "id": "5.2",
+        "ja": "5.3",
+        "nein": "7.1"
+      },
+      {
+        "id": "5.3",
+        "ja": "5.4",
+        "nein": "5.4"
+      },
+      {
+        "id": "5.4",
+        "ja": "5.5",
+        "nein": "5.5"
+      },
+      {
+        "id": "5.5",
+        "ja": "5.6",
+        "nein": "5.6"
+      },
+      {
+        "id": "5.6",
+        "ja": "5.7",
+        "nein": "5.7"
+      },
+      {
+        "id": "5.7",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "5.9",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.10",
+        "nein": "7.10"
+      },
+      {
+        "id": "7.10",
+        "ja": "7.11",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11",
+        "ja": "7.12",
+        "nein": "7.12"
+      },
+      {
+        "id": "7.12",
+        "ja": "7.13",
+        "nein": "7.13"
+      },
+      {
+        "id": "7.13",
+        "ja": "7.14",
+        "nein": "7.14"
+      },
+      {
+        "id": "7.14",
+        "ja": "7.15",
+        "nein": "7.15"
+      },
+      {
+        "id": "7.15",
+        "ja": "7.16",
+        "nein": "7.16"
+      },
+      {
+        "id": "7.16",
+        "ja": "7.17",
+        "nein": "7.17"
+      },
+      {
+        "id": "7.17",
+        "ja": "7.18",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.18",
+        "ja": "7.19",
+        "nein": "7.19"
+      },
+      {
+        "id": "7.19",
+        "ja": "7.22",
+        "nein": "7.22"
+      },
+      {
+        "id": "7.22",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "9.1",
+        "ja": "9a.1",
+        "nein": "9a.1"
+      },
+      {
+        "id": "9a.1",
+        "ja": "9a.2",
+        "nein": "9a.2"
+      },
+      {
+        "id": "9a.2",
+        "ja": "9a.3",
+        "nein": "9a.3"
+      },
+      {
+        "id": "9a.3",
+        "ja": "9a.4",
+        "nein": "9a.4"
+      },
+      {
+        "id": "9a.4",
+        "ja": "9a.5",
+        "nein": "9a.5"
+      },
+      {
+        "id": "9a.5",
+        "ja": "9a.6",
+        "nein": "9a.6"
+      },
+      {
+        "id": "9a.6",
+        "ja": "9a.7",
+        "nein": "9a.7"
+      },
+      {
+        "id": "9a.7",
+        "ja": "9a.8",
+        "nein": "9a.8"
+      },
+      {
+        "id": "9a.8",
+        "ja": "9a.9",
+        "nein": "9a.9"
+      },
+      {
+        "id": "9a.9",
+        "ja": "9a.10",
+        "nein": "9a.10"
+      },
+      {
+        "id": "9a.10",
+        "ja": "9a.11",
+        "nein": "9a.11"
+      },
+      {
+        "id": "9a.11",
+        "ja": "9a.12",
+        "nein": "9a.12"
+      },
+      {
+        "id": "9a.12",
+        "ja": "9a.13",
+        "nein": "9a.13"
+      },
+      {
+        "id": "9a.13",
+        "ja": "9a.14",
+        "nein": "9a.14"
+      },
+      {
+        "id": "9a.14",
+        "ja": "9b.1",
+        "nein": "9b.1"
+      },
+      {
+        "id": "9b.1",
+        "ja": "9b.2",
+        "nein": "9b.2"
+      },
+      {
+        "id": "9b.2",
+        "ja": "9b.3",
+        "nein": "9b.3"
+      },
+      {
+        "id": "9b.3",
+        "ja": "9b.4",
+        "nein": "9b.4"
+      },
+      {
+        "id": "9b.4",
+        "ja": "9b.5",
+        "nein": "9b.5"
+      },
+      {
+        "id": "9b.5",
+        "ja": "9b.6",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.6",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.1",
+        "nein": "10a.1"
+      },
+      {
+        "id": "10a.1",
+        "ja": "10a.2",
+        "nein": "10a.2"
+      },
+      {
+        "id": "10a.2",
+        "ja": "10a.4",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.4",
+        "ja": "10a.5",
+        "nein": "10a.5"
+      },
+      {
+        "id": "10a.5",
+        "ja": "10a.6",
+        "nein": "10a.6"
+      },
+      {
+        "id": "10a.6",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10c.1"
+      },
+      {
+        "id": "10c.2",
+        "ja": "10c.3",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.3",
+        "ja": "10c.4",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.4",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.5",
+        "ja": "10d.6",
+        "nein": "10d.6"
+      },
+      {
+        "id": "10d.6",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10e.1"
+      },
+      {
+        "id": "10e.2",
+        "ja": "10e.3",
+        "nein": "10e.3"
+      },
+      {
+        "id": "10e.3",
+        "ja": "10e.4",
+        "nein": "10e.4"
+      },
+      {
+        "id": "10e.4",
+        "ja": "10e.5",
+        "nein": "10e.5"
+      },
+      {
+        "id": "10e.5",
+        "ja": "10e.9",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.9",
+        "ja": "10e.10",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.10",
+        "ja": "10e.11",
+        "nein": "10e.11"
+      },
+      {
+        "id": "10e.11",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "11.1"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1",
+        "nein": "11.1"
+      },
+      {
+        "id": "11.1",
+        "ja": "11.2",
+        "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
+      },
+      {
+        "id": "12.1",
+        "ja": "12.2",
+        "nein": "12.2"
+      },
+      {
+        "id": "12.2",
+        "ja": "12.3",
+        "nein": "12.3"
+      },
+      {
+        "id": "12.3",
+        "ja": "12.4",
+        "nein": "12.4"
+      },
+      {
+        "id": "12.4",
+        "ja": "12.5",
+        "nein": "12.5"
+      },
+      {
+        "id": "12.5",
+        "ja": "12.6",
+        "nein": "12.6"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.7",
+        "nein": "12.7"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.8",
+        "nein": "12.8"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.9",
+        "nein": "12.9"
+      },
+      {
+        "id": "AUFFAELLIGKEITEN_GENERAL"
+      }
+    ],
+    "FAM_Erwachsene": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "0.1",
+        "ja": "5.1",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1a.4",
+        "ja": "1a.5",
+        "nein": "1a.5"
+      },
+      {
+        "id": "1a.9",
+        "ja": "1a.10",
+        "nein": "1a.10"
+      },
+      {
+        "id": "1a.10",
+        "ja": "1a.11",
+        "nein": "1a.11"
+      },
+      {
+        "id": "1a.11",
+        "ja": "1a.12",
+        "nein": "1a.12"
+      },
+      {
+        "id": "1a.12",
+        "ja": "1a.13",
+        "nein": "1a.13"
+      },
+      {
+        "id": "1a.13",
+        "ja": "5.1",
+        "nein": "5.1"
+      },
+      {
+        "id": "5.1",
+        "ja": "5.2",
+        "nein": "5.2"
+      },
+      {
+        "id": "5.2",
+        "ja": "5.3",
+        "nein": "7.1"
+      },
+      {
+        "id": "5.3",
+        "ja": "5.4",
+        "nein": "5.4"
+      },
+      {
+        "id": "5.4",
+        "ja": "5.5",
+        "nein": "5.5"
+      },
+      {
+        "id": "5.5",
+        "ja": "5.6",
+        "nein": "5.6"
+      },
+      {
+        "id": "5.6",
+        "ja": "5.7",
+        "nein": "5.7"
+      },
+      {
+        "id": "5.7",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "5.9",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.10",
+        "nein": "7.10"
+      },
+      {
+        "id": "7.10",
+        "ja": "7.11",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11",
+        "ja": "7.12",
+        "nein": "7.12"
+      },
+      {
+        "id": "7.12",
+        "ja": "7.13",
+        "nein": "7.13"
+      },
+      {
+        "id": "7.13",
+        "ja": "7.14",
+        "nein": "7.14"
+      },
+      {
+        "id": "7.14",
+        "ja": "7.15",
+        "nein": "7.15"
+      },
+      {
+        "id": "7.15",
+        "ja": "7.16",
+        "nein": "7.16"
+      },
+      {
+        "id": "7.16",
+        "ja": "7.17",
+        "nein": "7.17"
+      },
+      {
+        "id": "7.17",
+        "ja": "7.18",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.18",
+        "ja": "7.19",
+        "nein": "7.19"
+      },
+      {
+        "id": "7.19",
+        "ja": "7.22",
+        "nein": "7.22"
+      },
+      {
+        "id": "7.22",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "9.1",
+        "ja": "9a.1",
+        "nein": "9a.1"
+      },
+      {
+        "id": "9a.1",
+        "ja": "9a.2",
+        "nein": "9a.2"
+      },
+      {
+        "id": "9a.2",
+        "ja": "9a.3",
+        "nein": "9a.3"
+      },
+      {
+        "id": "9a.3",
+        "ja": "9a.4",
+        "nein": "9a.4"
+      },
+      {
+        "id": "9a.4",
+        "ja": "9a.5",
+        "nein": "9a.5"
+      },
+      {
+        "id": "9a.5",
+        "ja": "9a.6",
+        "nein": "9a.6"
+      },
+      {
+        "id": "9a.6",
+        "ja": "9a.7",
+        "nein": "9a.7"
+      },
+      {
+        "id": "9a.7",
+        "ja": "9a.8",
+        "nein": "9a.8"
+      },
+      {
+        "id": "9a.8",
+        "ja": "9a.9",
+        "nein": "9a.9"
+      },
+      {
+        "id": "9a.9",
+        "ja": "9a.10",
+        "nein": "9a.10"
+      },
+      {
+        "id": "9a.10",
+        "ja": "9a.11",
+        "nein": "9a.11"
+      },
+      {
+        "id": "9a.11",
+        "ja": "9a.12",
+        "nein": "9a.12"
+      },
+      {
+        "id": "9a.12",
+        "ja": "9a.13",
+        "nein": "9a.13"
+      },
+      {
+        "id": "9a.13",
+        "ja": "9a.14",
+        "nein": "9a.14"
+      },
+      {
+        "id": "9a.14",
+        "ja": "9b.1",
+        "nein": "9b.1"
+      },
+      {
+        "id": "9b.1",
+        "ja": "9b.2",
+        "nein": "9b.2"
+      },
+      {
+        "id": "9b.2",
+        "ja": "9b.3",
+        "nein": "9b.3"
+      },
+      {
+        "id": "9b.3",
+        "ja": "9b.4",
+        "nein": "9b.4"
+      },
+      {
+        "id": "9b.4",
+        "ja": "9b.5",
+        "nein": "9b.5"
+      },
+      {
+        "id": "9b.5",
+        "ja": "9b.6",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.6",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.1",
+        "nein": "10a.1"
+      },
+      {
+        "id": "10a.1",
+        "ja": "10a.2",
+        "nein": "10a.2"
+      },
+      {
+        "id": "10a.2",
+        "ja": "10a.4",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.4",
+        "ja": "10a.5",
+        "nein": "10a.5"
+      },
+      {
+        "id": "10a.5",
+        "ja": "10a.6",
+        "nein": "10a.6"
+      },
+      {
+        "id": "10a.6",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10c.1"
+      },
+      {
+        "id": "10c.2",
+        "ja": "10c.3",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.3",
+        "ja": "10c.4",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.4",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.5",
+        "ja": "10d.6",
+        "nein": "10d.6"
+      },
+      {
+        "id": "10d.6",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10e.1"
+      },
+      {
+        "id": "10e.2",
+        "ja": "10e.3",
+        "nein": "10e.3"
+      },
+      {
+        "id": "10e.3",
+        "ja": "10e.4",
+        "nein": "10e.4"
+      },
+      {
+        "id": "10e.4",
+        "ja": "10e.5",
+        "nein": "10e.5"
+      },
+      {
+        "id": "10e.5",
+        "ja": "10e.9",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.9",
+        "ja": "10e.10",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.10",
+        "ja": "10e.11",
+        "nein": "10e.11"
+      },
+      {
+        "id": "10e.11",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "11.1"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1",
+        "nein": "11.1"
+      },
+      {
+        "id": "11.1",
+        "ja": "11.2",
+        "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
+      },
+      {
+        "id": "12.1",
+        "ja": "12.2",
+        "nein": "12.2"
+      },
+      {
+        "id": "12.2",
+        "ja": "12.3",
+        "nein": "12.3"
+      },
+      {
+        "id": "12.3",
+        "ja": "12.4",
+        "nein": "12.4"
+      },
+      {
+        "id": "12.4",
+        "ja": "12.5",
+        "nein": "12.5"
+      },
+      {
+        "id": "12.5",
+        "ja": "12.6",
+        "nein": "12.6"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.7",
+        "nein": "12.7"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.8",
+        "nein": "12.8"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.9",
+        "nein": "12.9"
+      },
+      {
+        "id": "AUFFAELLIGKEITEN_GENERAL"
+      }
+    ],
+    "ARF_K_ARM_K_Erwachsene": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "0.1",
+        "ja": "5.1",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1a.4",
+        "ja": "1a.5",
+        "nein": "1a.5"
+      },
+      {
+        "id": "1a.9",
+        "ja": "1a.10",
+        "nein": "1a.10"
+      },
+      {
+        "id": "1a.10",
+        "ja": "1a.11",
+        "nein": "1a.11"
+      },
+      {
+        "id": "1a.11",
+        "ja": "1a.12",
+        "nein": "1a.12"
+      },
+      {
+        "id": "1a.12",
+        "ja": "1a.13",
+        "nein": "1a.13"
+      },
+      {
+        "id": "1a.13",
+        "ja": "5.1",
+        "nein": "5.1"
+      },
+      {
+        "id": "5.1",
+        "ja": "5.2",
+        "nein": "5.2"
+      },
+      {
+        "id": "5.2",
+        "ja": "5.3",
+        "nein": "6.1"
+      },
+      {
+        "id": "5.3",
+        "ja": "5.4",
+        "nein": "5.4"
+      },
+      {
+        "id": "5.4",
+        "ja": "5.5",
+        "nein": "5.5"
+      },
+      {
+        "id": "5.5",
+        "ja": "5.6",
+        "nein": "5.6"
+      },
+      {
+        "id": "5.6",
+        "ja": "5.7",
+        "nein": "5.7"
+      },
+      {
+        "id": "5.7",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "5.9",
+        "ja": "6.1",
+        "nein": "6.1"
+      },
+      {
+        "id": "6.1",
+        "ja": "6.2",
+        "nein": "6.2"
+      },
+      {
+        "id": "6.2",
+        "ja": "6.3",
+        "nein": "6.3"
+      },
+      {
+        "id": "6.3",
+        "ja": "6.4",
+        "nein": "6.4"
+      },
+      {
+        "id": "6.4",
+        "ja": "6.5",
+        "nein": "6.5"
+      },
+      {
+        "id": "6.5",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "6.6",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.10",
+        "nein": "7.10"
+      },
+      {
+        "id": "7.10",
+        "ja": "7.11",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11",
+        "ja": "7.12",
+        "nein": "7.12"
+      },
+      {
+        "id": "7.12",
+        "ja": "7.13",
+        "nein": "7.13"
+      },
+      {
+        "id": "7.13",
+        "ja": "7.14",
+        "nein": "7.14"
+      },
+      {
+        "id": "7.14",
+        "ja": "7.15",
+        "nein": "7.15"
+      },
+      {
+        "id": "7.15",
+        "ja": "7.16",
+        "nein": "7.16"
+      },
+      {
+        "id": "7.16",
+        "ja": "7.17",
+        "nein": "7.17"
+      },
+      {
+        "id": "7.17",
+        "ja": "7.18",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.18",
+        "ja": "7.19",
+        "nein": "7.19"
+      },
+      {
+        "id": "7.19",
+        "ja": "7.22",
+        "nein": "7.22"
+      },
+      {
+        "id": "7.22",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "9.1",
+        "ja": "9a.1",
+        "nein": "9a.1"
+      },
+      {
+        "id": "9a.1",
+        "ja": "9a.2",
+        "nein": "9a.2"
+      },
+      {
+        "id": "9a.2",
+        "ja": "9a.3",
+        "nein": "9a.3"
+      },
+      {
+        "id": "9a.3",
+        "ja": "9a.4",
+        "nein": "9a.4"
+      },
+      {
+        "id": "9a.4",
+        "ja": "9a.5",
+        "nein": "9a.5"
+      },
+      {
+        "id": "9a.5",
+        "ja": "9a.6",
+        "nein": "9a.6"
+      },
+      {
+        "id": "9a.6",
+        "ja": "9a.7",
+        "nein": "9a.7"
+      },
+      {
+        "id": "9a.7",
+        "ja": "9a.8",
+        "nein": "9a.8"
+      },
+      {
+        "id": "9a.8",
+        "ja": "9a.9",
+        "nein": "9a.9"
+      },
+      {
+        "id": "9a.9",
+        "ja": "9a.10",
+        "nein": "9a.10"
+      },
+      {
+        "id": "9a.10",
+        "ja": "9a.11",
+        "nein": "9a.11"
+      },
+      {
+        "id": "9a.11",
+        "ja": "9a.12",
+        "nein": "9a.12"
+      },
+      {
+        "id": "9a.12",
+        "ja": "9a.13",
+        "nein": "9a.13"
+      },
+      {
+        "id": "9a.13",
+        "ja": "9a.14",
+        "nein": "9a.14"
+      },
+      {
+        "id": "9a.14",
+        "ja": "9b.1",
+        "nein": "9b.1"
+      },
+      {
+        "id": "9b.1",
+        "ja": "9b.2",
+        "nein": "9b.2"
+      },
+      {
+        "id": "9b.2",
+        "ja": "9b.3",
+        "nein": "9b.3"
+      },
+      {
+        "id": "9b.3",
+        "ja": "9b.4",
+        "nein": "9b.4"
+      },
+      {
+        "id": "9b.4",
+        "ja": "9b.5",
+        "nein": "9b.5"
+      },
+      {
+        "id": "9b.5",
+        "ja": "9b.6",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.6",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.1",
+        "nein": "10a.1"
+      },
+      {
+        "id": "10a.1",
+        "ja": "10a.2",
+        "nein": "10a.2"
+      },
+      {
+        "id": "10a.2",
+        "ja": "10a.4",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.4",
+        "ja": "10a.5",
+        "nein": "10a.5"
+      },
+      {
+        "id": "10a.5",
+        "ja": "10a.6",
+        "nein": "10a.6"
+      },
+      {
+        "id": "10a.6",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10c.1"
+      },
+      {
+        "id": "10c.2",
+        "ja": "10c.3",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.3",
+        "ja": "10c.4",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.4",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.5",
+        "ja": "10d.6",
+        "nein": "10d.6"
+      },
+      {
+        "id": "10d.6",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10e.1"
+      },
+      {
+        "id": "10e.2",
+        "ja": "10e.3",
+        "nein": "10e.3"
+      },
+      {
+        "id": "10e.3",
+        "ja": "10e.4",
+        "nein": "10e.4"
+      },
+      {
+        "id": "10e.4",
+        "ja": "10e.5",
+        "nein": "10e.5"
+      },
+      {
+        "id": "10e.5",
+        "ja": "10e.9",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.9",
+        "ja": "10e.10",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.10",
+        "ja": "10e.11",
+        "nein": "10e.11"
+      },
+      {
+        "id": "10e.11",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "11.1"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1",
+        "nein": "11.1"
+      },
+      {
+        "id": "11.1",
+        "ja": "11.2",
+        "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
+      },
+      {
+        "id": "12.1",
+        "ja": "12.2",
+        "nein": "12.2"
+      },
+      {
+        "id": "12.2",
+        "ja": "12.3",
+        "nein": "12.3"
+      },
+      {
+        "id": "12.3",
+        "ja": "12.4",
+        "nein": "12.4"
+      },
+      {
+        "id": "12.4",
+        "ja": "12.5",
+        "nein": "12.5"
+      },
+      {
+        "id": "12.5",
+        "ja": "12.6",
+        "nein": "12.6"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.7",
+        "nein": "12.7"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.8",
+        "nein": "12.8"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.9",
+        "nein": "12.9"
+      },
+      {
+        "id": "AUFFAELLIGKEITEN_GENERAL"
+      }
+    ],
+    "Kind_FAM_ARM_K_ARF_K_UMF_K": [
+      {
+        "id": "0.1a",
+        "ja": "0.2",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "0.2",
+        "ja": "0.3",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "0.3",
+        "ja": "0.3a",
+        "nein": "0.3a"
+      },
+      {
+        "id": "0.3a",
+        "ja": "0.4",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "0.4",
+        "ja": "0.5",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "0.5",
+        "ja": "1a.1",
+        "nein": "1a.1"
+      },
+      {
+        "id": "1a.1",
+        "ja": "1a.2",
+        "nein": "1a.2"
+      },
+      {
+        "id": "1a.2",
+        "ja": "1a.3",
+        "nein": "1a.3"
+      },
+      {
+        "id": "1a.3",
+        "ja": "1a.9",
+        "nein": "1a.9"
+      },
+      {
+        "id": "1a.9",
+        "ja": "1a.10",
+        "nein": "1a.10"
+      },
+      {
+        "id": "1a.10",
+        "ja": "1a.11",
+        "nein": "1a.11"
+      },
+      {
+        "id": "1a.11",
+        "ja": "1a.12",
+        "nein": "1a.12"
+      },
+      {
+        "id": "1a.12",
+        "ja": "7.6",
+        "nein": "7.6"
+      },
+      {
+        "id": "7.6",
+        "ja": "7.7",
+        "nein": "7.7"
+      },
+      {
+        "id": "7.7",
+        "ja": "7.8",
+        "nein": "7.8"
+      },
+      {
+        "id": "7.8",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.20",
+        "nein": "7.20"
+      },
+      {
+        "id": "7.20",
+        "ja": "7.21",
+        "nein": "7.21"
+      },
+      {
+        "id": "7.21",
+        "ja": "9a.16",
+        "nein": "9a.16"
+      },
+      {
+        "id": "9a.16",
+        "ja": "9a.17",
+        "nein": "9a.17"
+      },
+      {
+        "id": "9a.17",
+        "ja": "9a.18",
+        "nein": "9a.18"
+      },
+      {
+        "id": "9a.18",
+        "ja": "9a.19",
+        "nein": "9a.19"
+      },
+      {
+        "id": "9a.19",
+        "ja": "9a.20",
+        "nein": "9a.20"
+      },
+      {
+        "id": "9a.20",
+        "ja": "9a.21",
+        "nein": "9a.21"
+      },
+      {
+        "id": "9a.21",
+        "ja": "9b.7",
+        "nein": "9b.7"
+      },
+      {
+        "id": "9b.7",
+        "ja": "9b.8",
+        "nein": "9b.8"
+      },
+      {
+        "id": "9b.8",
+        "ja": "9b.9",
+        "nein": "9b.9"
+      },
+      {
+        "id": "9b.9",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.3",
+        "nein": "10a.3"
+      },
+      {
+        "id": "10a.3",
+        "ja": "10c.6",
+        "nein": "10c.6"
+      },
+      {
+        "id": "10c.6",
+        "ja": "10e.6",
+        "nein": "10e.6"
+      },
+      {
+        "id": "10e.6",
+        "ja": "10e.7",
+        "nein": "10e.7"
+      },
+      {
+        "id": "10e.7",
+        "ja": "10e.8",
+        "nein": "10e.8"
+      },
+      {
+        "id": "10e.8",
+        "ja": "END",
+        "nein": "END"
+      }
+    ],
+    "uUMF_Kind": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "0.1",
+        "ja": "1b.1",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1b.1",
+        "ja": "1b.2",
+        "nein": "1b.2"
+      },
+      {
+        "id": "1b.2",
+        "ja": "1b.3",
+        "nein": "1b.3"
+      },
+      {
+        "id": "1b.3",
+        "ja": "1b.4",
+        "nein": "1b.4"
+      },
+      {
+        "id": "1b.4",
+        "ja": "1b.5",
+        "nein": "1b.5"
+      },
+      {
+        "id": "1b.5",
+        "ja": "1b.6",
+        "nein": "1b.6"
+      },
+      {
+        "id": "1b.6",
+        "ja": "1b.7",
+        "nein": "1b.7"
+      },
+      {
+        "id": "1b.7",
+        "ja": "1b.8",
+        "nein": "1b.9"
+      },
+      {
+        "id": "1b.8",
+        "ja": "1b.9",
+        "nein": "1b.9"
+      },
+      {
+        "id": "1b.9",
+        "ja": "1b.9.1",
+        "nein": "1b.10"
+      },
+      {
+        "id": "1b.9.1",
+        "ja": "1b.10",
+        "nein": "1b.10"
+      },
+      {
+        "id": "1b.10",
+        "ja": "1b.11",
+        "nein": "1b.11"
+      },
+      {
+        "id": "1b.11",
+        "ja": "1b.12",
+        "nein": "1b.12"
+      },
+      {
+        "id": "1b.12",
+        "ja": "1b.13",
+        "nein": "1b.13"
+      },
+      {
+        "id": "1b.13",
+        "ja": "1b.14",
+        "nein": "1b.14"
+      },
+      {
+        "id": "1b.14",
+        "ja": "5.1",
+        "nein": "5.1"
+      },
+      {
+        "id": "5.1",
+        "ja": "5.2",
+        "nein": "5.2"
+      },
+      {
+        "id": "5.2",
+        "ja": "5.3",
+        "nein": "6.1"
+      },
+      {
+        "id": "5.3",
+        "ja": "5.4",
+        "nein": "5.4"
+      },
+      {
+        "id": "5.4",
+        "ja": "5.5",
+        "nein": "5.5"
+      },
+      {
+        "id": "5.5",
+        "ja": "5.6",
+        "nein": "5.6"
+      },
+      {
+        "id": "5.6",
+        "ja": "5.7",
+        "nein": "5.7"
+      },
+      {
+        "id": "5.7",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "5.9",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.6",
+        "nein": "7.6"
+      },
+      {
+        "id": "7.6",
+        "ja": "7.7",
+        "nein": "7.7"
+      },
+      {
+        "id": "7.7",
+        "ja": "7.8",
+        "nein": "7.8"
+      },
+      {
+        "id": "7.8",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.10",
+        "nein": "7.10"
+      },
+      {
+        "id": "7.10",
+        "ja": "7.11",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11",
+        "ja": "7.12",
+        "nein": "7.12"
+      },
+      {
+        "id": "7.12",
+        "ja": "7.13",
+        "nein": "7.13"
+      },
+      {
+        "id": "7.13",
+        "ja": "7.14",
+        "nein": "7.14"
+      },
+      {
+        "id": "7.14",
+        "ja": "7.15",
+        "nein": "7.15"
+      },
+      {
+        "id": "7.15",
+        "ja": "7.16",
+        "nein": "7.16"
+      },
+      {
+        "id": "7.16",
+        "ja": "7.17",
+        "nein": "7.17"
+      },
+      {
+        "id": "7.17",
+        "ja": "7.18",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.18",
+        "ja": "7.19",
+        "nein": "7.19"
+      },
+      {
+        "id": "7.19",
+        "ja": "7.22",
+        "nein": "7.22"
+      },
+      {
+        "id": "7.22",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "9.1",
+        "ja": "9a.1",
+        "nein": "9a.1"
+      },
+      {
+        "id": "9a.1",
+        "ja": "9a.2",
+        "nein": "9a.2"
+      },
+      {
+        "id": "9a.2",
+        "ja": "9a.3",
+        "nein": "9a.3"
+      },
+      {
+        "id": "9a.3",
+        "ja": "9a.4",
+        "nein": "9a.4"
+      },
+      {
+        "id": "9a.4",
+        "ja": "9a.5",
+        "nein": "9a.5"
+      },
+      {
+        "id": "9a.5",
+        "ja": "9a.6",
+        "nein": "9a.6"
+      },
+      {
+        "id": "9a.6",
+        "ja": "9a.7",
+        "nein": "9a.7"
+      },
+      {
+        "id": "9a.7",
+        "ja": "9a.8",
+        "nein": "9a.8"
+      },
+      {
+        "id": "9a.8",
+        "ja": "9a.9",
+        "nein": "9a.9"
+      },
+      {
+        "id": "9a.9",
+        "ja": "9a.10",
+        "nein": "9a.10"
+      },
+      {
+        "id": "9a.10",
+        "ja": "9a.11",
+        "nein": "9a.11"
+      },
+      {
+        "id": "9a.11",
+        "ja": "9a.12",
+        "nein": "9a.12"
+      },
+      {
+        "id": "9a.12",
+        "ja": "9a.13",
+        "nein": "9a.13"
+      },
+      {
+        "id": "9a.13",
+        "ja": "9a.14",
+        "nein": "9a.14"
+      },
+      {
+        "id": "9a.14",
+        "ja": "9b.1",
+        "nein": "9b.1"
+      },
+      {
+        "id": "9b.1",
+        "ja": "9b.2",
+        "nein": "9b.2"
+      },
+      {
+        "id": "9b.2",
+        "ja": "9b.3",
+        "nein": "9b.3"
+      },
+      {
+        "id": "9b.3",
+        "ja": "9b.4",
+        "nein": "9b.4"
+      },
+      {
+        "id": "9b.4",
+        "ja": "9b.5",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.5",
+        "ja": "9b.6",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.6",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.1",
+        "nein": "10a.1"
+      },
+      {
+        "id": "10a.1",
+        "ja": "10a.2",
+        "nein": "10a.2"
+      },
+      {
+        "id": "10a.2",
+        "ja": "10a.4",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.4",
+        "ja": "10a.5",
+        "nein": "10a.5"
+      },
+      {
+        "id": "10a.5",
+        "ja": "10a.6",
+        "nein": "10a.6"
+      },
+      {
+        "id": "10a.6",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10c.1"
+      },
+      {
+        "id": "10c.2",
+        "ja": "10c.3",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.3",
+        "ja": "10c.4",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.4",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.5",
+        "ja": "10d.6",
+        "nein": "10d.6"
+      },
+      {
+        "id": "10d.6",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10e.1"
+      },
+      {
+        "id": "10e.2",
+        "ja": "10e.3",
+        "nein": "10e.3"
+      },
+      {
+        "id": "10e.3",
+        "ja": "10e.4",
+        "nein": "10e.4"
+      },
+      {
+        "id": "10e.4",
+        "ja": "10e.5",
+        "nein": "10e.5"
+      },
+      {
+        "id": "10e.5",
+        "ja": "10e.9",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.9",
+        "ja": "10e.10",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.10",
+        "ja": "10e.11",
+        "nein": "10e.11"
+      },
+      {
+        "id": "10e.11",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "11.1"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1",
+        "nein": "11.1"
+      },
+      {
+        "id": "11.1",
+        "ja": "11.2",
+        "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
+      },
+      {
+        "id": "12.1",
+        "ja": "12.2",
+        "nein": "12.2"
+      },
+      {
+        "id": "12.2",
+        "ja": "12.3",
+        "nein": "12.3"
+      },
+      {
+        "id": "12.3",
+        "ja": "12.4",
+        "nein": "12.4"
+      },
+      {
+        "id": "12.4",
+        "ja": "12.5",
+        "nein": "12.5"
+      },
+      {
+        "id": "12.5",
+        "ja": "12.6",
+        "nein": "12.6"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.7",
+        "nein": "12.7"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.8",
+        "nein": "12.8"
+      },
+      {
+        "id": "EINSCHAETZUNG_GENERAL",
+        "ja": "12.9",
+        "nein": "12.9"
+      },
+      {
+        "id": "AUFFAELLIGKEITEN_GENERAL"
+      }
+    ],
+    "Kind_14plus": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "0.1",
+        "ja": "1a.4",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1a.4",
+        "ja": "1a.5",
+        "nein": "1a.5"
+      },
+      {
+        "id": "1a.5",
+        "ja": "1a.6",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1a.6",
+        "ja": "1a.7",
+        "nein": "1a.7"
+      },
+      {
+        "id": "1a.7",
+        "ja": "1a.8",
+        "nein": "1a.8"
+      },
+      {
+        "id": "1a.8",
+        "ja": "1a.13",
+        "nein": "1a.13"
+      },
+      {
+        "id": "1a.13",
+        "ja": "5.1",
+        "nein": "5.1"
+      },
+      {
+        "id": "5.1",
+        "ja": "5.2",
+        "nein": "5.2"
+      },
+      {
+        "id": "5.2",
+        "ja": "5.3",
+        "nein": "6.1"
+      },
+      {
+        "id": "5.3",
+        "ja": "5.4",
+        "nein": "5.4"
+      },
+      {
+        "id": "5.4",
+        "ja": "5.5",
+        "nein": "5.5"
+      },
+      {
+        "id": "5.5",
+        "ja": "5.6",
+        "nein": "5.6"
+      },
+      {
+        "id": "5.6",
+        "ja": "5.7",
+        "nein": "5.7"
+      },
+      {
+        "id": "5.7",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "5.9",
+        "nein": "5.9"
+      },
+      {
+        "id": "5.9",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.6",
+        "nein": "7.6"
+      },
+      {
+        "id": "7.6",
+        "ja": "7.7",
+        "nein": "7.7"
+      },
+      {
+        "id": "7.7",
+        "ja": "7.8",
+        "nein": "7.8"
+      },
+      {
+        "id": "7.8",
+        "ja": "7.9",
+        "nein": "7.9"
+      },
+      {
+        "id": "7.9",
+        "ja": "7.10",
+        "nein": "7.10"
+      },
+      {
+        "id": "7.10",
+        "ja": "7.11",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11",
+        "ja": "7.12",
+        "nein": "7.12"
+      },
+      {
+        "id": "7.12",
+        "ja": "7.13",
+        "nein": "7.13"
+      },
+      {
+        "id": "7.13",
+        "ja": "7.14",
+        "nein": "7.14"
+      },
+      {
+        "id": "7.14",
+        "ja": "7.15",
+        "nein": "7.15"
+      },
+      {
+        "id": "7.15",
+        "ja": "7.16",
+        "nein": "7.16"
+      },
+      {
+        "id": "7.16",
+        "ja": "7.17",
+        "nein": "7.17"
+      },
+      {
+        "id": "7.17",
+        "ja": "7.18",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.18",
+        "ja": "7.19",
+        "nein": "7.19"
+      },
+      {
+        "id": "7.19",
+        "ja": "7.22",
+        "nein": "7.22"
+      },
+      {
+        "id": "7.22",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1",
+        "nein": "9.1"
+      },
+      {
+        "id": "9.1",
+        "ja": "9a.1",
+        "nein": "9a.1"
+      },
+      {
+        "id": "9a.1",
+        "ja": "9a.2",
+        "nein": "9a.2"
+      },
+      {
+        "id": "9a.2",
+        "ja": "9a.3",
+        "nein": "9a.3"
+      },
+      {
+        "id": "9a.3",
+        "ja": "9a.4",
+        "nein": "9a.4"
+      },
+      {
+        "id": "9a.4",
+        "ja": "9a.5",
+        "nein": "9a.5"
+      },
+      {
+        "id": "9a.5",
+        "ja": "9a.6",
+        "nein": "9a.6"
+      },
+      {
+        "id": "9a.6",
+        "ja": "9a.7",
+        "nein": "9a.7"
+      },
+      {
+        "id": "9a.7",
+        "ja": "9a.8",
+        "nein": "9a.8"
+      },
+      {
+        "id": "9a.8",
+        "ja": "9a.9",
+        "nein": "9a.9"
+      },
+      {
+        "id": "9a.9",
+        "ja": "9a.10",
+        "nein": "9a.10"
+      },
+      {
+        "id": "9a.10",
+        "ja": "9a.11",
+        "nein": "9a.11"
+      },
+      {
+        "id": "9a.11",
+        "ja": "9a.12",
+        "nein": "9a.12"
+      },
+      {
+        "id": "9a.12",
+        "ja": "9a.13",
+        "nein": "9a.13"
+      },
+      {
+        "id": "9a.13",
+        "ja": "9a.14",
+        "nein": "9a.14"
+      },
+      {
+        "id": "9a.14",
+        "ja": "9b.1",
+        "nein": "9b.1"
+      },
+      {
+        "id": "9b.1",
+        "ja": "9b.2",
+        "nein": "9b.2"
+      },
+      {
+        "id": "9b.2",
+        "ja": "9b.3",
+        "nein": "9b.3"
+      },
+      {
+        "id": "9b.3",
+        "ja": "9b.4",
+        "nein": "9b.4"
+      },
+      {
+        "id": "9b.4",
+        "ja": "9b.5",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.5",
+        "ja": "9b.6",
+        "nein": "9b.6"
+      },
+      {
+        "id": "9b.6",
+        "ja": "9b.10",
+        "nein": "9b.10"
+      },
+      {
+        "id": "9b.10",
+        "ja": "10a.1",
+        "nein": "10a.1"
+      },
+      {
+        "id": "10a.1",
+        "ja": "10a.2",
+        "nein": "10a.2"
+      },
+      {
+        "id": "10a.2",
+        "ja": "10a.4",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.4",
+        "ja": "10a.5",
+        "nein": "10a.5"
+      },
+      {
+        "id": "10a.5",
+        "ja": "10a.6",
+        "nein": "10a.6"
+      },
+      {
+        "id": "10a.6",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.7",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.8",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10a.9",
+        "ja": "10c.1",
+        "nein": "10c.1"
+      },
+      {
+        "id": "10c.1",
+        "ja": "10c.2",
+        "nein": "10c.2"
+      },
+      {
+        "id": "10c.2",
+        "ja": "10c.3",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.3",
+        "ja": "10c.4",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.4",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.7",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10c.8",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.3",
+        "nein": "10d.2"
+      },
+      {
+        "id": "10d.2",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.5",
+        "ja": "10d.6",
+        "nein": "10d.6"
+      },
+      {
+        "id": "10d.6",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10d.7",
+        "ja": "10e.1",
+        "nein": "10e.1"
+      },
+      {
+        "id": "10e.1",
+        "ja": "10e.2",
+        "nein": "10e.2"
+      },
+      {
+        "id": "10e.2",
+        "ja": "10e.3",
+        "nein": "10e.3"
+      },
+      {
+        "id": "10e.3",
+        "ja": "10e.4",
+        "nein": "10e.4"
+      },
+      {
+        "id": "10e.4",
+        "ja": "10e.5",
+        "nein": "10e.5"
+      },
+      {
+        "id": "10e.5",
+        "ja": "10e.9",
+        "nein": "10e.9"
+      },
+      {
+        "id": "10e.9",
+        "ja": "10e.10",
+        "nein": "10e.10"
+      },
+      {
+        "id": "10e.10",
+        "ja": "10e.11",
+        "nein": "10e.11"
+      },
+      {
+        "id": "10e.11",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "10e.13"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1",
+        "nein": "11.1"
+      },
+      {
+        "id": "11.1",
+        "ja": "11.2",
+        "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
+      },
+      {
+        "id": "12.1",
+        "ja": "12.2",
+        "nein": "12.2"
+      },
+      {
+        "id": "12.2",
+        "ja": "12.3",
+        "nein": "12.3"
+      },
+      {
+        "id": "12.3",
+        "ja": "12.4",
+        "nein": "12.4"
+      },
+      {
+        "id": "12.4",
+        "ja": "12.5",
+        "nein": "12.5"
+      },
+      {
+        "id": "12.5",
+        "ja": "12.6",
+        "nein": "12.6"
+      },
+      {
+        "id": "12.6",
+        "ja": "12.7",
+        "nein": "12.7"
+      },
+      {
+        "id": "12.7",
+        "ja": "12.8",
+        "nein": "12.8"
+      },
+      {
+        "id": "12.8",
+        "ja": "12.9",
+        "nein": "12.9"
+      },
+      {
+        "id": "12.9",
+        "ja": "END",
+        "nein": "END"
+      }
+    ]
+  }
+}
