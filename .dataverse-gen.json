@@ -1,6 +1,15 @@
 {
   "adapter": "dataverse",
   "tables": [
+    "contact",
+    "ava_bbu_beurteilungbesondererbedurfnisse",
+    "ava_bbu_bedurfniskategorie"
+  ],
+  "entities": [
+    "ava_bbu_bedurfniskategorie",
+    "ava_bbu_beurteilungbesondererbedurfnisse",
     "contact"
-  ]
+  ],
+  "actions": [],
+  "functions": []
 }

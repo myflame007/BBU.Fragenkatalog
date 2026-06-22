@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ClientData } from '../services/crmService';
-import { Sun, Moon, Type, Plus, Minus } from 'lucide-react';
+import { Sun, Moon, Type, Plus, Minus, Languages } from 'lucide-react';
+import config from '../data/config.json';
 
 interface Props {
   clientData: ClientData;
@@ -9,9 +10,11 @@ interface Props {
     total: number;
     percent: number;
   };
+  language: string;
+  onLanguageChange: (lang: string) => void;
 }
 
-export const WizardHeader: React.FC<Props> = ({ clientData, progress }) => {
+export const WizardHeader: React.FC<Props> = ({ clientData, progress, language, onLanguageChange }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [fontSize, setFontSize] = useState(100);
 
@@ -112,9 +115,22 @@ export const WizardHeader: React.FC<Props> = ({ clientData, progress }) => {
           <p className="text-[8px] font-bold text-slate-400 mt-0.5 uppercase tracking-tighter">Jahre</p>
         </div>
         <div className="w-px h-10 bg-slate-200 dark:bg-slate-700"></div>
-        <div className="text-center min-w-[60px]">
-          <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Sprache</p>
-          <p className="font-black text-slate-800 dark:text-slate-100 uppercase text-2xl leading-none">{clientData.language}</p>
+        <div className="min-w-[140px]">
+          <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1 flex items-center gap-1">
+            <Languages size={11} /> Sprache
+          </p>
+          <select
+            value={language}
+            onChange={(e) => onLanguageChange(e.target.value)}
+            className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg px-2 py-1 text-sm font-bold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 outline-none transition"
+            title={`Muttersprache: ${clientData.motherTongue || clientData.language}`}
+          >
+            {config.languages.map(lang => (
+              <option key={lang.id} value={lang.id}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

@@ -1,35 +1,35 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ClientData } from '../services/crmService';
-import { getNextStepId, getQuestionById, getStepById } from '../services/flowEngine';
+import { getNextStepId, getQuestionById } from '../services/flowEngine';
 import { calculateAssessments } from '../services/assessmentEngine';
 import { calculateProgress } from '../services/progressService';
 
-export const useWizard = (initialData: ClientData | null) => {
-  const [clientData, setClientData] = useState<ClientData | null>(initialData);
-  const [currentStepId, setCurrentStepId] = useState<string | null>(null);
-  const [answers, setAnswers] = useState<Record<string, any>>({});
-  const [history, setHistory] = useState<string[]>([]);
-  const [isComplete, setIsComplete] = useState(false);
-  const [loading, setLoading] = useState(false);
+function loadSavedWizardState(): Record<string, any> | null {
+  try {
+    const raw = localStorage.getItem('wizard_state');
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
 
-  // Persistence: Load state from localStorage on mount
-  useEffect(() => {
-    if (!initialData) {
-      const savedState = localStorage.getItem('wizard_state');
-      if (savedState) {
-        try {
-          const { clientData: savedClientData, currentStepId: savedStepId, answers: savedAnswers, history: savedHistory, isComplete: savedIsComplete } = JSON.parse(savedState);
-          setClientData(savedClientData);
-          setCurrentStepId(savedStepId);
-          setAnswers(savedAnswers);
-          setHistory(savedHistory);
-          setIsComplete(savedIsComplete);
-        } catch (e) {
-          console.error("Failed to restore wizard state", e);
-        }
-      }
-    }
-  }, [initialData]);
+export const useWizard = (initialData: ClientData | null) => {
+  const [clientData, setClientData] = useState<ClientData | null>(() =>
+    initialData ?? loadSavedWizardState()?.clientData ?? null
+  );
+  const [currentStepId, setCurrentStepId] = useState<string | null>(() =>
+    initialData ? null : (loadSavedWizardState()?.currentStepId ?? null)
+  );
+  const [answers, setAnswers] = useState<Record<string, any>>(() =>
+    initialData ? {} : (loadSavedWizardState()?.answers ?? {})
+  );
+  const [history, setHistory] = useState<string[]>(() =>
+    initialData ? [] : (loadSavedWizardState()?.history ?? [])
+  );
+  const [isComplete, setIsComplete] = useState<boolean>(() =>
+    initialData ? false : (loadSavedWizardState()?.isComplete ?? false)
+  );
+  const loading = false;
 
   // Persistence: Save state to localStorage whenever it changes
   useEffect(() => {
@@ -71,18 +71,28 @@ export const useWizard = (initialData: ClientData | null) => {
     }
   }, []);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (initialData) {
-      setClientData(initialData);
-      const startStepId = getNextStepId(initialData.groupId, null);
-      const startAssessments = calculateAssessments({}, initialData);
+      try {
+        setClientData(initialData);
+        const startStepId = getNextStepId(initialData.groupId, null);
+        if (!startStepId) {
+          throw new Error(`Keine Beurteilung für Betreuungskategorie "${initialData.groupId}" definiert. Bitte überprüfen Sie die Konfiguration.`);
+        }
+        const startAssessments = calculateAssessments({}, initialData);
 
-      setHistory([]);
-      setAnswers({});
-      setIsComplete(false);
-      goToNextStep(startStepId, startAssessments, initialData.groupId);
+        setHistory([]);
+        setAnswers({});
+        setIsComplete(false);
+        goToNextStep(startStepId, startAssessments, initialData.groupId);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Ein unerwarteter Fehler ist aufgetreten';
+        throw new Error(message);
+      }
     }
   }, [initialData, goToNextStep]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleAbbruch = useCallback(() => {
     setIsComplete(true);

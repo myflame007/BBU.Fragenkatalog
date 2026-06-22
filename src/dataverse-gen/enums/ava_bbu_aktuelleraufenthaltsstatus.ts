@@ -1,0 +1,13 @@
+/* eslint-disable*/
+// Enum ava_bbu_aktuelleraufenthaltsstatus
+export const enum ava_bbu_aktuelleraufenthaltsstatus {
+  Zulassungsverfahren = 100000000,
+  ErstinstanzlichesasyloderfremdenrechtlichesVerfahrenBFA = 100000001,
+  ZweitinstanzlichesasyloderfremdenrechtlichesVerfahrenBVwG = 100000002,
+  RechtskrftignegativabgeschlossenesasyloderfremdenrechtlichesVerfahren = 100000003,
+  RechtskrftigpositivabgeschlossenesasyloderfremdenrechtlichesVerfahrenAsylberechtigteSubsidirSchutzberechtigteAufenthaltstitelausbercksichtigungswrdigenGrnden = 100000004,
+  Duldung = 100000005,
+  RechtmigerAufenthaltgemanderergesetzlicherBestimmungenzBVisumfrdenkurzfristigenAufenthaltAufenthaltstitelnachdemNAGVorbergehendesAufenthaltsrechtfrVertriebene = 100000006,
+  UnrechtmigerAufenthalt = 100000007,
+}
+  

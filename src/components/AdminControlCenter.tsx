@@ -11,7 +11,6 @@ import {
   Download,
   ChevronDown,
   ChevronUp,
-  Database,
   AlertCircle
 } from 'lucide-react';
 
@@ -599,7 +598,7 @@ export const AdminControlCenter: React.FC = () => {
                           try {
                             const parsed = JSON.parse(e.target.value);
                             handleUpdateQuestion(q.id, { rule: parsed });
-                          } catch (err) {
+                          } catch {
                             alert("Ungültiges JSON-Format. Bitte prüfen Sie Ihre Eingabe.");
                           }
                         }}

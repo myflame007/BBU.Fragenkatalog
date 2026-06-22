@@ -41,10 +41,11 @@ const evaluateRule = (rule: Rule, answers: Record<string, any>, clientData?: Cli
   switch (rule.type) {
     case 'age_min':
       return clientData ? clientData.age >= (rule.value || 0) : false;
-    case 'count':
+    case 'count': {
       const ids = rule.ids || (rule.range ? generateIdRange(rule.range.prefix, rule.range.start, rule.range.end) : []);
       const count = rule.answer === 'Nein' ? countNeinInRange(answers, ids) : countJaInRange(answers, ids);
       return count >= (rule.threshold || 0);
+    }
     case 'answer':
       return getAnswerValue(answers, rule.id || '') === rule.answer;
     case 'or':
@@ -76,11 +77,12 @@ export const calculateAssessments = (answers: Record<string, any>, clientData?: 
         case "1a.13":
           result = countJaInRange(answers, generateIdRange("1a.", 1, 11)) >= 3;
           break;
-        case "1b.14":
+        case "1b.14": {
           const jaCount1b = countJaInRange(answers, generateIdRange("1b.", 1, 5));
           const neinCount1b = countNeinInRange(answers, generateIdRange("1b.", 7, 13));
           result = jaCount1b >= 2 || neinCount1b >= 2;
           break;
+        }
         case "5.8":
           result = countJaInRange(answers, ["5.3", "5.4", "5.5"]) >= 1;
           break;
@@ -90,18 +92,20 @@ export const calculateAssessments = (answers: Record<string, any>, clientData?: 
         case "6.6":
           result = ["6.1", "6.3", "6.5"].some(id => getAnswerValue(answers, id) === "Ja");
           break;
-        case "7.23":
+        case "7.23": {
           const jaCount7 = countJaInRange(answers, generateIdRange("7.", 10, 21));
           const ja7_22 = getAnswerValue(answers, "7.22") === "Ja";
           result = jaCount7 >= 3 || ja7_22;
           break;
-        case "9b.10":
+        }
+        case "9b.10": {
           const ja9a_1_14 = countJaInRange(answers, generateIdRange("9a.", 1, 14)) >= 3;
           const ja9a_16_21 = countJaInRange(answers, generateIdRange("9a.", 16, 21)) >= 3;
           const ja9b_1_6 = countJaInRange(answers, generateIdRange("9b.", 1, 6)) >= 1;
           const ja9b_7_9 = countJaInRange(answers, generateIdRange("9b.", 7, 9)) >= 1;
           result = ja9a_1_14 || ja9a_16_21 || ja9b_1_6 || ja9b_7_9;
           break;
+        }
         case "10a.7":
           result = getAnswerValue(answers, "10a.2") === "Ja" || getAnswerValue(answers, "10a.3") === "Ja";
           break;
@@ -120,12 +124,13 @@ export const calculateAssessments = (answers: Record<string, any>, clientData?: 
         case "10d.7":
           result = countJaInRange(answers, ["10d.3", "10d.4"]) >= 2 || getAnswerValue(answers, "10d.6") === "Ja";
           break;
-        case "10e.12":
+        case "10e.12": {
           const ja10e_2_3 = countJaInRange(answers, ["10e.2", "10e.3"]) >= 1;
           const ja10d_4_5 = countJaInRange(answers, ["10d.4", "10d.5"]) >= 1;
           const ja10e_7_8 = countJaInRange(answers, ["10e.7", "10e.8"]) >= 2;
           result = (ja10e_2_3 && ja10d_4_5) || ja10e_7_8;
           break;
+        }
         case "10e.13":
           result = getAnswerValue(answers, "10e.11") === "Ja";
           break;

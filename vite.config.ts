@@ -4,7 +4,14 @@ import { powerApps } from '@microsoft/power-apps-vite/plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), powerApps()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', { target: '18' }]],
+      },
+    }),
+    powerApps(),
+  ],
   server: {
     allowedHosts: ['.csb.app']
   }

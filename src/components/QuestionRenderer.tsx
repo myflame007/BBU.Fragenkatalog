@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Eye, Info, MessageSquare, ChevronRight, CornerDownRight, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import config from '../data/config.json';
@@ -42,12 +42,6 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
   const [notes, setNotes] = useState('');
   const [dropdownValue, setDropdownValue] = useState('');
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
-
-  // Reset local state when question changes
-  useEffect(() => {
-    setNotes('');
-    setDropdownValue('');
-  }, [question.id]);
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';

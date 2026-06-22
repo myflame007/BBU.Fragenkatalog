@@ -1,0 +1,32 @@
+/* eslint-disable*/
+// Enum ava_bbu_statusofproceeding
+export const enum ava_bbu_statusofproceeding {
+  Altersfeststellung = 100000007,
+  BVa = 100000006,
+  DUODublinOut = 100000010,
+  DublinInzugelassen = 100000011,
+  EinreiseantragFamilienverfahrenzugelassen = 100000009,
+  FASTTRACKnichtzugelassen = 100000004,
+  FASTTRACKzugelassen = 100000005,
+  Folgeantragnichtzugelassen = 100000002,
+  Folgeantragzugelassen = 100000003,
+  Identittsabklrungnichtzugelassen = 100000008,
+  rechtskrftignegativ3u8 = 100000015,
+  rechtskrftignegativ51und2Instanz = 100000016,
+  rechtskrftigpositiv3 = 100000013,
+  sonstigerVerfahrensstand = 100000012,
+  subsidirschutzberechtigt8 = 100000014,
+  zugelassen = 100000000,
+  zugelassenDUOlaufend = 100000001,
+  _4aAsylG = 100000017,
+  Duldung = 100000018,
+  _68AVG = 100000019,
+  UnzulssigkeitsverfahrengemArt38VerfVO = 100000020,
+  BeschleunigteVerfahrensfhrunggemArt42VerfVOZustndigkeitBund = 100000021,
+  BeschleunigteVerfahrensfhrunggemArt42VerfVOZustndigkeitLand = 100000026,
+  ZustndigkeitsverfahrengemAMMVO = 100000022,
+  GrenzverfahrengemArt43ffVerfVO = 100000023,
+  Normverfahren = 100000024,
+  FolgeantraggemArt55VerfVO = 100000025,
+}
+  

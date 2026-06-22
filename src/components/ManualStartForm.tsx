@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import config from '../data/config.json';
 import { ClientData, fetchClientByIfa, FamilyMember } from '../services/crmService';
 import { Search, Loader2, Users, ArrowRight, AlertCircle } from 'lucide-react';
@@ -13,7 +13,8 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
   const [loading, setLoading] = useState(false);
   const [isPulsing, setIsPulsing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<ClientData>({
+  const [isLanguageManuallySelected, setIsLanguageManuallySelected] = useState(false);
+  const [formData, setFormData] = useState<ClientData>(() => ({
     id: 'MANUAL_' + Date.now(),
     ifaNumber: '',
     firstName: '',
@@ -26,7 +27,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
     motherTongue: '',
     groupId: config.groups[0].id,
     language: 'de'
-  });
+  }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +36,11 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+
+    if (name === 'language') {
+      setIsLanguageManuallySelected(true);
+    }
+
     setFormData(prev => {
       const newData = {
         ...prev,
@@ -42,7 +48,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
       };
 
       // Auto-sync UI language with mother tongue when changed manually
-      if (name === 'motherTongue') {
+      if (name === 'motherTongue' && !isLanguageManuallySelected) {
         newData.language = value;
       }
 
@@ -91,7 +97,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
       age,
       groupId,
       ifaNumber: data.ifaNumber || formData.ifaNumber,
-      language: data.motherTongue || formData.language
+      language: isLanguageManuallySelected ? formData.language : (data.language || formData.language)
     };
 
     // Trigger pulse animation

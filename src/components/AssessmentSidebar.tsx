@@ -1,7 +1,6 @@
-import React from 'react';
-import config from '../data/config.json';
+import React, { useState } from 'react';
 import catalogData from '../data/questionCatalog.json';
-import { AlertCircle, ShieldAlert } from 'lucide-react';
+import { AlertCircle, ChevronLeft, ChevronRight, ShieldAlert } from 'lucide-react';
 
 const catalog = catalogData as any;
 
@@ -10,6 +9,8 @@ interface Props {
 }
 
 export const AssessmentSidebar: React.FC<Props> = ({ assessments }) => {
+  const [collapsed, setCollapsed] = useState(false);
+
   // List of "real" risk assessment items that should be displayed
   const realRiskIds = [
     "1a.13", "1b.14", "5.8", "5.9", "6.6", "7.22", "7.23",
@@ -21,9 +22,37 @@ export const AssessmentSidebar: React.FC<Props> = ({ assessments }) => {
     assessments[id] && realRiskIds.includes(id)
   );
 
+  if (collapsed) {
+    return (
+      <div className="w-12 bg-slate-50 dark:bg-slate-900/50 border-l border-slate-200 dark:border-slate-800 h-screen sticky top-0 hidden xl:flex flex-col items-center justify-start py-6 ml-4 transition-colors">
+        <button
+          onClick={() => setCollapsed(false)}
+          className="p-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-md transition border border-slate-200 dark:border-slate-700"
+          title="Risiko-Sidebar einblenden"
+          aria-label="Risiko-Sidebar einblenden"
+        >
+          <ChevronLeft className="text-slate-500 dark:text-slate-400" size={18} />
+        </button>
+        {activeAssessmentIds.length > 0 && (
+          <div className="mt-3 w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-700 dark:text-red-300 text-xs font-black">
+            {activeAssessmentIds.length}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (activeAssessmentIds.length === 0) {
     return (
       <div className="w-96 bg-slate-50 dark:bg-slate-900/50 border-l border-slate-200 dark:border-slate-800 h-screen p-12 sticky top-0 overflow-y-auto hidden xl:flex flex-col items-center justify-center text-center ml-8 transition-colors">
+        <button
+          onClick={() => setCollapsed(true)}
+          className="absolute top-4 right-4 p-2 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition"
+          title="Sidebar ausblenden"
+          aria-label="Sidebar ausblenden"
+        >
+          <ChevronRight size={16} className="text-slate-400" />
+        </button>
         <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 shadow-inner">
           <ShieldAlert size={48} className="text-slate-300 dark:text-slate-700" />
         </div>
@@ -57,9 +86,19 @@ export const AssessmentSidebar: React.FC<Props> = ({ assessments }) => {
           </div>
           <h3 className="text-xl font-black text-red-900 dark:text-red-400 tracking-tight">Risiko</h3>
         </div>
-        <span className="bg-red-200 dark:bg-red-900/40 text-red-700 dark:text-red-200 text-xs font-black px-2 py-1 rounded-lg">
-          {activeAssessmentIds.length}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="bg-red-200 dark:bg-red-900/40 text-red-700 dark:text-red-200 text-xs font-black px-2 py-1 rounded-lg">
+            {activeAssessmentIds.length}
+          </span>
+          <button
+            onClick={() => setCollapsed(true)}
+            className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition"
+            title="Sidebar ausblenden"
+            aria-label="Sidebar ausblenden"
+          >
+            <ChevronRight size={16} className="text-red-400" />
+          </button>
+        </div>
       </div>
 
       <div className="space-y-8">
@@ -82,8 +121,8 @@ export const AssessmentSidebar: React.FC<Props> = ({ assessments }) => {
         ))}
       </div>
 
-      <div className="mt-12 pt-8 border-t border-gray-100 text-center">
-        <p className="text-xs text-gray-400 font-medium italic">
+      <div className="mt-12 pt-8 border-t border-gray-100 dark:border-slate-700 text-center">
+        <p className="text-xs text-gray-400 dark:text-slate-500 font-medium italic">
           Diese Liste wird automatisch basierend auf Ihren Antworten aktualisiert.
         </p>
       </div>
