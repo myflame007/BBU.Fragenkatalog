@@ -12,5 +12,6 @@ export const enum ava_bbu_typdervulnerabilitat {
   PersonendiederLGBTIQGemeinschaftzugerechnetwerden = 100000008,
   MENVia = 100000010,
   LEFIBF = 100000011,
+  Sonstiges = 100000019,
 }
   

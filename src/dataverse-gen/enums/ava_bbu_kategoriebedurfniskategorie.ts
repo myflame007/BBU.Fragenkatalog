@@ -20,5 +20,6 @@ export const enum ava_bbu_kategoriebedurfniskategorie {
   PersondieanderenschwerenFormenvonpsychischerphysischerundsexuellerGewaltausgesetztwar = 100000016,
   PsychManahmen = 100000017,
   MenschmitBehinderungPsych = 100000018,
+  Sonstiges = 100000019,
 }
   

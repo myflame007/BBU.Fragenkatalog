@@ -17,6 +17,7 @@ export const ava_bbu_bedurfniskategorieMetadata = {
     ava_bbu_kategorie: "Optionset",
     ava_bbu_typ: "Optionset",
     ava_qualitatcode: "MultiSelect",
+    ava_sonstigebesonderebedurfnisse: "MultiSelect",
     statecode: "Optionset",
     statuscode: "Optionset",
     // Date Formats
@@ -66,6 +67,7 @@ export const enum ava_bbu_BedurfniskategorieAttributes {
   ava_BeurteilungbesondererBedurfnisseIdName = "ava_beurteilungbesondererbedurfnisseidname",
   ava_Name = "ava_name",
   ava_QualitatCode = "ava_qualitatcode",
+  ava_SonstigeBesondereBedurfnisse = "ava_sonstigebesonderebedurfnisse",
   CreatedBy = "createdby",
   CreatedByName = "createdbyname",
   CreatedByYomiName = "createdbyyominame",
@@ -151,6 +153,8 @@ export interface ava_bbu_Bedurfniskategorie extends IEntity {
   ava_name?: string | null;
   // Qualität  ava_bbu_qualitat
   ava_qualitatcode?: import("../enums/ava_bbu_qualitat").ava_bbu_qualitat[] | null;
+  // Sonstige Besondere Bedürfnisse
+  ava_sonstigebesonderebedurfnisse?: import("../enums/ava_sonstigebesonderebedurfnisse").ava_sonstigebesonderebedurfnisse[] | null;
   // Erstellt von LookupType Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat.
   createdby?: import("dataverse-ify").EntityReference | null;
   //  StringType

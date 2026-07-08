@@ -45,6 +45,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "01.1": {
+      "id": "01.1",
+      "category": "Zustimmung des Klienten/der Klientin",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Stimmst du zu, dass wir mit dem Gespräch fortfahren?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "0.1a": {
       "id": "0.1a",
       "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
@@ -120,17 +130,6 @@
       "answerType": "Drop down (Namen/alle MJ)",
       "condition": ""
     },
-    "0.5": {
-      "id": "0.5",
-      "category": "Beurteilung bei begleiteten Kindern, die das Gespräch nicht selbst führen",
-      "type": "Bewertung",
-      "text": {
-        "de": "Der/die Minderjährige ist während des Gesprächs anwesend. ",
-        "en": "The minor is present during the conversation."
-      },
-      "answerType": "Ja/Nein",
-      "condition": ""
-    },
     "1a.1": {
       "id": "1a.1",
       "category": "1a. Begleitete*r Minderjährige*r",
@@ -178,21 +177,6 @@
       },
       "answerType": "Infobox",
       "condition": ""
-    },
-    "1a.5": {
-      "id": "1a.5",
-      "category": "1a. Begleitete*r Minderjährige*r",
-      "type": "Bewertung",
-      "text": {
-        "de": "Das Gespräch wird mit einem Kind über 14 Jahren geführt.",
-        "en": "The conversation is being conducted with a child over 14 years old."
-      },
-      "answerType": "Ja/Nein",
-      "condition": "",
-      "rule": {
-        "type": "age_min",
-        "value": 14
-      }
     },
     "1a.6": {
       "id": "1a.6",
@@ -410,12 +394,7 @@
       "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
       "type": "Direkte Fragen",
       "text": {
-        "de": "Wie heißen diese Personen und wo wohnen sie?",
-        "en": "What are these people's names and where do they live?",
-        "ar": "إذاكانت اﻹجابة\" ﻻ\"، هل تعرف أشخاصا ف النمسا؟ أين يقيمون؟",
-        "fa": "اگر نه، آیا افرادی را در اتریش می‌شناسی؟ آن‌ها کجا زندگی می‌کنند؟",
-        "so": "Haddii maya, ma taqaanaa qof ku sugan Austria? Xaggee ayuu deggan yahay?",
-        "ru": "Если нет, то есть ли у тебя в Австрии знакомые? Где они живут?"
+        "de": "Weißt du wo genau? Welche Verwandte?"
       },
       "answerType": "Nur Anmerkung",
       "condition": ""
@@ -440,12 +419,7 @@
       "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
       "type": "Direkte Fragen",
       "text": {
-        "de": "Wie heißen diese Personen und wo wohnen sie?",
-        "en": "What are these people's names and where do they live?",
-        "ar": "ما هي أسماء هؤلاء الأشخاص وأين يعيشون؟",
-        "fa": "نام این افراد چیست و کجا زندگی می‌کنند؟",
-        "ru": "Как зовут этих людей и где они живут?",
-        "so": "Magacyada dadkan waa maxay, xaggee bayna deggen yihiin?"
+        "de": "In welchem EU Land? Welche Verwandte?"
       },
       "answerType": "Nur Anmerkung",
       "condition": ""
@@ -470,12 +444,7 @@
       "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
       "type": "Direkte Fragen",
       "text": {
-        "de": "Gibt es etwas, das dir manchmal schwerfällt? Gibt es etwas, was dir Sorgen bereitet oder wo du Unterstützung benötigst?",
-        "en": "Is there anything that is sometimes difficult for you? Is there anything that worries you?",
-        "ar": "هل هناك شء تجده صعبا ف بعض اأآحيان؟ هل هناك شء يقلقك أو تحتاج إىل دعم بشأنه؟",
-        "fa": "آیا چیزی هست که گاهی برایت دشوار باشد؟ آیا چیزی هست که باعث نگرانی تو شود یا در آن به حمایت نیاز داشته باشی؟",
-        "so": "Ma jiraan wax kugu adkaada? Ma jiraan wax ku welweliya ama aad u baahan tahay taageero?\n",
-        "ru": "Есть ли что-нибудь, что тебе иногда даётся с трудом? Есть ли что-нибудь, что тебя беспокоит или в чём тебе нужна поддержка?"
+        "de": "Gibt es etwas, was dir Sorgen bereitet oder wo du Unterstützung benötigst?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
       "condition": ""
@@ -485,12 +454,7 @@
       "category": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
       "type": "Direkte Fragen",
       "text": {
-        "de": "Hast du Sorge um deine Sicherheit hier in der Betreuungseinrichtung?",
-        "en": "Are you worried about your safety here in the care facility?",
-        "ar": "هل تشعر بالقلق عىل سﻻمتك هنا ف مركز الرعاية؟",
-        "fa": "آیا درباره امنیت خود در این مرکز مراقبت نگرانی داری؟",
-        "ru": "Ты опасаешься за свою безопасность здесь, в учреждении, в котором находишься?",
-        "so": "Ma ka walwalsan tahay ammaankaaga xarunta aad joogto?"
+        "de": "Fühlst du dich hier nicht in der Betreuungseinrichtung wohl?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -593,6 +557,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "5.1.1": {
+      "id": "5.1.1",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Sprechtext",
+      "text": {
+        "de": "In manchen Ländern werden Menschen bestraft oder verfolgt, weil sie eine Person gleichen Geschlechts lieben oder weil ihr Geschlecht nicht zu dem passt, das ihnen bei der Geburt zugewiesen wurde. In Österreich darf niemand deswegen bedroht, verletzt oder diskriminiert werden. Es gibt innerhalb und außerhalb der Betreuungseinrichtung Unterstützungsangebote für LGBTI-Personen. Alles was wir besprechen, bleibt vertraulich. Solltest du die nachfolgenden Fragen zum jetzigen Zeitpunkt nicht beantworten wollen, kannst du dich vertraulich an eine Betreuerin oder einen Betreuer wenden."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "5.2": {
       "id": "5.2",
       "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
@@ -608,6 +582,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "5.2.1": {
+      "id": "5.2.1",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Betrifft dich einer der Punkte, die ich soeben erwähnt habe?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "5.3": {
       "id": "5.3",
       "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
@@ -619,6 +603,16 @@
         "fa": "آیا در اتاق خود با هم‌اتاقی‌هایتان احساس امنیت نمی‌کنید؟",
         "so": "Ma ku dareemaysaa amni darro qolkaaga marka aad la joogto dadka kale ee kula nool?",
         "ru": "Вы не чувствуете себя в безопасности в своей комнате, с Вашими соседями по комнате?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "5.3.1": {
+      "id": "5.3.1",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Fühlst du dich hier nicht sicher?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -683,6 +677,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
       "condition": ""
     },
+    "5.7.1": {
+      "id": "5.7.1",
+      "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchtest du die Angaben ergänzen mit welchen Pronomen oder welchem Namen du angesprochen werden möchtest?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
     "5.8": {
       "id": "5.8",
       "category": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
@@ -697,6 +701,7 @@
         "type": "count",
         "ids": [
           "5.3",
+          "5.3.1",
           "5.4",
           "5.5"
         ],
@@ -915,6 +920,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "7.9.1": {
+      "id": "7.9.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen haben Angst vor anderen oder werden gezwungen, Dinge zu tun, die sie nicht tun möchten. Zum Beispiel wird ihnen gesagt, dass sie sehr viel Geld für ihre Reise in ein anderes Land bezahlen müssen. Oder sie und ihre Familien werden bedroht oder unter Druck gesetzt. Oft werden diesen Menschen ihre Ausweise weggenommen. Andere kontrollieren dann, wohin sie gehen und mit wem sie sprechen dürfen. Ihnen wird gesagt, dass sie arbeiten müssen, stehlen sollen, auf der Straße betteln sollen oder sexuelle Dienste anbieten müssen. Sie bekommen dafür kein oder nur sehr wenig Geld. Das nennt man „Ausbeutung“ oder auch „Menschenhandel“ oder „Kinderhandel“. Das kann im Herkunftsland passieren, auf der Flucht oder auch in Europa. Betroffene Personen haben besondere Rechte. Es gibt spezielle Organisationen, die Hilfe und Schutz anbieten können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "7.10": {
       "id": "7.10",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
@@ -930,14 +945,34 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "7.10.1": {
+      "id": "7.10.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Weißt du wo du dich gerade befindest?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "7.11": {
       "id": "7.11",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
-      "type": "Bewertung",
+      "type": "Beobachtung",
       "text": {
         "de": "Klient*in weiß nicht, wo er*sie sich befindet.",
         "en": "The client does not know where they are.",
         "fa": "مراجع نمی‌داند کجا قرار دارد."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.11.1": {
+      "id": "7.11.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Klient*in kann NICHT angeben, wo er*sie sich befindet."
       },
       "answerType": "Ja/Nein",
       "condition": ""
@@ -957,13 +992,33 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "7.12.1": {
+      "id": "7.12.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Kannst du mir auch sagen, wo du vor deiner Ankunft hier warst?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "7.13": {
       "id": "7.13",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
-      "type": "Bewertung",
+      "type": "Beobachtung",
       "text": {
         "de": "Klient*in weiß nicht, wo er*sie sich befindet. ",
         "en": "The client does not know where they are."
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
+    "7.13.1": {
+      "id": "7.13.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Beobachtung",
+      "text": {
+        "de": "Klient*in kann NICHT angeben, wo er*sie sich befindet."
       },
       "answerType": "Ja/Nein",
       "condition": ""
@@ -979,6 +1034,16 @@
         "fa": "آیا کسی به شما دروغ گفته، شما را تهدید کرده، تحت فشار قرار داده یا برخلاف خواستتان نگه داشته است؟",
         "so": "Ma jiraa qof ku khiyaamay, ku handaday, ku cadaadiyay ama ku hayay adigoon rabin?",
         "ru": "Кто-то обманывал Вас, угрожал Вам, оказывал давление или задерживал Вас против Вашей воли?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.14.1": {
+      "id": "7.14.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat dich jemand angelogen, bedroht, unter Druck gesetzt oder festgehalten, obwohl du das nicht wolltest?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1013,6 +1078,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "7.16.1": {
+      "id": "7.16.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat jemand von dir verlangt zu arbeiten oder etwas zu tun, das du nicht wolltest?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "7.17": {
       "id": "7.17",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
@@ -1028,6 +1103,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "7.17.1": {
+      "id": "7.17.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es im Moment jemanden, der dir sagt was du tun sollst? Fühlst du dich unsicher oder bedroht?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "7.18": {
       "id": "7.18",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
@@ -1039,6 +1124,16 @@
         "fa": "آیا به حمایت نیاز دارید؟",
         "so": "Ma u baahan tahay taageero?",
         "ru": "Вы нуждаетесь в поддержке?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "7.18.1": {
+      "id": "7.18.1",
+      "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Brauchst du Hilfe?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1091,7 +1186,7 @@
     "7.22": {
       "id": "7.22",
       "category": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
-      "type": "Bewertung",
+      "type": "Beobachtung",
       "text": {
         "de": "Die gesamte Situation deutet auf einen Verdacht auf Menschenhandel hin",
         "en": "The overall situation indicates a suspicion of human trafficking."
@@ -1108,7 +1203,7 @@
         "en": "Indicators identified (CMS)"
       },
       "answerType": "Ja/Nein",
-      "condition": "Wenn 7.10-7.21 =>3x ja = ja ODER wenn 7.22 = ja",
+      "condition": "Wenn 7.1-7.5 => 4x ja = ja (Beobachtung) ODER Wenn 7.6-7.8 2x ja (Kinderhandel) Wenn 7.10-7.21 (außer: 7.10 und 7.12) =>4x ja = ja (Selbstaussage) ODER wenn 7.22 = ja (Beobachtung)Kategorie wird automatisch geschrieben",
       "rule": {
         "type": "or",
         "rules": [
@@ -1116,10 +1211,45 @@
             "type": "count",
             "range": {
               "prefix": "7.",
-              "start": 10,
-              "end": 21
+              "start": 1,
+              "end": 5
             },
-            "threshold": 3,
+            "threshold": 4,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "range": {
+              "prefix": "7.",
+              "start": 6,
+              "end": 8
+            },
+            "threshold": 2,
+            "answer": "Ja"
+          },
+          {
+            "type": "count",
+            "ids": [
+              "7.11",
+              "7.11.1",
+              "7.13",
+              "7.13.1",
+              "7.14",
+              "7.14.1",
+              "7.15",
+              "7.15.1",
+              "7.16",
+              "7.16.1",
+              "7.17",
+              "7.17.1",
+              "7.19"
+            ],
+            "threshold": 4,
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "7.20",
             "answer": "Ja"
           },
           {
@@ -1145,6 +1275,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "9.1.1": {
+      "id": "9.1.1",
+      "category": "9. Person, die an einer krankheitswertigen belastungsabhängigen Störung, einer psychischen Erkrankung von vergleichbarem Gewicht oder einer sonstigen schweren Erkrankung leidet",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen erleben Phasen, in denen ihre Gedanken, Gefühle oder ihr Verhalten sehr belastend ist.  Dann wird der Alltag schwieriger. Genau wie bei körperlichen Krankheiten kann das jede und jeden treffen. Es gibt Hilfe und Unterstützung, die entlasten können. Es ist sehr mutig, um Hilfe zu bitten. Das kann ein erster Schritt, damit es einem langfristig besser geht."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "9a.1": {
       "id": "9a.1",
       "category": "9a. Psychosoziale Belastung",
@@ -1156,6 +1296,16 @@
         "fa": "آیا زود عصبانی می‌شوید؟",
         "ru": "Вы легко выходите из себя?",
         "so": "Ma si degdeg ah ayaad u xanaaqdaa?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.1.1": {
+      "id": "9a.1.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Wirst du schnell wütend?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1175,6 +1325,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "9a.2.1": {
+      "id": "9a.2.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du Probleme beim Ein- oder Durchschlafen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "9a.3": {
       "id": "9a.3",
       "category": "9a. Psychosoziale Belastung",
@@ -1186,6 +1346,16 @@
         "fa": "آیا در ماه گذشته اغلب چیزهایی را در زندگی روزمره فراموش کرده‌اید یا وسایلی را گم کرده‌اید، مثل تلفن همراه یا کارت شناسایی؟",
         "ru": "В течение последнего месяца Вы часто забывали или теряли вещи в повседневной жизни, - например, мобильный телефон или удостоверение личности?",
         "so": "Bishii la soo dhaafay ma ku noqnoqotay inaad hilmaanto waxyaabo ama shay lumiso sida telefoonnada ama aqoonsiga?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.3.1": {
+      "id": "9a.3.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Vergisst oder verlierst du oft Sachen, wie zum Beispiel dein Handy oder deine ID? "
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1205,6 +1375,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "9a.4.1": {
+      "id": "9a.4.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, das du nicht mehr machst, obwohl du es früher gerne gemacht hast?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "9a.5": {
       "id": "9a.5",
       "category": "9a. Psychosoziale Belastung",
@@ -1216,6 +1396,16 @@
         "fa": "آیا در ماه گذشته اغلب احساس غمگینی یا تنهایی کرده‌اید؟",
         "ru": "В течение последнего месяца Вы часто ощущали грусть или чувствовали себя одиноким?",
         "so": "Bishii la soo dhaafay marar badan ma dareentay murugo ama kalinimo?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.5.1": {
+      "id": "9a.5.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du dich im letzten Monat oft traurig oder einsam gefühlt?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1235,6 +1425,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "9a.6.1": {
+      "id": "9a.6.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Ist dir oft schwindelig, fühlst du dich kraftlos oder wie gelähmt , ohne dass du dafür einen medizinischen Grund kennst?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "9a.7": {
       "id": "9a.7",
       "category": "9a. Psychosoziale Belastung",
@@ -1250,6 +1450,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "9a.7.1": {
+      "id": "9a.7.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du oft Erinnerungen an schlimme Dinge die passiert sind?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "9a.8": {
       "id": "9a.8",
       "category": "9a. Psychosoziale Belastung",
@@ -1261,6 +1471,16 @@
         "fa": "آیا در ماه گذشته زیاد احساس ترس داشته‌اید؟",
         "ru": "Вы часто испытывали страх в течение последнего месяца?",
         "so": "Bishii la soo dhaafay ma dareentay cabsi badan?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9a.8.1": {
+      "id": "9a.8.1",
+      "category": "9a. Psychosoziale Belastung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du im letzten Monat oft Angst gehabt?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1483,6 +1703,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "9b.5.1": {
+      "id": "9b.5.1",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du im letzten Monat oft Angst gehabt?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "9b.6": {
       "id": "9b.6",
       "category": "9b. Schwere psychische Erkrankung",
@@ -1494,6 +1724,16 @@
         "fa": "آیا در ماه گذشته پیش آمده که عمداً به خودتان آسیب بزنید؟",
         "so": "Ma leedahay cudurro maskaxeed miso nafsiyeed?\n",
         "ru": "У Вас есть какие-либо психические заболевания?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "9b.6.1": {
+      "id": "9b.6.1",
+      "category": "9b. Schwere psychische Erkrankung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du irgendwelche psychischen Erkrankungen? Hörst du zB Stimmen oder bist verwirrt?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1558,11 +1798,32 @@
         "rules": [
           {
             "type": "count",
-            "range": {
-              "prefix": "9a.",
-              "start": 1,
-              "end": 14
-            },
+            "ids": [
+              "9.1",
+              "9.1.1",
+              "9a.1",
+              "9a.1.1",
+              "9a.2",
+              "9a.2.1",
+              "9a.3",
+              "9a.3.1",
+              "9a.4",
+              "9a.4.1",
+              "9a.5",
+              "9a.5.1",
+              "9a.6",
+              "9a.6.1",
+              "9a.7",
+              "9a.7.1",
+              "9a.8",
+              "9a.8.1",
+              "9a.9",
+              "9a.10",
+              "9a.11",
+              "9a.12",
+              "9a.13",
+              "9a.14"
+            ],
             "threshold": 3,
             "answer": "Ja"
           },
@@ -1614,6 +1875,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "10a.1.1": {
+      "id": "10a.1.1",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Sprechtext",
+      "text": {
+        "de": "Manche Menschen erleben vor oder während der Flucht sehr schwere Gewalt. Manche werden sogar gefoltert – besonders, wenn sie im Gefängnis waren. Diese Informationen können für das Asylverfahren wichtig sein. Du entscheidest selbst, ob du darüber sprechen möchtest und wie viel du erzählst. Es kann auch hilfreich sein, wenn Ärztinnen oder Ärzte Verletzungen oder andere Spuren dokumentieren. Das kann deine Aussagen im Asylverfahren unterstützen. In Österreich gibt es spezialisierte Stellen, die Menschen mit solchen Erfahrungen professionell helfen können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "10a.2": {
       "id": "10a.2",
       "category": "10a. Potenzielles Opfer von Folter",
@@ -1625,6 +1896,16 @@
         "fa": "آیا در زندگی شما موقعیت‌هایی وجود داشته که در آن عمداً درد شدید جسمی یا روانی به شما وارد شده باشد؛ مثلاً توسط نهادهای دولتی یا گروه‌های دیگر؟",
         "so": "Ma jireen xaalado noloshaada ah oo si ula kac ah laguu geystay xanuun jireed ama maskaxeed oo daran – tusaale ahaan hay'ad dowladeed ama kooxo kale?\n\n",
         "ru": "Бывали ли в Вашей жизни ситуации, когда Вам намеренно причиняли сильную физическую или эмоциональную боль – например, со стороны государственных органов или других групп?\n"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10a.2.1": {
+      "id": "10a.2.1",
+      "category": "10a. Potenzielles Opfer von Folter",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gab es in deinem Leben Situationen, in denen dir absichtlich schwere körperliche oder seelische Schmerzen zugefügt wurden – etwa durch staatliche Stellen oder andere Gruppen?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1710,6 +1991,11 @@
           },
           {
             "type": "answer",
+            "id": "10a.2.1",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
             "id": "10a.3",
             "answer": "Ja"
           }
@@ -1773,6 +2059,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "10c.1.1": {
+      "id": "10c.1.1",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Info",
+      "text": {
+        "de": "Manchmal erleben Menschen sexuelle Handlungen, denen sie nicht zugestimmt haben. Das ist eine Form von Gewalt, die in Österreich strafbar ist. Es kann sehr belastend sein und Gefühle wie Angst, Scham oder Verwirrung auslösen. Wichtig ist: Die Verantwortung liegt immer bei der Person, die die Gewalt ausgeübt hat, nie bei der betroffenen Person. Es gibt in und außerhalb der Betreuungseinrichtung kompetente Anlaufstellen, die Betroffenen Unterstützung bieten können."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "10c.2": {
       "id": "10c.2",
       "category": "10c. Person, die Vergewaltigung erlitten hat",
@@ -1784,6 +2080,16 @@
         "fa": "آیا خشونت جنسی را تجربه کرده‌اید که هنوز هم برای شما آزاردهنده است؟",
         "so": "Ma la kulantay rabshad galmo oo weli ku culus adiga maanta?",
         "ru": "Вы сталкивались с сексуальным насилием, которое до сих пор причиняет Вам страдания?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.2.1": {
+      "id": "10c.2.1",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hat dich schon einmal jemand an Stellen angefasst oder behandelt, dass es sich für dich nicht richtig angefühlt hat?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1803,6 +2109,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "10c.3.1": {
+      "id": "10c.3.1",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Beeinträchtigen diese Erlebnisse deinen Schlaf, deine Gefühle oder deinen Alltag?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "10c.4": {
       "id": "10c.4",
       "category": "10c. Person, die Vergewaltigung erlitten hat",
@@ -1814,6 +2130,16 @@
         "fa": "آیا می‌خواهید با یک فرد متخصص آموزش‌دیده درباره این موضوع صحبت کنید؟",
         "so": "Ma rabtaa inaad la hadasho khabiir si gaar ah loo tababaray?",
         "ru": "Хотели бы Вы поговорить об этом со специально обученным специалистом?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10c.4.1": {
+      "id": "10c.4.1",
+      "category": "10c. Person, die Vergewaltigung erlitten hat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchtest du mit einer speziell geschulten Fachkraft darüber sprechen?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1853,6 +2179,11 @@
           },
           {
             "type": "answer",
+            "id": "10c.2.1",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
             "id": "10c.6",
             "answer": "Ja"
           }
@@ -1875,6 +2206,16 @@
           {
             "type": "answer",
             "id": "10c.3",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10c.3.1",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10c.4.1",
             "answer": "Ja"
           },
           {
@@ -1944,6 +2285,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "10d.5.1": {
+      "id": "10d.5.1",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen dürfen nicht selbst entscheiden, ob sie heiraten möchten. Sie werden unter Druck gesetzt oder dazu gezwungen. Das nennt man Zwangsheirat. Zwangsheirat ist eine Form von Gewalt und in Österreich verboten. Manchmal betrifft das auch Kinder oder Jugendliche. In Österreich darf man grundsätzlich erst ab 18 Jahren heiraten. Es gibt spezielle Beratungsstellen, die betroffene Menschen vertraulich unterstützen und dir helfen können. "
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "10d.6": {
       "id": "10d.6",
       "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
@@ -1955,6 +2306,16 @@
         "fa": "آیا این موضوع شامل شما می‌شود؟",
         "ru": "Касается ли это Вас?",
         "so": "Ma ku khusaysaa tani adiga?\n"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10d.6.1": {
+      "id": "10d.6.1",
+      "category": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Betrifft dich das?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -1973,6 +2334,11 @@
         "type": "or",
         "rules": [
           {
+            "type": "answer",
+            "id": "10d.1",
+            "answer": "Ja"
+          },
+          {
             "type": "count",
             "ids": [
               "10d.3",
@@ -1984,6 +2350,11 @@
           {
             "type": "answer",
             "id": "10d.6",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10d.6.1",
             "answer": "Ja"
           }
         ]
@@ -2003,6 +2374,16 @@
       "answerType": "Infobox",
       "condition": ""
     },
+    "10e.1.1": {
+      "id": "10e.1.1",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Info",
+      "text": {
+        "de": "Manche Menschen erleben Gewalt oder Missbrauch. Gewalt kann viele Gesichter haben: Sie kann körperlich sein, z.B. wenn jemand gestoßen oder geschlagen wird. Sie kann auch seelisch sein, zum Beispiel wenn jemand beleidigt, erniedrigt oder eingeschüchtert wird. Gewalt kann außerdem passieren, wenn jemand kontrolliert wird oder wichtige Dinge verboten werden. Auch das Wegnehmen von Geld oder das Einsperren gehört dazu. Es ist auch Gewalt, wenn jemand zu sexuellen Handlungen gedrängt oder gezwungen wird, gegen den eigenen Willen. Manche Gewalterfahrungen können schon länger zurückliegen und Menschen trotzdem noch beeinflussen. Diese Erfahrungen können sehr schmerzhaft sein. Du entscheidest, ob du die Fragen beantworten möchtest."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "10e.2": {
       "id": "10e.2",
       "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
@@ -2017,6 +2398,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "10e.2.1": {
+      "id": "10e.2.1",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du Erfahrungen gemacht, bei denen dir absichtlich körperliche Schmerzen oder Verletzungen zugefügt wurden?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "10e.3": {
       "id": "10e.3",
       "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
@@ -2027,6 +2418,16 @@
         "ar": "هل كانت هناك مواقف تعرضت فيها لضغوط نفسية شديدة أو تهديدات أو ترهيب؟",
         "ru": "Бывали ли ситуации, когда Вы подвергались сильному психологическому давлению, угрозам или запугиванию?",
         "so": "Ma jireen xaalado aad si maskaxeed si xooggan laguugu cadaadiyay, laguugu hanjabay ama laguugu cabsi geliyay?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "10e.3.1": {
+      "id": "10e.3.1",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gab es Situationen, in denen du psychisch stark unter Druck gesetzt, bedroht oder eingeschüchtert wurdest?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -2143,6 +2544,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "10e.11.1": {
+      "id": "10e.11.1",
+      "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Möchtest du mit einer Fachperson sprechen?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "10e.12": {
       "id": "10e.12",
       "category": "10e. Person, die anderen schweren Formen von psychischer, physischer, geschlechtsbasierter und sexueller Gewalt ausgesetzt war",
@@ -2152,7 +2563,7 @@
         "en": "Indications present (display)"
       },
       "answerType": "Ja/Nein",
-      "condition": "Wenn 10e.2-10e.3 =>1x ja UND wenn 10d.4-10d.5 = 1xja ODER 10e.7-10e.8 => 2x ja",
+      "condition": "Wenn 10e.2-10e.3 =>1x ja UND wenn 10e.4-10e.5 = 1xja ODER 10e.7-10e.6 => 1x UND wenn 10e.8 => 1x ja",
       "rule": {
         "type": "or",
         "rules": [
@@ -2163,7 +2574,9 @@
                 "type": "count",
                 "ids": [
                   "10e.2",
-                  "10e.3"
+                  "10e.2.1",
+                  "10e.3",
+                  "10e.3.1"
                 ],
                 "threshold": 1,
                 "answer": "Ja"
@@ -2171,8 +2584,8 @@
               {
                 "type": "count",
                 "ids": [
-                  "10d.4",
-                  "10d.5"
+                  "10e.4",
+                  "10e.5"
                 ],
                 "threshold": 1,
                 "answer": "Ja"
@@ -2180,12 +2593,32 @@
             ]
           },
           {
-            "type": "count",
-            "ids": [
-              "10e.7",
-              "10e.8"
-            ],
-            "threshold": 2,
+            "type": "and",
+            "rules": [
+              {
+                "type": "count",
+                "ids": [
+                  "10e.6",
+                  "10e.7"
+                ],
+                "threshold": 1,
+                "answer": "Ja"
+              },
+              {
+                "type": "answer",
+                "id": "10e.8",
+                "answer": "Ja"
+              }
+            ]
+          },
+          {
+            "type": "answer",
+            "id": "10e.2.1",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10e.3.1",
             "answer": "Ja"
           }
         ]
@@ -2202,9 +2635,19 @@
       "answerType": "Ja/Nein",
       "condition": "Wenn 10e.11 => ja",
       "rule": {
-        "type": "answer",
-        "id": "10e.11",
-        "answer": "Ja"
+        "type": "or",
+        "rules": [
+          {
+            "type": "answer",
+            "id": "10e.11",
+            "answer": "Ja"
+          },
+          {
+            "type": "answer",
+            "id": "10e.11.1",
+            "answer": "Ja"
+          }
+        ]
       }
     },
     "11.1": {
@@ -2218,6 +2661,16 @@
         "fa": "بعضی افراد خشونت یا سوءاستفاده را تجربه می‌کنند. خشونت می‌تواند شکل‌های مختلفی داشته باشد: می‌تواند جسمی باشد، مثلاً وقتی کسی هل داده یا کتک زده می‌شود. همچنین می‌تواند روانی باشد، مثلاً وقتی کسی توهین، تحقیر یا ترسانده می‌شود. خشونت همچنین می‌تواند زمانی رخ دهد که فردی کنترل شود یا چیزهای مهمی برای او ممنوع شود. گرفتن پول یا حبس کردن نیز جزو خشونت است. همچنین اگر کسی برخلاف میل خود به اعمال جنسی وادار یا مجبور شود، این نیز خشونت است. بعضی تجربه‌های خشونت ممکن است مدت‌ها پیش رخ داده باشند اما همچنان بر افراد تأثیر بگذارند. این تجربه‌ها می‌توانند بسیار دردناک باشند و شما خودتان تصمیم می‌گیرید که آیا می‌خواهید به پرسش‌ها پاسخ دهید یا خیر.",
         "so": "Wada hadalka waxaa horey laguu weydiiyay su’aalo badan oo ku saabsan baahiyaha iyo taageerada suurtagalka ah Su’aalahaani waxay daboolaan kaliya qaybo gaar ah Haddii ay jiraan mowduucyo kale oo aan weli la taaban, waxaad ku dari kartaa Waxaan fahamsanahay inay adag tahay in laga jawaabo su’aalaha qaarkood Haddii aad rabto inaad wax ka beddesho ama ku darto xog mustaqbalka, shaqaalaheennu way ku caawin doonaan",
         "ru": "В ходе нашей беседы Вам уже задали множество вопросов о Ваших различных потребностях и возможной поддержке. Однако эти вопросы охватывают лишь определенные области. Если есть другие темы, которые еще не были затронуты, пожалуйста, добавьте их. Мы понимаем, что отвечать на некоторые вопросы может быть сложно. Если Вы захотите изменить или дополнить Ваши высказывания позже, наши сотрудники с удовольствием Вам помогут."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "11.1.1": {
+      "id": "11.1.1",
+      "category": "Sonstiges",
+      "type": "Info",
+      "text": {
+        "de": "Im Gespräch wurden dir schon viele Fragen gestellt, dazu wie es dir geht, was du erlebt hast und welche Unterstützung du benötigst. Diese Fragen decken nur bestimmte Bereiche ab. Wenn du noch etwas sagen möchtest oder dir noch etwas einfällt, was wir noch nicht besprochen haben, kannst du das gerne erzählen. Ich verstehe, dass manche Fragen schwer zu beantworten sind. Wenn du später noch etwas ändern oder hinzufügen möchtest, kannst du jederzeit zu unseren Betreuerinnen und Betreuern kommen – sie helfen dir gerne.\nDu machst das sehr gut. Ich weiß, dass das Gespräch anstrengend sein kann. Ich würde dir gerne noch ein paar weitere Fragen stellen. Du hast die Wahl, ob du noch weitere Fragen beantworten möchtest. Egal wie du dich entscheidest, das ist okay. "
       },
       "answerType": "Infobox",
       "condition": ""
@@ -2237,6 +2690,56 @@
       "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
       "condition": ""
     },
+    "11.2.1": {
+      "id": "11.2.1",
+      "category": "Sonstiges",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Hast du noch Fragen? Gibt es etwas dass du uns mitteilen möchstest?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet wenn Ja= Anmerkung",
+      "condition": ""
+    },
+    "11.3.1": {
+      "id": "11.3.1",
+      "category": "Sonstiges",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Kannst du in deiner Muttersprache lesen und schreiben?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "11.3": {
+      "id": "11.3",
+      "category": "Sonstiges",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Sind Sie in der Lage, in Ihrer Muttersprache zu lesen und zu schreiben?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "11f.2": {
+      "id": "11f.2",
+      "category": "Sonstiges",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Bist du damit einverstanden, wenn ich dir noch weitere Fragen stelle, dazu wie es dir geht? "
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "11f.3": {
+      "id": "11f.3",
+      "category": "Sonstiges",
+      "type": "Info",
+      "text": {
+        "de": "Das ist in Ordnung. Wir sind fast fertig mit dem Gespräch."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
     "12.1": {
       "id": "12.1",
       "category": "Abschluss",
@@ -2248,6 +2751,16 @@
         "fa": "از شرکت شما در ارزیابی نیازها بسیار سپاسگزاریم. نتایج ثبت و به BFA ارسال می‌شود. ما طبق قانون موظف هستیم ارزیابی نیازها را به شما تحویل دهیم. احتمالاً می‌توانید این سند را تا سه روز دیگر از Infopoint دریافت کنید. اگر به دلیل حساس بودن داده‌ها فقط می‌خواهید سند را ببینید و آن را با خود نبرید، ما نسخه چاپی را از بین می بریم . اگر بر اساس گفته‌های شما اقدامات بیشتری لازم باشد، یکی از کارکنان مراقبت با شما تماس خواهد گرفت. اگر نیازهای ویژه شما تغییر کرد، لطفاً به ما اطلاع دهید. در پایان هنوز ۳ پرسش داریم.",
         "so": "Waad ku mahadsan tahay ka qaybqaadashadaada qiimeynta baahiyaha Natiijooyinka waa la diiwaangelin doonaa waxaana loo gudbin doonaa BFA Sharcigu wuxuu nagu waajibinayaa inaan kuu dhiibno qiimeynta baahiyaha Waxaad dukumeentiga ka qaadan kartaa qiyaastii 3 maalmood kadib goobta macluumaadka Haddii aad rabto oo keliya inaad aragto dukumeentiga sababtoo ah xog xasaasi ah oo aadan rabin inaad qaadato, waan baabi'in doonaa Haddii tallaabooyin kale loo baahdo iyadoo lagu saleynayo jawaabahaaga, shaqaale ayaa kula soo xiriiri doona Haddii baahiyahaaga gaarka ah ay isbedelaan, fadlan noo sheeg Ugu dambeyntii waxaan haynaa 3 su’aal",
         "ru": "Благодарим Вас за участие в оценке Ваших потребностей. Результаты будут задокументированы и переданы в Федеральное ведомство (BFA). Мы  обязаны по закону предоставить вам результаты оценки потребностей. Вы сможете забрать документ в информационном пункте через три дня. Если Вы хотите только просмотреть документ, но не забирать его с собой из-за конфиденциальности данных, мы уничтожим распечатку. Если предоставленная Вами информация указывает на необходимость дальнейших действий, с Вами свяжется сотрудник службы поддержки. Пожалуйста, сообщите нам, если Ваши конкретные потребности изменились. В заключение у нас осталось еще три вопроса."
+      },
+      "answerType": "Infobox",
+      "condition": ""
+    },
+    "12.1.1": {
+      "id": "12.1.1",
+      "category": "Abschluss",
+      "type": "Info",
+      "text": {
+        "de": "Das hast du super gemacht. Ich weiß, dass das nicht leicht war. Vielen Dank für deine Teilnahme an dem Gespräch heute! Du erinnerst dich: Manche Informationen geben wir an das BFA weiter. Ich bin auch vom Gesetz dazu verpflichtet, dir die Informationen zu geben, die an das BFA gehen. Du kannst das Dokument voraussichtlich in drei Tagen am Infopoint abholen. Kannst du mir sagen, wo du den Infopoint findest? Es ist auch okay, wenn du das Dokument nur anschauen willst. Wir können das Dokument danach entsorgen. Es kann sein, dass wir im Team denken, dass du etwas Hilfe benötigst, von dem was du mir heute erzählt hast. Dann wird sich in den nächsten Tagen eine Betreuerin oder ein Betreuer bei dir melden. Wenn sich etwas ändert, dazu wie es dir geht und wie du dich fühlst, kannst du auch jederzeit selbst einer Betreuerin oder einem Betreuer Bescheid geben. Wir sind fast fertig. Zum Abschluss haben wir noch 4 Fragen."
       },
       "answerType": "Infobox",
       "condition": ""
@@ -2267,6 +2780,16 @@
       "answerType": "Ja/Nein",
       "condition": ""
     },
+    "12.2.1": {
+      "id": "12.2.1",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Sprechtext",
+      "text": {
+        "de": "Jede Person hat Dinge, die ihr helfen können – zum Beispiel Menschen, die für die da sind oder Dinge, die sie gut kann. Das ist besonders wichtig, wenn es einmal schwierig ist. \n Wir möchten dir dazu ein paar Fragen stellen. "
+      },
+      "answerType": "Ja/Nein",
+      "condition": ""
+    },
     "12.3": {
       "id": "12.3",
       "category": "Einschätzung für die Betreuung",
@@ -2278,6 +2801,16 @@
         "fa": "آیا در حال حاضر فردی دارید که از شما حمایت کند یا نزد او احساس امنیت کنید؛ مثلاً کسی که مرتب با او در تماس هستید یا در زندگی روزمره به شما کمک می‌کند؟",
         "ru": "Есть ли у Вас сейчас кто-то, кто Вас поддерживает или с кем Вы чувствуете себя в безопасности - например, человек, с которым Вы регулярно общаетесь или который помогает Вам в повседневной жизни? \n",
         "so": "Ma hadda leedahay qof aad ka hesho taageero ama aad ka dareento ammaan – tusaale ahaan qof aad si joogto ah ula xiriirto ama kaa caawiya nolol maalmeedka?\n"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "12.3.1": {
+      "id": "12.3.1",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es gerade jemanden, bei dem du dich sicher fühlst und der für dich da ist? Zum Beispiel jemand, mit dem du oft sprichst oder der dir im Alltag hilft."
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -2297,6 +2830,16 @@
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
     },
+    "12.4.1": {
+      "id": "12.4.1",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, dass dir hilft, wenn es dir nicht so gut geht oder etwas gerade schwierig ist? Zum Beispiel mit jemandem reden, spazieren gehen oder etwas machen, dass du gerne machst."
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
     "12.5": {
       "id": "12.5",
       "category": "Einschätzung für die Betreuung",
@@ -2308,6 +2851,16 @@
         "fa": "آیا در خودتان نقاط قوتی می‌بینید که به شما کمک کند با موقعیت‌های چالش‌برانگیز کنار بیایید؛ مثلاً خود را مستقل، صبور، بااعتمادبه‌نفس یا اجتماعی می‌دانید؟",
         "so": "Ma aragtaa awoodo shakhsi ah oo kaa caawiya inaad ka gudubto xaaladaha adag – tusaale ahaan inaad tahay qof madax-bannaan, dulqaad leh, isku kalsoon ama bulsho jecel?",
         "ru": "Видите ли Вы в себе сильные стороны, которые помогают Вам справляться со сложными ситуациями, - например, считаете ли Вы себя независимым, терпеливым, уверенным в себе или общительным?"
+      },
+      "answerType": "Ja/Nein/Nicht beantwortet",
+      "condition": ""
+    },
+    "12.5.1": {
+      "id": "12.5.1",
+      "category": "Einschätzung für die Betreuung",
+      "type": "Direkte Fragen",
+      "text": {
+        "de": "Gibt es etwas, dass du besonders gut kannst, was dich stark macht? Bist du zB geduldig, mutig, selbstsicher oder kannst du gut auf andere zugehen?"
       },
       "answerType": "Ja/Nein/Nicht beantwortet",
       "condition": ""
@@ -2391,7 +2944,7 @@
       "category": "sonstiges",
       "type": "Beobachtung",
       "text": {
-        "de": ""
+        "de": "Weitere Auffälligkeiten während des Gesprächs"
       },
       "answerType": "Ja/Nein wenn Ja= Anmerkung",
       "condition": ""
@@ -2522,11 +3075,6 @@
       },
       {
         "id": "7.17",
-        "ja": "7.18",
-        "nein": "7.18"
-      },
-      {
-        "id": "7.18",
         "ja": "7.19",
         "nein": "7.19"
       },
@@ -2703,17 +3251,17 @@
       {
         "id": "10c.2",
         "ja": "10c.3",
-        "nein": "10d.1"
+        "nein": "10d.2"
       },
       {
         "id": "10c.3",
         "ja": "10c.4",
-        "nein": "10d.1"
+        "nein": "10d.2"
       },
       {
         "id": "10c.4",
         "ja": "10c.7",
-        "nein": "10c.7"
+        "nein": "10d.2"
       },
       {
         "id": "10c.7",
@@ -2807,6 +3355,11 @@
       },
       {
         "id": "11.1",
+        "ja": "11.3",
+        "nein": "11.3"
+      },
+      {
+        "id": "11.3",
         "ja": "11.2",
         "nein": "11.2"
       },
@@ -2837,26 +3390,8 @@
       },
       {
         "id": "12.5",
-        "ja": "12.6",
-        "nein": "12.6"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.7",
-        "nein": "12.7"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.8",
-        "nein": "12.8"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.9",
-        "nein": "12.9"
-      },
-      {
-        "id": "AUFFAELLIGKEITEN_GENERAL"
+        "ja": "END",
+        "nein": "END"
       }
     ],
     "FAM_Erwachsene": [
@@ -2868,38 +3403,8 @@
       },
       {
         "id": "0.1",
-        "ja": "1a.4",
-        "nein": "ABBRUCH"
-      },
-      {
-        "id": "1a.4",
-        "ja": "1a.9",
-        "nein": "1a.9"
-      },
-      {
-        "id": "1a.9",
-        "ja": "1a.10",
-        "nein": "1a.10"
-      },
-      {
-        "id": "1a.10",
-        "ja": "1a.11",
-        "nein": "1a.11"
-      },
-      {
-        "id": "1a.11",
-        "ja": "1a.12",
-        "nein": "1a.12"
-      },
-      {
-        "id": "1a.12",
-        "ja": "1a.13",
-        "nein": "1a.13"
-      },
-      {
-        "id": "1a.13",
         "ja": "5.1",
-        "nein": "5.1"
+        "nein": "ABBRUCH"
       },
       {
         "id": "5.1",
@@ -3013,11 +3518,6 @@
       },
       {
         "id": "7.17",
-        "ja": "7.18",
-        "nein": "7.18"
-      },
-      {
-        "id": "7.18",
         "ja": "7.19",
         "nein": "7.19"
       },
@@ -3194,12 +3694,12 @@
       {
         "id": "10c.2",
         "ja": "10c.3",
-        "nein": "10d.1"
+        "nein": "10d.2"
       },
       {
         "id": "10c.3",
         "ja": "10c.4",
-        "nein": "10d.1"
+        "nein": "10c.4"
       },
       {
         "id": "10c.4",
@@ -3292,19 +3792,24 @@
         "nein": "11.1"
       },
       {
-        "id": "11.2",
-        "ja": "12.1",
-        "nein": "12.1"
-      },
-      {
         "id": "10e.13",
         "ja": "11.1",
         "nein": "11.1"
       },
       {
         "id": "11.1",
+        "ja": "11.3",
+        "nein": "11.3"
+      },
+      {
+        "id": "11.3",
         "ja": "11.2",
         "nein": "11.2"
+      },
+      {
+        "id": "11.2",
+        "ja": "12.1",
+        "nein": "12.1"
       },
       {
         "id": "12.1",
@@ -3328,26 +3833,8 @@
       },
       {
         "id": "12.5",
-        "ja": "12.6",
-        "nein": "12.6"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.7",
-        "nein": "12.7"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.8",
-        "nein": "12.8"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.9",
-        "nein": "12.9"
-      },
-      {
-        "id": "AUFFAELLIGKEITEN_GENERAL"
+        "ja": "END",
+        "nein": "END"
       }
     ],
     "ARF_K_ARM_K_Erwachsene": [
@@ -3359,38 +3846,8 @@
       },
       {
         "id": "0.1",
-        "ja": "1a.4",
-        "nein": "ABBRUCH"
-      },
-      {
-        "id": "1a.4",
-        "ja": "1a.9",
-        "nein": "1a.9"
-      },
-      {
-        "id": "1a.9",
-        "ja": "1a.10",
-        "nein": "1a.10"
-      },
-      {
-        "id": "1a.10",
-        "ja": "1a.11",
-        "nein": "1a.11"
-      },
-      {
-        "id": "1a.11",
-        "ja": "1a.12",
-        "nein": "1a.12"
-      },
-      {
-        "id": "1a.12",
-        "ja": "1a.13",
-        "nein": "1a.13"
-      },
-      {
-        "id": "1a.13",
         "ja": "5.1",
-        "nein": "5.1"
+        "nein": "ABBRUCH"
       },
       {
         "id": "5.1",
@@ -3534,11 +3991,6 @@
       },
       {
         "id": "7.17",
-        "ja": "7.18",
-        "nein": "7.18"
-      },
-      {
-        "id": "7.18",
         "ja": "7.19",
         "nein": "7.19"
       },
@@ -3715,12 +4167,12 @@
       {
         "id": "10c.2",
         "ja": "10c.3",
-        "nein": "10d.1"
+        "nein": "10d.2"
       },
       {
         "id": "10c.3",
         "ja": "10c.4",
-        "nein": "10d.1"
+        "nein": "10d.2"
       },
       {
         "id": "10c.4",
@@ -3819,6 +4271,11 @@
       },
       {
         "id": "11.1",
+        "ja": "11.3",
+        "nein": "11.3"
+      },
+      {
+        "id": "11.3",
         "ja": "11.2",
         "nein": "11.2"
       },
@@ -3849,58 +4306,25 @@
       },
       {
         "id": "12.5",
-        "ja": "12.6",
-        "nein": "12.6"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.7",
-        "nein": "12.7"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.8",
-        "nein": "12.8"
-      },
-      {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.9",
-        "nein": "12.9"
-      },
-      {
-        "id": "AUFFAELLIGKEITEN_GENERAL"
+        "ja": "END",
+        "nein": "END"
       }
     ],
     "Kind_FAM_ARM_K_ARF_K_UMF_K": [
       {
         "id": "0.1a",
-        "ja": "0.2",
-        "nein": "ABBRUCH"
-      },
-      {
-        "id": "0.2",
         "ja": "0.3",
         "nein": "ABBRUCH"
       },
       {
         "id": "0.3",
-        "ja": "0.3a",
-        "nein": "0.3a"
-      },
-      {
-        "id": "0.3a",
         "ja": "0.4",
-        "nein": "ABBRUCH"
+        "nein": "0.4"
       },
       {
         "id": "0.4",
-        "ja": "0.5",
-        "nein": "ABBRUCH"
-      },
-      {
-        "id": "0.5",
         "ja": "1a.1",
-        "nein": "1a.1"
+        "nein": "ABBRUCH"
       },
       {
         "id": "1a.1",
@@ -3914,6 +4338,11 @@
       },
       {
         "id": "1a.3",
+        "ja": "1a.4",
+        "nein": "1a.4"
+      },
+      {
+        "id": "1a.4",
         "ja": "1a.9",
         "nein": "1a.9"
       },
@@ -3934,6 +4363,11 @@
       },
       {
         "id": "1a.12",
+        "ja": "1a.13",
+        "nein": "1a.13"
+      },
+      {
+        "id": "1a.13",
         "ja": "7.6",
         "nein": "7.6"
       },
@@ -3964,6 +4398,11 @@
       },
       {
         "id": "7.21",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
         "ja": "9a.16",
         "nein": "9a.16"
       },
@@ -4019,11 +4458,21 @@
       },
       {
         "id": "10a.3",
+        "ja": "10a.7",
+        "nein": "10a.7"
+      },
+      {
+        "id": "10a.7",
         "ja": "10c.6",
         "nein": "10c.6"
       },
       {
         "id": "10c.6",
+        "ja": "10c.7",
+        "nein": "10c.7"
+      },
+      {
+        "id": "10c.7",
         "ja": "10e.6",
         "nein": "10e.6"
       },
@@ -4039,11 +4488,16 @@
       },
       {
         "id": "10e.8",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
         "ja": "END",
         "nein": "END"
       }
     ],
-    "uUMF_Kind": [
+    "UMF_Kind": [
       {
         "id": "001"
       },
@@ -4051,7 +4505,7 @@
         "id": "002"
       },
       {
-        "id": "0.1",
+        "id": "01.1",
         "ja": "1b.1",
         "nein": "ABBRUCH"
       },
@@ -4127,53 +4581,33 @@
       },
       {
         "id": "1b.14",
-        "ja": "5.1",
-        "nein": "5.1"
-      },
-      {
-        "id": "5.1",
-        "ja": "5.2",
-        "nein": "5.2"
-      },
-      {
-        "id": "5.2",
-        "ja": "5.3",
+        "ja": "7.1",
         "nein": "7.1"
       },
       {
-        "id": "5.3",
-        "ja": "5.4",
-        "nein": "5.4"
+        "id": "5.1.1",
+        "ja": "5.2.1",
+        "nein": "5.2.1"
       },
       {
-        "id": "5.4",
-        "ja": "5.5",
-        "nein": "5.5"
+        "id": "5.2.1",
+        "ja": "5.3.1",
+        "nein": "10a.1.1"
       },
       {
-        "id": "5.5",
-        "ja": "5.6",
-        "nein": "5.6"
+        "id": "5.3.1",
+        "ja": "5.7.1",
+        "nein": "5.7.1"
       },
       {
-        "id": "5.6",
-        "ja": "5.7",
-        "nein": "5.7"
-      },
-      {
-        "id": "5.7",
+        "id": "5.7.1",
         "ja": "5.8",
         "nein": "5.8"
       },
       {
         "id": "5.8",
-        "ja": "5.9",
-        "nein": "5.9"
-      },
-      {
-        "id": "5.9",
-        "ja": "7.1",
-        "nein": "7.1"
+        "ja": "10a.1.1",
+        "nein": "10a.1.1"
       },
       {
         "id": "7.1",
@@ -4212,116 +4646,106 @@
       },
       {
         "id": "7.8",
-        "ja": "7.9",
-        "nein": "7.9"
+        "ja": "7.9.1",
+        "nein": "7.9.1"
       },
       {
-        "id": "7.9",
-        "ja": "7.10",
-        "nein": "7.10"
+        "id": "7.9.1",
+        "ja": "7.10.1",
+        "nein": "7.10.1"
       },
       {
-        "id": "7.10",
-        "ja": "7.11",
-        "nein": "7.11"
+        "id": "7.10.1",
+        "ja": "7.11.1",
+        "nein": "7.11.1"
       },
       {
-        "id": "7.11",
-        "ja": "7.12",
-        "nein": "7.12"
+        "id": "7.11.1",
+        "ja": "7.12.1",
+        "nein": "7.12.1"
       },
       {
-        "id": "7.12",
-        "ja": "7.13",
-        "nein": "7.13"
+        "id": "7.12.1",
+        "ja": "7.13.1",
+        "nein": "7.13.1"
       },
       {
-        "id": "7.13",
-        "ja": "7.14",
-        "nein": "7.14"
+        "id": "7.13.1",
+        "ja": "7.14.1",
+        "nein": "7.14.1"
       },
       {
-        "id": "7.14",
-        "ja": "7.15",
-        "nein": "7.15"
+        "id": "7.14.1",
+        "ja": "7.16.1",
+        "nein": "7.16.1"
       },
       {
-        "id": "7.15",
-        "ja": "7.16",
-        "nein": "7.16"
+        "id": "7.16.1",
+        "ja": "7.17.1",
+        "nein": "7.17.1"
       },
       {
-        "id": "7.16",
-        "ja": "7.17",
-        "nein": "7.17"
+        "id": "7.17.1",
+        "ja": "7.18.1",
+        "nein": "7.18.1"
       },
       {
-        "id": "7.17",
-        "ja": "7.18",
-        "nein": "7.18"
-      },
-      {
-        "id": "7.18",
-        "ja": "7.19",
-        "nein": "7.19"
-      },
-      {
-        "id": "7.19",
+        "id": "7.18.1",
         "ja": "7.22",
         "nein": "7.22"
       },
       {
         "id": "7.22",
-        "ja": "9.1",
-        "nein": "9.1"
+        "ja": "7.23",
+        "nein": "7.23"
       },
       {
         "id": "7.23",
-        "ja": "9.1",
-        "nein": "9.1"
+        "ja": "9.1.1",
+        "nein": "9.1.1"
       },
       {
-        "id": "9.1",
-        "ja": "9a.1",
-        "nein": "9a.1"
+        "id": "9.1.1",
+        "ja": "9a.1.1",
+        "nein": "9a.1.1"
       },
       {
-        "id": "9a.1",
-        "ja": "9a.2",
-        "nein": "9a.2"
+        "id": "9a.1.1",
+        "ja": "9a.2.1",
+        "nein": "9a.2.1"
       },
       {
-        "id": "9a.2",
-        "ja": "9a.3",
-        "nein": "9a.3"
+        "id": "9a.2.1",
+        "ja": "9a.3.1",
+        "nein": "9a.3.1"
       },
       {
-        "id": "9a.3",
-        "ja": "9a.4",
-        "nein": "9a.4"
+        "id": "9a.3.1",
+        "ja": "9a.4.1",
+        "nein": "9a.4.1"
       },
       {
-        "id": "9a.4",
-        "ja": "9a.5",
-        "nein": "9a.5"
+        "id": "9a.4.1",
+        "ja": "9a.5.1",
+        "nein": "9a.5.1"
       },
       {
-        "id": "9a.5",
-        "ja": "9a.6",
-        "nein": "9a.6"
+        "id": "9a.5.1",
+        "ja": "9a.6.1",
+        "nein": "9a.6.1"
       },
       {
-        "id": "9a.6",
-        "ja": "9a.7",
-        "nein": "9a.7"
+        "id": "9a.6.1",
+        "ja": "9a.7.1",
+        "nein": "9a.7.1"
       },
       {
-        "id": "9a.7",
-        "ja": "9a.8",
-        "nein": "9a.8"
+        "id": "9a.7.1",
+        "ja": "9a.8.1",
+        "nein": "9a.8.1"
       },
       {
-        "id": "9a.8",
+        "id": "9a.8.1",
         "ja": "9a.9",
         "nein": "9a.9"
       },
@@ -4352,101 +4776,56 @@
       },
       {
         "id": "9a.14",
-        "ja": "9b.1",
-        "nein": "9b.1"
+        "ja": "9b.5.1",
+        "nein": "9b.5.1"
       },
       {
-        "id": "9b.1",
-        "ja": "9b.2",
-        "nein": "9b.2"
+        "id": "9b.5.1",
+        "ja": "9b.6.1",
+        "nein": "9b.6.1"
       },
       {
-        "id": "9b.2",
-        "ja": "9b.3",
-        "nein": "9b.3"
-      },
-      {
-        "id": "9b.3",
-        "ja": "9b.4",
-        "nein": "9b.4"
-      },
-      {
-        "id": "9b.4",
-        "ja": "9b.5",
-        "nein": "9b.6"
-      },
-      {
-        "id": "9b.5",
-        "ja": "9b.6",
-        "nein": "9b.6"
-      },
-      {
-        "id": "9b.6",
+        "id": "9b.6.1",
         "ja": "9b.10",
         "nein": "9b.10"
       },
       {
         "id": "9b.10",
-        "ja": "10a.1",
-        "nein": "10a.1"
+        "ja": "10e.1.1",
+        "nein": "10e.1.1"
       },
       {
-        "id": "10a.1",
-        "ja": "10a.2",
-        "nein": "10a.2"
+        "id": "10a.1.1",
+        "ja": "10a.2.1",
+        "nein": "10a.2.1"
       },
       {
-        "id": "10a.2",
-        "ja": "10a.4",
-        "nein": "10c.1"
-      },
-      {
-        "id": "10a.4",
-        "ja": "10a.5",
-        "nein": "10a.5"
-      },
-      {
-        "id": "10a.5",
-        "ja": "10a.6",
-        "nein": "10a.6"
-      },
-      {
-        "id": "10a.6",
+        "id": "10a.2.1",
         "ja": "10a.7",
         "nein": "10a.7"
       },
       {
         "id": "10a.7",
-        "ja": "10a.8",
-        "nein": "10a.8"
+        "ja": "10c.1.1",
+        "nein": "10c.1.1"
       },
       {
-        "id": "10a.8",
-        "ja": "10a.9",
-        "nein": "10a.9"
+        "id": "10c.1.1",
+        "ja": "10c.2.1",
+        "nein": "10c.2.1"
       },
       {
-        "id": "10a.9",
-        "ja": "10c.1",
-        "nein": "10c.1"
+        "id": "10c.2.1",
+        "ja": "10c.3.1",
+        "nein": "10d.7"
       },
       {
-        "id": "10c.1",
-        "ja": "10c.2",
-        "nein": "10c.2"
+        "id": "10c.3.1",
+        "ja": "10c.4.1",
+        "nein": "10c.4.1"
       },
       {
-        "id": "10c.2",
-        "ja": "10c.3",
-        "nein": "10d.1"
-      },
-      {
-        "id": "10c.3",
-        "ja": "10c.4",
-        "nein": "10d.1"
-      },
-      {
-        "id": "10c.4",
+        "id": "10c.4.1",
         "ja": "10c.7",
         "nein": "10c.7"
       },
@@ -4477,129 +4856,106 @@
       },
       {
         "id": "10d.4",
-        "ja": "10d.5",
-        "nein": "10d.5"
+        "ja": "10d.5.1",
+        "nein": "10d.5.1"
       },
       {
-        "id": "10d.5",
-        "ja": "10d.6",
-        "nein": "10d.6"
+        "id": "10d.5.1",
+        "ja": "10d.6.1",
+        "nein": "10d.6.1"
       },
       {
-        "id": "10d.6",
+        "id": "10d.6.1",
         "ja": "10d.7",
         "nein": "10d.7"
       },
       {
         "id": "10d.7",
-        "ja": "10e.1",
-        "nein": "10e.1"
+        "ja": "11.3.1",
+        "nein": "11.3.1"
       },
       {
-        "id": "10e.1",
-        "ja": "10e.2",
-        "nein": "10e.2"
+        "id": "10e.1.1",
+        "ja": "10e.2.1",
+        "nein": "10e.2.1"
       },
       {
-        "id": "10e.2",
-        "ja": "10e.3",
-        "nein": "10e.3"
+        "id": "10e.2.1",
+        "ja": "10e.3.1",
+        "nein": "10e.3.1"
       },
       {
-        "id": "10e.3",
-        "ja": "10e.4",
-        "nein": "10e.4"
+        "id": "10e.3.1",
+        "ja": "10e.11.1",
+        "nein": "10e.11.1"
       },
       {
-        "id": "10e.4",
-        "ja": "10e.5",
-        "nein": "10e.5"
-      },
-      {
-        "id": "10e.5",
-        "ja": "10e.9",
-        "nein": "10e.10"
-      },
-      {
-        "id": "10e.9",
-        "ja": "10e.10",
-        "nein": "10e.10"
-      },
-      {
-        "id": "10e.10",
-        "ja": "10e.11",
-        "nein": "10e.11"
-      },
-      {
-        "id": "10e.11",
+        "id": "10e.11.1",
         "ja": "10e.12",
         "nein": "10e.12"
       },
       {
         "id": "10e.12",
         "ja": "10e.13",
-        "nein": "11.1"
+        "nein": "10e.13"
       },
       {
         "id": "10e.13",
-        "ja": "11.1",
-        "nein": "11.1"
+        "ja": "11.1.1",
+        "nein": "11.1.1"
       },
       {
-        "id": "11.1",
-        "ja": "11.2",
-        "nein": "11.2"
+        "id": "11.1.1",
+        "ja": "11f.2",
+        "nein": "11f.2"
       },
       {
-        "id": "11.2",
-        "ja": "12.1",
-        "nein": "12.1"
+        "id": "11f.2",
+        "ja": "5.1.1",
+        "nein": "11f.3"
       },
       {
-        "id": "12.1",
-        "ja": "12.2",
-        "nein": "12.2"
+        "id": "11f.3",
+        "ja": "11.3.1",
+        "nein": "11.3.1"
       },
       {
-        "id": "12.2",
-        "ja": "12.3",
-        "nein": "12.3"
+        "id": "11.3.1",
+        "ja": "11.2.1",
+        "nein": "11.2.1"
       },
       {
-        "id": "12.3",
-        "ja": "12.4",
-        "nein": "12.4"
+        "id": "11.2.1",
+        "ja": "12.1.1",
+        "nein": "12.1.1"
       },
       {
-        "id": "12.4",
-        "ja": "12.5",
-        "nein": "12.5"
+        "id": "12.1.1",
+        "ja": "12.2.1",
+        "nein": "12.2.1"
       },
       {
-        "id": "12.5",
-        "ja": "12.6",
-        "nein": "12.6"
+        "id": "12.2.1",
+        "ja": "12.3.1",
+        "nein": "12.3.1"
       },
       {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.7",
-        "nein": "12.7"
+        "id": "12.3.1",
+        "ja": "12.4.1",
+        "nein": "12.4.1"
       },
       {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.8",
-        "nein": "12.8"
+        "id": "12.4.1",
+        "ja": "12.5.1",
+        "nein": "12.5.1"
       },
       {
-        "id": "EINSCHAETZUNG_GENERAL",
-        "ja": "12.9",
-        "nein": "12.9"
-      },
-      {
-        "id": "AUFFAELLIGKEITEN_GENERAL"
+        "id": "12.5.1",
+        "ja": "END",
+        "nein": "END"
       }
     ],
-    "Kind_14plus": [
+    "uUMF_Kind": [
       {
         "id": "001"
       },
@@ -4607,84 +4963,109 @@
         "id": "002"
       },
       {
-        "id": "0.1",
-        "ja": "1a.4",
+        "id": "01.1",
+        "ja": "1b.1",
         "nein": "ABBRUCH"
       },
       {
-        "id": "1a.4",
-        "ja": "1a.5",
-        "nein": "1a.5"
+        "id": "1b.1",
+        "ja": "1b.2",
+        "nein": "1b.2"
       },
       {
-        "id": "1a.5",
-        "ja": "1a.6",
-        "nein": "ABBRUCH"
+        "id": "1b.2",
+        "ja": "1b.3",
+        "nein": "1b.3"
       },
       {
-        "id": "1a.6",
-        "ja": "1a.7",
-        "nein": "1a.7"
+        "id": "1b.3",
+        "ja": "1b.4",
+        "nein": "1b.4"
       },
       {
-        "id": "1a.7",
-        "ja": "1a.8",
-        "nein": "1a.8"
+        "id": "1b.4",
+        "ja": "1b.5",
+        "nein": "1b.5"
       },
       {
-        "id": "1a.8",
-        "ja": "1a.13",
-        "nein": "1a.13"
+        "id": "1b.5",
+        "ja": "1b.6",
+        "nein": "1b.6"
       },
       {
-        "id": "1a.13",
-        "ja": "5.1",
-        "nein": "5.1"
+        "id": "1b.6",
+        "ja": "1b.7",
+        "nein": "1b.7"
       },
       {
-        "id": "5.1",
-        "ja": "5.2",
-        "nein": "5.2"
+        "id": "1b.7",
+        "ja": "1b.8",
+        "nein": "1b.9"
       },
       {
-        "id": "5.2",
-        "ja": "5.3",
+        "id": "1b.8",
+        "ja": "1b.9",
+        "nein": "1b.9"
+      },
+      {
+        "id": "1b.9",
+        "ja": "1b.9.1",
+        "nein": "1b.10"
+      },
+      {
+        "id": "1b.9.1",
+        "ja": "1b.10",
+        "nein": "1b.10"
+      },
+      {
+        "id": "1b.10",
+        "ja": "1b.11",
+        "nein": "1b.11"
+      },
+      {
+        "id": "1b.11",
+        "ja": "1b.12",
+        "nein": "1b.12"
+      },
+      {
+        "id": "1b.12",
+        "ja": "1b.13",
+        "nein": "1b.13"
+      },
+      {
+        "id": "1b.13",
+        "ja": "1b.14",
+        "nein": "1b.14"
+      },
+      {
+        "id": "1b.14",
+        "ja": "7.1",
         "nein": "7.1"
       },
       {
-        "id": "5.3",
-        "ja": "5.4",
-        "nein": "5.4"
+        "id": "5.1.1",
+        "ja": "5.2.1",
+        "nein": "5.2.1"
       },
       {
-        "id": "5.4",
-        "ja": "5.5",
-        "nein": "5.5"
+        "id": "5.2.1",
+        "ja": "5.3.1",
+        "nein": "10a.1.1"
       },
       {
-        "id": "5.5",
-        "ja": "5.6",
-        "nein": "5.6"
+        "id": "5.3.1",
+        "ja": "5.7.1",
+        "nein": "5.7.1"
       },
       {
-        "id": "5.6",
-        "ja": "5.7",
-        "nein": "5.7"
-      },
-      {
-        "id": "5.7",
+        "id": "5.7.1",
         "ja": "5.8",
         "nein": "5.8"
       },
       {
         "id": "5.8",
-        "ja": "5.9",
-        "nein": "5.9"
-      },
-      {
-        "id": "5.9",
-        "ja": "7.1",
-        "nein": "7.1"
+        "ja": "10a.1.1",
+        "nein": "10a.1.1"
       },
       {
         "id": "7.1",
@@ -4723,61 +5104,51 @@
       },
       {
         "id": "7.8",
-        "ja": "7.9",
-        "nein": "7.9"
+        "ja": "7.9.1",
+        "nein": "7.9.1"
       },
       {
-        "id": "7.9",
-        "ja": "7.10",
-        "nein": "7.10"
+        "id": "7.9.1",
+        "ja": "7.10.1",
+        "nein": "7.10.1"
       },
       {
-        "id": "7.10",
-        "ja": "7.11",
-        "nein": "7.11"
+        "id": "7.10.1",
+        "ja": "7.11.1",
+        "nein": "7.11.1"
       },
       {
-        "id": "7.11",
-        "ja": "7.12",
-        "nein": "7.12"
+        "id": "7.11.1",
+        "ja": "7.12.1",
+        "nein": "7.12.1"
       },
       {
-        "id": "7.12",
-        "ja": "7.13",
-        "nein": "7.13"
+        "id": "7.12.1",
+        "ja": "7.13.1",
+        "nein": "7.13.1"
       },
       {
-        "id": "7.13",
-        "ja": "7.14",
-        "nein": "7.14"
+        "id": "7.13.1",
+        "ja": "7.14.1",
+        "nein": "7.14.1"
       },
       {
-        "id": "7.14",
-        "ja": "7.15",
-        "nein": "7.15"
+        "id": "7.14.1",
+        "ja": "7.16.1",
+        "nein": "7.16.1"
       },
       {
-        "id": "7.15",
-        "ja": "7.16",
-        "nein": "7.16"
+        "id": "7.16.1",
+        "ja": "7.17.1",
+        "nein": "7.17.1"
       },
       {
-        "id": "7.16",
-        "ja": "7.17",
-        "nein": "7.17"
+        "id": "7.17.1",
+        "ja": "7.18.1",
+        "nein": "7.18.1"
       },
       {
-        "id": "7.17",
-        "ja": "7.18",
-        "nein": "7.18"
-      },
-      {
-        "id": "7.18",
-        "ja": "7.19",
-        "nein": "7.19"
-      },
-      {
-        "id": "7.19",
+        "id": "7.18.1",
         "ja": "7.22",
         "nein": "7.22"
       },
@@ -4788,51 +5159,379 @@
       },
       {
         "id": "7.23",
-        "ja": "9.1",
-        "nein": "9.1"
+        "ja": "10e.1.1",
+        "nein": "10e.1.1"
       },
       {
-        "id": "9.1",
-        "ja": "9a.1",
+        "id": "10a.1.1",
+        "ja": "10a.2.1",
+        "nein": "10a.2.1"
+      },
+      {
+        "id": "10a.2.1",
+        "ja": "10a.7",
+        "nein": "10a.7"
+      },
+      {
+        "id": "10a.7",
+        "ja": "10c.1.1",
+        "nein": "10c.1.1"
+      },
+      {
+        "id": "10c.1.1",
+        "ja": "10c.2.1",
+        "nein": "10c.2.1"
+      },
+      {
+        "id": "10c.2.1",
+        "ja": "10c.3.1",
+        "nein": "10d.7"
+      },
+      {
+        "id": "10c.3.1",
+        "ja": "10c.4.1",
+        "nein": "10c.4.1"
+      },
+      {
+        "id": "10c.4.1",
+        "ja": "10c.7",
+        "nein": "10c.7"
+      },
+      {
+        "id": "10c.7",
+        "ja": "10c.8",
+        "nein": "10c.8"
+      },
+      {
+        "id": "10c.8",
+        "ja": "10d.1",
+        "nein": "10d.1"
+      },
+      {
+        "id": "10d.1",
+        "ja": "10d.2",
+        "nein": "10d.2"
+      },
+      {
+        "id": "10d.2",
+        "ja": "10d.3",
+        "nein": "10d.5"
+      },
+      {
+        "id": "10d.3",
+        "ja": "10d.4",
+        "nein": "10d.4"
+      },
+      {
+        "id": "10d.4",
+        "ja": "10d.5.1",
+        "nein": "10d.5.1"
+      },
+      {
+        "id": "10d.5.1",
+        "ja": "10d.6.1",
+        "nein": "10d.6.1"
+      },
+      {
+        "id": "10d.6.1",
+        "ja": "10d.7",
+        "nein": "10d.7"
+      },
+      {
+        "id": "10d.7",
+        "ja": "11.3.1",
+        "nein": "11.3.1"
+      },
+      {
+        "id": "10e.1.1",
+        "ja": "10e.2.1",
+        "nein": "11.1.1"
+      },
+      {
+        "id": "10e.2.1",
+        "ja": "10e.3.1",
+        "nein": "10e.3.1"
+      },
+      {
+        "id": "10e.3.1",
+        "ja": "10e.11.1",
+        "nein": "10e.11.1"
+      },
+      {
+        "id": "10e.11.1",
+        "ja": "10e.12",
+        "nein": "10e.12"
+      },
+      {
+        "id": "10e.12",
+        "ja": "10e.13",
+        "nein": "10e.13"
+      },
+      {
+        "id": "10e.13",
+        "ja": "11.1.1",
+        "nein": "11.1.1"
+      },
+      {
+        "id": "11.1.1",
+        "ja": "11f.2",
+        "nein": "11f.2"
+      },
+      {
+        "id": "11f.2",
+        "ja": "5.1.1",
+        "nein": "11f.3"
+      },
+      {
+        "id": "11f.3",
+        "ja": "11.3.1",
+        "nein": "11.3.1"
+      },
+      {
+        "id": "11.3.1",
+        "ja": "11.2.1",
+        "nein": "11.2.1"
+      },
+      {
+        "id": "11.2.1",
+        "ja": "12.1.1",
+        "nein": "12.1.1"
+      },
+      {
+        "id": "12.1.1",
+        "ja": "12.2.1",
+        "nein": "12.2.1"
+      },
+      {
+        "id": "12.2.1",
+        "ja": "12.3.1",
+        "nein": "12.3.1"
+      },
+      {
+        "id": "12.3.1",
+        "ja": "12.4.1",
+        "nein": "12.4.1"
+      },
+      {
+        "id": "12.4.1",
+        "ja": "12.5.1",
+        "nein": "12.5.1"
+      },
+      {
+        "id": "12.5.1",
+        "ja": "END",
+        "nein": "END"
+      }
+    ],
+    "Kind_14plus": [
+      {
+        "id": "001"
+      },
+      {
+        "id": "002"
+      },
+      {
+        "id": "01.1",
+        "ja": "1a.1",
+        "nein": "ABBRUCH"
+      },
+      {
+        "id": "1a.1",
+        "ja": "1a.2",
+        "nein": "1a.2"
+      },
+      {
+        "id": "1a.2",
+        "ja": "1a.3",
+        "nein": "1a.3"
+      },
+      {
+        "id": "1a.3",
+        "ja": "1a.4",
+        "nein": "1a.4"
+      },
+      {
+        "id": "1a.4",
+        "ja": "1a.6",
+        "nein": "1a.6"
+      },
+      {
+        "id": "1a.6",
+        "ja": "1a.7",
+        "nein": "1a.7"
+      },
+      {
+        "id": "1a.6",
+        "ja": "1a.7",
+        "nein": "1a.7"
+      },
+      {
+        "id": "1a.7",
+        "ja": "1a.8",
+        "nein": "1a.8"
+      },
+      {
+        "id": "1a.8",
+        "ja": "1a.13",
+        "nein": "1a.13"
+      },
+      {
+        "id": "1a.13",
+        "ja": "7.1",
+        "nein": "7.1"
+      },
+      {
+        "id": "5.1.1",
+        "ja": "5.2.1",
+        "nein": "5.2.1"
+      },
+      {
+        "id": "5.2.1",
+        "ja": "5.3.1",
+        "nein": "10a.1.1"
+      },
+      {
+        "id": "5.3.1",
+        "ja": "5.7.1",
+        "nein": "5.7.1"
+      },
+      {
+        "id": "5.7.1",
+        "ja": "5.8",
+        "nein": "5.8"
+      },
+      {
+        "id": "5.8",
+        "ja": "10a.1.1",
+        "nein": "10a.1.1"
+      },
+      {
+        "id": "7.1",
+        "ja": "7.2",
+        "nein": "7.2"
+      },
+      {
+        "id": "7.2",
+        "ja": "7.3",
+        "nein": "7.3"
+      },
+      {
+        "id": "7.3",
+        "ja": "7.4",
+        "nein": "7.4"
+      },
+      {
+        "id": "7.4",
+        "ja": "7.5",
+        "nein": "7.5"
+      },
+      {
+        "id": "7.5",
+        "ja": "7.6",
+        "nein": "7.6"
+      },
+      {
+        "id": "7.6",
+        "ja": "7.8",
+        "nein": "7.8"
+      },
+      {
+        "id": "7.8",
+        "ja": "7.9.1",
+        "nein": "7.9.1"
+      },
+      {
+        "id": "7.9.1",
+        "ja": "7.10.1",
+        "nein": "7.10.1"
+      },
+      {
+        "id": "7.10.1",
+        "ja": "7.11.1",
+        "nein": "7.11"
+      },
+      {
+        "id": "7.11.1",
+        "ja": "7.12.1",
+        "nein": "7.12.1"
+      },
+      {
+        "id": "7.12.1",
+        "ja": "7.13.1",
+        "nein": "7.13.1"
+      },
+      {
+        "id": "7.13.1",
+        "ja": "7.14.1",
+        "nein": "7.14.1"
+      },
+      {
+        "id": "7.14.1",
+        "ja": "7.16.1",
+        "nein": "7.16.1"
+      },
+      {
+        "id": "7.16.1",
+        "ja": "7.17.1",
+        "nein": "7.17.1"
+      },
+      {
+        "id": "7.17.1",
+        "ja": "7.22",
+        "nein": "7.18"
+      },
+      {
+        "id": "7.22",
+        "ja": "7.23",
+        "nein": "7.23"
+      },
+      {
+        "id": "7.23",
+        "ja": "9.1.1",
+        "nein": "9.1.1"
+      },
+      {
+        "id": "9.1.1",
+        "ja": "9a.1.1",
         "nein": "9a.1"
       },
       {
-        "id": "9a.1",
-        "ja": "9a.2",
-        "nein": "9a.2"
+        "id": "9a.1.1",
+        "ja": "9a.2.1",
+        "nein": "9a.2.1"
       },
       {
-        "id": "9a.2",
-        "ja": "9a.3",
-        "nein": "9a.3"
+        "id": "9a.2.1",
+        "ja": "9a.3.1",
+        "nein": "9a.3.1"
       },
       {
-        "id": "9a.3",
-        "ja": "9a.4",
-        "nein": "9a.4"
+        "id": "9a.3.1",
+        "ja": "9a.4.1",
+        "nein": "9a.4.1"
       },
       {
-        "id": "9a.4",
-        "ja": "9a.5",
-        "nein": "9a.5"
+        "id": "9a.4.1",
+        "ja": "9a.5.1",
+        "nein": "9a.5.1"
       },
       {
-        "id": "9a.5",
-        "ja": "9a.6",
-        "nein": "9a.6"
+        "id": "9a.5.1",
+        "ja": "9a.6.1",
+        "nein": "9a.6.1"
       },
       {
-        "id": "9a.6",
-        "ja": "9a.7",
-        "nein": "9a.7"
+        "id": "9a.6.1",
+        "ja": "9a.7.1",
+        "nein": "9a.7.1"
       },
       {
-        "id": "9a.7",
-        "ja": "9a.8",
-        "nein": "9a.8"
+        "id": "9a.7.1",
+        "ja": "9a.8.1",
+        "nein": "9a.8.1"
       },
       {
-        "id": "9a.8",
+        "id": "9a.8.1",
         "ja": "9a.9",
         "nein": "9a.9"
       },
@@ -4863,108 +5562,63 @@
       },
       {
         "id": "9a.14",
-        "ja": "9b.1",
-        "nein": "9b.1"
+        "ja": "9b.5.1",
+        "nein": "9b.5.1"
       },
       {
-        "id": "9b.1",
-        "ja": "9b.2",
-        "nein": "9b.2"
+        "id": "9b.5.1",
+        "ja": "9b.6.1",
+        "nein": "9b.6.1"
       },
       {
-        "id": "9b.2",
-        "ja": "9b.3",
-        "nein": "9b.3"
-      },
-      {
-        "id": "9b.3",
-        "ja": "9b.4",
-        "nein": "9b.4"
-      },
-      {
-        "id": "9b.4",
-        "ja": "9b.5",
-        "nein": "9b.6"
-      },
-      {
-        "id": "9b.5",
-        "ja": "9b.6",
-        "nein": "9b.6"
-      },
-      {
-        "id": "9b.6",
+        "id": "9b.6.1",
         "ja": "9b.10",
         "nein": "9b.10"
       },
       {
         "id": "9b.10",
-        "ja": "10a.1",
-        "nein": "10a.1"
+        "ja": "10e.1.1",
+        "nein": "10e.1.1"
       },
       {
-        "id": "10a.1",
-        "ja": "10a.2",
-        "nein": "10a.2"
+        "id": "10a.1.1",
+        "ja": "10a.2.1",
+        "nein": "10a.2.1"
       },
       {
-        "id": "10a.2",
-        "ja": "10a.4",
-        "nein": "10c.1"
-      },
-      {
-        "id": "10a.4",
-        "ja": "10a.5",
-        "nein": "10a.5"
-      },
-      {
-        "id": "10a.5",
-        "ja": "10a.6",
-        "nein": "10a.6"
-      },
-      {
-        "id": "10a.6",
-        "ja": "10c.1",
-        "nein": "10c.1"
+        "id": "10a.2.1",
+        "ja": "10a.7",
+        "nein": "10c.1.1"
       },
       {
         "id": "10a.7",
-        "ja": "10c.1",
-        "nein": "10c.1"
+        "ja": "10c.1.1",
+        "nein": "10c.1.1"
       },
       {
-        "id": "10a.8",
-        "ja": "10c.1",
-        "nein": "10c.1"
+        "id": "10c.1.1",
+        "ja": "10c.2.1",
+        "nein": "10c.2.1"
       },
       {
-        "id": "10a.9",
-        "ja": "10c.1",
-        "nein": "10c.1"
+        "id": "10c.2.1",
+        "ja": "10c.3.1",
+        "nein": "10c7"
       },
       {
-        "id": "10c.1",
-        "ja": "10c.2",
-        "nein": "10c.2"
+        "id": "10c.3.1",
+        "ja": "10c.4.1",
+        "nein": "10c.4.1"
       },
       {
-        "id": "10c.2",
-        "ja": "10c.3",
-        "nein": "10d.1"
-      },
-      {
-        "id": "10c.3",
-        "ja": "10c.4",
-        "nein": "10d.1"
-      },
-      {
-        "id": "10c.4",
-        "ja": "10d.1",
-        "nein": "10d.1"
+        "id": "10c.4.1",
+        "ja": "10c.7",
+        "nein": "10c.7"
       },
       {
         "id": "10c.7",
-        "ja": "10d.1",
-        "nein": "10d.1"
+        "ja": "10c.8",
+        "nein": "10c.8"
       },
       {
         "id": "10c.8",
@@ -4988,61 +5642,41 @@
       },
       {
         "id": "10d.4",
-        "ja": "10d.5",
-        "nein": "10d.5"
+        "ja": "10d.5.1",
+        "nein": "10d.5.1"
       },
       {
-        "id": "10d.5",
-        "ja": "10d.6",
-        "nein": "10d.6"
+        "id": "10d.5.1",
+        "ja": "10d.6.1",
+        "nein": "10d.6.1"
       },
       {
-        "id": "10d.6",
-        "ja": "10e.1",
-        "nein": "10e.1"
+        "id": "10d.6.1",
+        "ja": "10d.7",
+        "nein": "10d.7"
       },
       {
         "id": "10d.7",
-        "ja": "10e.1",
-        "nein": "10e.1"
+        "ja": "11.3.1",
+        "nein": "11.3.1"
       },
       {
-        "id": "10e.1",
-        "ja": "10e.2",
-        "nein": "10e.2"
+        "id": "10e.1.1",
+        "ja": "10e.2.1",
+        "nein": "10e.2.1"
       },
       {
-        "id": "10e.2",
-        "ja": "10e.3",
-        "nein": "10e.3"
+        "id": "10e.2.1",
+        "ja": "10e.3.1",
+        "nein": "10e.3.1"
       },
       {
-        "id": "10e.3",
-        "ja": "10e.4",
-        "nein": "10e.4"
+        "id": "10e.3.1",
+        "ja": "10e.11.1",
+        "nein": "10e.11.1"
       },
       {
-        "id": "10e.4",
-        "ja": "10e.5",
-        "nein": "10e.5"
-      },
-      {
-        "id": "10e.5",
-        "ja": "10e.9",
-        "nein": "10e.9"
-      },
-      {
-        "id": "10e.9",
-        "ja": "10e.10",
-        "nein": "10e.10"
-      },
-      {
-        "id": "10e.10",
-        "ja": "10e.11",
-        "nein": "10e.11"
-      },
-      {
-        "id": "10e.11",
+        "id": "10e.11.1",
         "ja": "10e.12",
         "nein": "10e.12"
       },
@@ -5053,61 +5687,56 @@
       },
       {
         "id": "10e.13",
-        "ja": "11.1",
-        "nein": "11.1"
+        "ja": "11.1.1",
+        "nein": "11.1.1"
       },
       {
-        "id": "11.1",
-        "ja": "11.2",
-        "nein": "11.2"
+        "id": "11.1.1",
+        "ja": "11f.2",
+        "nein": "11f.2"
       },
       {
-        "id": "11.2",
-        "ja": "12.1",
-        "nein": "12.1"
+        "id": "11f.2",
+        "ja": "5.1.1",
+        "nein": "11f.3"
       },
       {
-        "id": "12.1",
-        "ja": "12.2",
-        "nein": "12.2"
+        "id": "11f.3",
+        "ja": "11.3.1",
+        "nein": "11.3.1"
       },
       {
-        "id": "12.2",
-        "ja": "12.3",
-        "nein": "12.3"
+        "id": "11.3.1",
+        "ja": "11.2.1",
+        "nein": "11.2.1"
       },
       {
-        "id": "12.3",
-        "ja": "12.4",
-        "nein": "12.4"
+        "id": "11.2.1",
+        "ja": "12.1.1",
+        "nein": "12.1.1"
       },
       {
-        "id": "12.4",
-        "ja": "12.5",
-        "nein": "12.5"
+        "id": "12.1.1",
+        "ja": "12.2.1",
+        "nein": "12.2.1"
       },
       {
-        "id": "12.5",
-        "ja": "12.6",
-        "nein": "12.6"
+        "id": "12.2.1",
+        "ja": "12.3.1",
+        "nein": "12.3.1"
       },
       {
-        "id": "12.6",
-        "ja": "12.7",
-        "nein": "12.7"
+        "id": "12.3.1",
+        "ja": "12.4.1",
+        "nein": "12.4.1"
       },
       {
-        "id": "12.7",
-        "ja": "12.8",
-        "nein": "12.8"
+        "id": "12.4.1",
+        "ja": "12.5.1",
+        "nein": "12.5.1"
       },
       {
-        "id": "12.8",
-        "ja": "12.9",
-        "nein": "12.9"
-      },
-      {
-        "id": "12.9",
+        "id": "12.5.1",
         "ja": "END",
         "nein": "END"
       }

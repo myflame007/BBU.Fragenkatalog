@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import config from '../data/config.json';
-import { ClientData, fetchClientByIfa, FamilyMember } from '../services/crmService';
+import {
+  ClientData,
+  fetchClientByIfa,
+  FamilyMember,
+  normalizeContactToClientData,
+  getOptionSetLabel
+} from '../services/crmService';
 import { Search, Loader2, Users, ArrowRight, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { calculateAge } from '../utils/dateUtils';
+import {
+  Contactsgendercode,
+  Contactsfamilystatuscode,
+  Contactsava_mothertongue,
+  Contactsava_clientgroup,
+  type Contacts
+} from '../generated/models/ContactsModel';
 
 interface Props {
   onStart: (data: ClientData) => void;
+}
+
+// Internal form state using CRM field names
+interface RawFormData extends Partial<Contacts> {
+  ui_language: string;
+  familyMembers?: FamilyMember[];
 }
 
 export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
@@ -14,42 +33,61 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
   const [isPulsing, setIsPulsing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLanguageManuallySelected, setIsLanguageManuallySelected] = useState(false);
-  const [formData, setFormData] = useState<ClientData>(() => ({
-    id: 'MANUAL_' + Date.now(),
-    ifaNumber: '',
-    firstName: '',
-    lastName: '',
-    sex: 'm',
-    birthDate: '',
-    age: 0,
-    nationality: '',
-    familyStatus: '',
-    motherTongue: '',
-    groupId: config.groups[0].id,
-    language: 'de'
+
+  const [formData, setFormData] = useState<RawFormData>(() => ({
+    contactid: 'MANUAL_' + Date.now(),
+    ava_ifanumbertext: '',
+    firstname: '',
+    lastname: '',
+    gendercode: 1, // Männlich
+    ava_birthdate: '',
+    ava_age: '0',
+    ava_nationalitystateid: undefined,
+    familystatuscode: 1, // Ledig
+    ava_mothertongue: 100000138, // Deutsch
+    ava_clientgroup: 100000005, // Familie
+    ui_language: 'de',
+    familyMembers: []
   }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onStart(formData);
+    const normalized = normalizeContactToClientData(formData as Contacts);
+    // Override UI language if manually selected or default
+    normalized.language = formData.ui_language || normalized.language;
+    // Keep family members from state
+    normalized.familyMembers = formData.familyMembers;
+    onStart(normalized);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    if (name === 'language') {
-      setIsLanguageManuallySelected(true);
-    }
-
     setFormData(prev => {
       const newData = {
         ...prev,
-        [name]: name === 'age' ? parseInt(value) || 0 : value
+        [name]: ['gendercode', 'familystatuscode', 'ava_mothertongue', 'ava_clientgroup'].includes(name)
+          ? parseInt(value)
+          : value
       };
 
-      // Auto-sync UI language with mother tongue when changed manually
-      if (name === 'motherTongue' && !isLanguageManuallySelected) {
-        newData.language = value;
+      if (name === 'ui_language') {
+        setIsLanguageManuallySelected(true);
+      }
+
+      // Auto-sync UI language with mother tongue when changed and not manually overridden
+      if (name === 'ava_mothertongue' && !isLanguageManuallySelected) {
+        const langLabel = getOptionSetLabel(Contactsava_mothertongue, parseInt(value));
+        const langConfig = config.languages.find(l => l.label === langLabel || l.id === langLabel.toLowerCase());
+        if (langConfig) {
+          newData.ui_language = langConfig.id;
+        }
+      }
+
+      // Auto-calculate age if birthdate changes
+      if (name === 'ava_birthdate') {
+        const age = calculateAge(value);
+        newData.ava_age = String(age);
       }
 
       return newData;
@@ -58,57 +96,47 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
 
   const [showAgeModal, setShowAgeModal] = useState<{ show: boolean, member: ClientData | null }>({ show: false, member: null });
 
-  const mapClientGroup = (avaClientGroup: string, age: number): string => {
-    const isAdult = age >= 18;
-
-    // If it's already a valid internal group ID, return it
-    if (config.groups.some(g => g.id === avaClientGroup)) {
-      return avaClientGroup;
-    }
-
-    // Mapping rules based on user input (ava_clientgroup)
-    if (avaClientGroup === 'ARF' || avaClientGroup === 'ARM') {
-      return isAdult ? 'ARF_ARM' : 'Kind_FAM_ARM_K_ARF_K_UMF_K';
-    }
-
-    if (avaClientGroup === 'ARF (Kind)' || avaClientGroup === 'ARM (Kind)') {
-      return isAdult ? 'ARF_K_ARM_K_Erwachsene' : 'Kind_FAM_ARM_K_ARF_K_UMF_K';
-    }
-
-    if (avaClientGroup === 'Familie') {
-      return isAdult ? 'ARF_K_ARM_K_Erwachsene' : 'Kind_FAM_ARM_K_ARF_K_UMF_K';
-    }
-
-    if (avaClientGroup === 'UMF' || avaClientGroup === 'UMF (Kind)' || avaClientGroup === 'uUMF') {
-      return 'uUMF_Kind';
-    }
-
-    // Default if no specific match
-    return isAdult ? 'ARF_ARM' : 'Kind_FAM_ARM_K_ARF_K_UMF_K';
-  };
-
   const applyCrmData = (data: ClientData) => {
-    const age = data.age || calculateAge(data.birthDate);
-    const groupId = mapClientGroup(data.groupId, age);
-
-    const finalData: ClientData = {
-      ...formData,
-      ...data,
-      age,
-      groupId,
-      ifaNumber: data.ifaNumber || formData.ifaNumber,
-      language: isLanguageManuallySelected ? formData.language : (data.language || formData.language)
+    // Helper to find the key for a given label in an OptionSet
+    const findOptionKey = (options: Record<number, string>, label: string): number | undefined => {
+       const entry = Object.entries(options).find(([_, v]) => v.toLowerCase() === label.toLowerCase());
+       return entry ? parseInt(entry[0]) : undefined;
     };
+
+    // Convert ClientData back to RawFormData for the form fields
+    const rawData: RawFormData = {
+      contactid: data.id,
+      ava_ifanumbertext: data.ifaNumber,
+      firstname: data.firstName,
+      lastname: data.lastName,
+      ava_birthdate: data.birthDate,
+      ava_age: String(data.age),
+      ava_nationalitystateid: data.nationality as any,
+      ui_language: isLanguageManuallySelected ? formData.ui_language : data.language,
+      familyMembers: data.familyMembers
+    };
+
+    // Mapping back values
+    rawData.gendercode = (data.sex === 'm' ? 1 : (data.sex === 'w' ? 2 : 192350000)) as Contactsgendercode;
+
+    const statusKey = findOptionKey(Contactsfamilystatuscode, data.familyStatus);
+    if (statusKey) rawData.familystatuscode = statusKey as Contactsfamilystatuscode;
+
+    const tongueKey = findOptionKey(Contactsava_mothertongue, data.motherTongue);
+    if (tongueKey) rawData.ava_mothertongue = tongueKey as Contactsava_mothertongue;
+
+    const groupKey = findOptionKey(Contactsava_clientgroup, data.groupId);
+    if (groupKey) rawData.ava_clientgroup = groupKey as Contactsava_clientgroup;
 
     // Trigger pulse animation
     setIsPulsing(true);
     setTimeout(() => setIsPulsing(false), 1000);
 
     // Special handling for 14-18 age group
-    if (age >= 14 && age < 18) {
-      setShowAgeModal({ show: true, member: finalData });
+    if (data.age >= 14 && data.age < 18) {
+      setShowAgeModal({ show: true, member: data });
     } else {
-      setFormData(finalData);
+      setFormData(prev => ({ ...prev, ...rawData }));
     }
   };
 
@@ -116,7 +144,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchClientByIfa(formData.ifaNumber || '1468');
+      const data = await fetchClientByIfa(String(formData.ava_ifanumbertext || '1468'));
       applyCrmData(data);
     } catch (err: any) {
       setError(err.message || "Fehler beim Laden der CSM-Daten");
@@ -126,10 +154,8 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
   };
 
   const handleSelectFamilyMember = async (member: FamilyMember) => {
-    // Set IFA first to show it in search box
-    setFormData(prev => ({ ...prev, ifaNumber: member.ifaNumber }));
+    setFormData(prev => ({ ...prev, ava_ifanumbertext: member.ifaNumber }));
 
-    // Automatically trigger CRM fetch
     setLoading(true);
     setError(null);
     try {
@@ -171,7 +197,15 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
                 <button
                   onClick={() => {
                     if (showAgeModal.member) {
-                      setFormData({ ...showAgeModal.member, groupId: 'Kind_14plus' });
+                      const raw = {
+                        ...formData,
+                        ava_age: String(showAgeModal.member.age),
+                        ui_language: showAgeModal.member.language,
+                        familyMembers: showAgeModal.member.familyMembers
+                      };
+                      setFormData(raw);
+                      // Custom start with specific group
+                      onStart({ ...showAgeModal.member, groupId: 'Kind_14plus' });
                     }
                     setShowAgeModal({ show: false, member: null });
                   }}
@@ -184,7 +218,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
                 <button
                   onClick={() => {
                     if (showAgeModal.member) {
-                      setFormData(showAgeModal.member);
+                      onStart(showAgeModal.member);
                     }
                     setShowAgeModal({ show: false, member: null });
                   }}
@@ -199,7 +233,6 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
         )}
       </AnimatePresence>
 
-      {/* Linke Seite: Formular */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{
@@ -211,20 +244,19 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
         className={`lg:col-span-2 bg-white dark:bg-slate-800 p-8 rounded-xl shadow-xl overflow-y-auto transition-colors duration-300 ${isPulsing ? 'ring-4 ring-blue-500/40' : ''}`}
       >
         <h2 className="text-2xl font-bold text-gray-800 dark:text-slate-100 mb-6 border-b dark:border-slate-700 pb-4">
-          Klientendaten erfassen
+          Klientendaten erfassen (CRM Simulation)
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-        {/* CRM Fetch & IFA Nummer */}
         <div className="bg-blue-50 dark:bg-slate-700/50 p-4 rounded-xl border border-blue-100 dark:border-slate-600 mb-6">
           <div className="flex flex-col md:flex-row gap-4 items-end">
             <div className="flex-1 w-full">
-              <label className="block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase mb-1">IFA-Nummer (CRM Suche)</label>
+              <label className="block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase mb-1">IFA-Nummer (ava_ifanumbertext)</label>
               <div className="relative">
                 <input
                   required
                   type="text"
-                  name="ifaNumber"
-                  value={formData.ifaNumber}
+                  name="ava_ifanumbertext"
+                  value={formData.ava_ifanumbertext || ''}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                   placeholder="z.B. 1468"
@@ -235,38 +267,36 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
             <button
               type="button"
               onClick={handleCrmFetch}
-              disabled={loading || !formData.ifaNumber}
+              disabled={loading || !formData.ava_ifanumbertext}
               className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold px-6 py-2 rounded-lg shadow transition-all flex items-center gap-2 whitespace-nowrap h-[42px]"
             >
               {loading ? <Loader2 className="animate-spin h-5 w-5" /> : <Search className="h-5 w-5" />}
-              Daten aus CSM laden
+              CRM Fetch simulieren
             </button>
           </div>
           {error && <p className="text-red-500 text-xs mt-2 font-bold">{error}</p>}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Vorname */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Vorname (firstname)</label>
             <input
               required
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="firstname"
+              value={formData.firstname || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
               placeholder="z.B. Max"
             />
           </div>
-          {/* Nachname */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Nachname (lastname)</label>
             <input
               required
               type="text"
-              name="lastName"
-              value={formData.lastName}
+              name="lastname"
+              value={formData.lastname || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
               placeholder="z.B. Mustermann"
@@ -275,28 +305,26 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Geschlecht */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Geschlecht (gendercode)</label>
             <select
-              name="sex"
-              value={formData.sex}
+              name="gendercode"
+              value={formData.gendercode || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             >
-              <option value="m">Männlich</option>
-              <option value="w">Weiblich</option>
-              <option value="d">Divers</option>
+              {Object.entries(Contactsgendercode).map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
             </select>
           </div>
-          {/* Geburtstag */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Geburtstag (ava_birthdate)</label>
             <input
               required
               type="date"
-              name="birthDate"
-              value={formData.birthDate}
+              name="ava_birthdate"
+              value={formData.ava_birthdate || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             />
@@ -304,91 +332,80 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Alter */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Alter (ava_age)</label>
             <input
               required
               type="number"
-              step="any"
-              name="age"
-              value={formData.age || ''}
+              name="ava_age"
+              value={formData.ava_age || '0'}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
               min="0"
               max="120"
             />
           </div>
-          {/* Nationalität */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Nationalität (ava_nationalitystateid)</label>
             <input
-              required
               type="text"
-              name="nationality"
-              value={formData.nationality}
+              name="ava_nationalitystateid"
+              value={(formData.ava_nationalitystateid as unknown as string) || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-              placeholder="z.B. Österreich"
+              placeholder="z.B. ITAKA"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Familienstand */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Familienstand (familystatuscode)</label>
             <select
-              name="familyStatus"
-              value={formData.familyStatus}
+              name="familystatuscode"
+              value={formData.familystatuscode || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             >
-              <option value="ledig">Ledig</option>
-              <option value="verheiratet">Verheiratet</option>
-              <option value="geschieden">Geschieden</option>
-              <option value="verwitwet">Verwitwet</option>
+              {Object.entries(Contactsfamilystatuscode).map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
             </select>
           </div>
-          {/* Muttersprache */}
           <div>
             <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Muttersprache (ava_mothertongue)</label>
             <select
-              name="motherTongue"
-              value={formData.motherTongue}
+              name="ava_mothertongue"
+              value={formData.ava_mothertongue || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             >
-              {config.languages.map(lang => (
-                <option key={lang.id} value={lang.id}>{lang.label}</option>
+              {Object.entries(Contactsava_mothertongue).map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
               ))}
             </select>
           </div>
         </div>
 
-        {/* Betreuungskategorie */}
         <div>
           <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Betreuungskategorie (ava_clientgroup)</label>
           <select
-            name="groupId"
-            value={formData.groupId}
+            name="ava_clientgroup"
+            value={formData.ava_clientgroup || ''}
             onChange={handleChange}
             className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
           >
-            {config.groups.map(group => (
-              <option key={group.id} value={group.id}>
-                {group.name}
-              </option>
+            {Object.entries(Contactsava_clientgroup).map(([value, label]) => (
+              <option key={value} value={value}>{label}</option>
             ))}
           </select>
         </div>
 
-        {/* Assistent Sprache */}
         <div>
           <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">Sprache des Assistenten (UI)</label>
           <select
-            name="language"
-            value={formData.language}
+            name="ui_language"
+            value={formData.ui_language || ''}
             onChange={handleChange}
             className="w-full px-4 py-2 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
           >
@@ -414,7 +431,6 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
         </form>
       </motion.div>
 
-      {/* Familien-Bucket */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -425,11 +441,6 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
           <h3 className="text-xl font-bold text-gray-800 dark:text-slate-100">
             KERNFAMILIE
           </h3>
-          {formData.numFamilyMembers !== undefined && (
-            <span className="ml-auto bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-bold">
-              {formData.numFamilyMembers} Mitglieder
-            </span>
-          )}
         </div>
 
         {!formData.familyMembers || formData.familyMembers.length === 0 ? (
@@ -440,7 +451,7 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
           </div>
         ) : (
           <div className="space-y-3">
-            {formData.familyMembers.map((member, idx) => (
+            {formData.familyMembers.map((member: FamilyMember, idx: number) => (
               <button
                 key={idx}
                 onClick={() => handleSelectFamilyMember(member)}
