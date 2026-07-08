@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ClientData } from '../services/crmService';
 import { getNextStepId, getQuestionById } from '../services/flowEngine';
-import { calculateAssessments } from '../services/assessmentEngine';
+import { calculateAssessments, calculateQualities } from '../services/assessmentEngine';
 import { calculateProgress } from '../services/progressService';
 
 function loadSavedWizardState(): Record<string, any> | null {
@@ -45,13 +45,14 @@ export const useWizard = (initialData: ClientData | null) => {
   }, [clientData, currentStepId, answers, history, isComplete]);
 
   const assessments = useMemo(() => calculateAssessments(answers, clientData), [answers, clientData]);
+  const qualities = useMemo(() => calculateQualities(answers, assessments), [answers, assessments]);
 
   const goToNextStep = useCallback((stepId: string | null, currentAssessments: Record<string, boolean>, group: string) => {
     let nextStepId = stepId;
 
     // Auto-skip bewertung steps using the calculated assessment result
-    // Items 0.5, 1a.5, 7.11, 7.13 are interactive evaluations and should not be skipped
-    const interactiveEvaluations = ["0.5", "1a.5", "7.11", "7.13"];
+    // Items 7.11, 7.13 are interactive evaluations and should not be skipped
+    const interactiveEvaluations = ["7.11", "7.13"];
 
     while (nextStepId) {
       const nextQuestion = getQuestionById(nextStepId);
@@ -99,7 +100,7 @@ export const useWizard = (initialData: ClientData | null) => {
     setCurrentStepId(null);
   }, []);
 
-  const handleAnswer = (answer: string, notes?: string) => {
+  const handleAnswer = (answer: string, notes?: string, selection?: string) => {
     if (!clientData || !currentStepId) return;
 
     if (answer === "Abbruch") {
@@ -110,6 +111,7 @@ export const useWizard = (initialData: ClientData | null) => {
           text: "Abbruch durch Benutzer",
           answer,
           notes,
+          selection,
           timestamp: new Date().toISOString()
         }
       };
@@ -129,6 +131,7 @@ export const useWizard = (initialData: ClientData | null) => {
         text: text[clientData.language] || text['de'],
         answer,
         notes,
+        selection,
         timestamp: new Date().toISOString()
       }
     };
@@ -160,6 +163,7 @@ export const useWizard = (initialData: ClientData | null) => {
     currentQuestion,
     answers,
     assessments,
+    qualities,
     isComplete,
     loading,
     history,

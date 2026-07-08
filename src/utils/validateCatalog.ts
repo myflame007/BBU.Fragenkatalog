@@ -1,4 +1,5 @@
 import catalogData from '../data/questionCatalog.json';
+import config from '../data/config.json';
 
 const catalog = catalogData as any;
 
@@ -7,6 +8,7 @@ const validate = () => {
   let errors = 0;
 
   const questionIds = new Set(Object.keys(catalog.questions));
+  const categoryIds = new Set(config.categories.map(c => c.id));
 
   // Check questions
   Object.values(catalog.questions).forEach((q: any) => {

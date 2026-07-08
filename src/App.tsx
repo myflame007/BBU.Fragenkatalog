@@ -86,6 +86,7 @@ const DEBUG_ASSESSMENTS: Record<string, boolean> = {
   '10a.7': true, '10a.8': true, '10a.9': true,
   '10c.7': true, '10c.8': true,
   '10d.7': true, '10e.13': true,
+  'cat_1a': true, '11.3': true, '11.3.1': true
 };
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
     currentQuestion,
     answers,
     assessments,
+    qualities,
     isComplete,
     loading,
     progress,
@@ -177,7 +179,9 @@ function App() {
       const real = await fetchClientById(contactId);
       if (cancelled) return;
       if (real) {
-        if (real.age >= 14 && real.age < 18) {
+        // Modal nur für begleitete Minderjährige (ARFKind, ARMKind, Familie) zwischen 14-18
+        const isAccompaniedMinor = real.groupId === 'Kind_FAM_ARM_K_ARF_K_UMF_K';
+        if (real.age >= 14 && real.age < 18 && isAccompaniedMinor) {
           setAgeModalData(real);
         } else {
           setManualClientData(real);
@@ -190,7 +194,8 @@ function App() {
         const mock = await fetchClientByIfa('1468');
         if (cancelled) return;
         const merged = { ...mock, id: contactId };
-        if (merged.age >= 14 && merged.age < 18) {
+        const isAccompaniedMinor = merged.groupId === 'Kind_FAM_ARM_K_ARF_K_UMF_K';
+        if (merged.age >= 14 && merged.age < 18 && isAccompaniedMinor) {
           setAgeModalData(merged);
         } else {
           setManualClientData(merged);
@@ -346,6 +351,7 @@ function App() {
               <AssessmentComplete
                 answers={debugSkip ? {} : answers}
                 assessments={debugSkip ? DEBUG_ASSESSMENTS : assessments}
+                qualities={debugSkip ? {} : qualities}
                 clientData={clientData ?? undefined}
                 beurteilungId={beurteilungId}
                 onStartFamilyMember={(member) => {

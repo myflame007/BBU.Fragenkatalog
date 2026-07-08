@@ -11,8 +11,31 @@ import {
   Download,
   ChevronDown,
   ChevronUp,
-  AlertCircle
+  AlertCircle,
+  Search,
+  Globe,
+  Languages,
+  CheckCircle2,
+  GripVertical,
+  ArrowRight
 } from 'lucide-react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 const catalog = catalogData as any;
 
@@ -39,6 +62,7 @@ const LanguageSection: React.FC<{ languages: any[], question: any, onUpdate: (te
               <textarea
                 className="flex-1 border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none min-h-[80px]"
                 placeholder={`Text in ${lang.label}...`}
+                dir={['ar', 'fa', 'fa_af', 'ps', 'ur', 'ku_ckb'].includes(lang.id) ? 'rtl' : 'ltr'}
                 value={question.text[lang.id] || ''}
                 onChange={(e) => onUpdate({ ...question.text, [lang.id]: e.target.value })}
               />
@@ -50,6 +74,88 @@ const LanguageSection: React.FC<{ languages: any[], question: any, onUpdate: (te
   );
 };
 
+const SortableFlowStep: React.FC<{
+  step: any;
+  index: number;
+  questions: any[];
+  onUpdate: (updatedStep: any) => void;
+  onRemove: () => void;
+}> = ({ step, index, questions, onUpdate, onRemove }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: `${index}-${step.id}` });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 0,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <tr ref={setNodeRef} style={style} className={`hover:bg-gray-50 transition-colors group ${isDragging ? 'shadow-2xl bg-blue-50' : ''}`}>
+      <td className="px-6 py-4 font-mono text-xs text-gray-400">
+        <div className="flex items-center gap-3">
+          <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-blue-500 transition-colors">
+            <GripVertical size={16} />
+          </div>
+          {index + 1}
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <select
+          className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none bg-white shadow-sm"
+          value={step.id}
+          onChange={(e) => onUpdate({ id: e.target.value })}
+        >
+          {questions.map(q => (
+            <option key={q.id} value={q.id}>
+              [{q.id}] {q.text.de?.substring(0, 50)}...
+            </option>
+          ))}
+          <option value="END">ENDE</option>
+          <option value="ABBRUCH">ABBRUCH</option>
+        </select>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center gap-2">
+          <ArrowRight size={14} className="text-green-500" />
+          <input
+            className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="Nächste ID (z.B. 5.1)"
+            value={step.ja || ''}
+            onChange={(e) => onUpdate({ ja: e.target.value })}
+          />
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center gap-2">
+          <ArrowRight size={14} className="text-red-500" />
+          <input
+            className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="Nächste ID (z.B. ABBRUCH)"
+            value={step.nein || ''}
+            onChange={(e) => onUpdate({ nein: e.target.value })}
+          />
+        </div>
+      </td>
+      <td className="px-6 py-4 text-right">
+        <button
+          onClick={onRemove}
+          className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        >
+          <Trash2 size={16} />
+        </button>
+      </td>
+    </tr>
+  );
+};
+
 export const AdminControlCenter: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'editor' | 'flows' | 'assessments'>('editor');
   const [questions, setQuestions] = useState<any[]>(Object.values(catalog.questions));
@@ -58,6 +164,9 @@ export const AdminControlCenter: React.FC = () => {
   const [activeGroup, setActiveGroup] = useState<string>(config.groups[0].id);
   const [flowMode, setFlowMode] = useState<'visual' | 'table'>('visual');
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [focusLanguage, setFocusLanguage] = useState<string | null>(null);
+  const [filterCategory, setFilterCategory] = useState<string | null>(null);
 
   const VisualRule: React.FC<{ rule: any }> = ({ rule }) => {
     if (!rule) return <span className="text-gray-400 italic">Keine Regel definiert</span>;
@@ -144,12 +253,25 @@ export const AdminControlCenter: React.FC = () => {
     setFlows({ ...flows, [group]: newGroupFlow });
   };
 
-  const moveFlowStep = (group: string, index: number, direction: 'up' | 'down') => {
-    const newGroupFlow = [...flows[group]];
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= newGroupFlow.length) return;
-    [newGroupFlow[index], newGroupFlow[targetIndex]] = [newGroupFlow[targetIndex], newGroupFlow[index]];
-    setFlows({ ...flows, [group]: newGroupFlow });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const activeIndex = parseInt(active.id.toString().split('-')[0]);
+      const overIndex = parseInt(over.id.toString().split('-')[0]);
+
+      setFlows(prev => ({
+        ...prev,
+        [activeGroup]: arrayMove(prev[activeGroup], activeIndex, overIndex)
+      }));
+    }
   };
 
   const handleAddQuestion = () => {
@@ -185,6 +307,23 @@ export const AdminControlCenter: React.FC = () => {
     link.click();
   };
 
+  const filteredQuestions = questions.filter(q => {
+    const matchesSearch = q.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (q.text.de || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (focusLanguage && q.text[focusLanguage] && q.text[focusLanguage].toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const matchesCategory = !filterCategory || q.category === filterCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  const getLanguageStats = (langId: string) => {
+    const total = questions.length;
+    const translated = questions.filter(q => q.text[langId] && q.text[langId].trim().length > 0).length;
+    const percent = Math.round((translated / total) * 100);
+    return { translated, total, percent };
+  };
+
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -205,51 +344,167 @@ export const AdminControlCenter: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 mb-8 overflow-x-auto">
+        <div className="flex bg-white p-1 rounded-2xl border border-gray-200 mb-8 w-fit shadow-sm">
           <button
             onClick={() => setActiveTab('editor')}
-            className={`px-6 py-3 font-bold text-sm transition-colors whitespace-nowrap border-b-2 ${activeTab === 'editor' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-400 hover:text-gray-600'}`}
+            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'editor' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
-            <div className="flex items-center gap-2">
-              <Edit3 size={18} />
-              Fragen-Editor
-            </div>
+            <Edit3 size={18} />
+            Fragen-Editor
           </button>
           <button
             onClick={() => setActiveTab('flows')}
-            className={`px-6 py-3 font-bold text-sm transition-colors whitespace-nowrap border-b-2 ${activeTab === 'flows' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-400 hover:text-gray-600'}`}
+            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'flows' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
-            <div className="flex items-center gap-2">
-              <Layout size={18} />
-              Flow-Editor
-            </div>
+            <Layout size={18} />
+            Flow-Editor
           </button>
           <button
             onClick={() => setActiveTab('assessments')}
-            className={`px-6 py-3 font-bold text-sm transition-colors whitespace-nowrap border-b-2 ${activeTab === 'assessments' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-400 hover:text-gray-600'}`}
+            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'assessments' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
-            <div className="flex items-center gap-2">
-              <Eye size={18} />
-              Bewertungs-Regeln
-            </div>
+            <Eye size={18} />
+            Bewertungs-Regeln
           </button>
         </div>
 
         {activeTab === 'editor' && (
           <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-700">{questions.length} Fragen im Katalog</h2>
-              <button
-                onClick={handleAddQuestion}
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 transition"
-              >
-                <Plus size={20} />
-                Neue Frage
-              </button>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-gray-700">{filteredQuestions.length} von {questions.length} Fragen</h2>
+              </div>
+              <div className="flex flex-wrap gap-3 w-full md:w-auto">
+                <div className="flex gap-2 flex-1 md:flex-none">
+                  <div className="relative flex-1 md:w-64">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                    <input
+                      type="text"
+                      placeholder="Suchen nach ID oder Text..."
+                      className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                  <select
+                    className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 outline-none focus:ring-2 focus:ring-blue-500"
+                    value={filterCategory || ''}
+                    onChange={(e) => setFilterCategory(e.target.value || null)}
+                  >
+                    <option value="">Alle Kategorien</option>
+                    {config.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  </select>
+                </div>
+                <button
+                  onClick={() => setFocusLanguage(focusLanguage ? null : config.languages[1].id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition ${focusLanguage ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                >
+                  <Languages size={18} />
+                  {focusLanguage ? 'Fokus-Modus beenden' : 'Sprach-Fokus'}
+                </button>
+                <button
+                  onClick={handleAddQuestion}
+                  className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-700 transition shadow-sm"
+                >
+                  <Plus size={20} />
+                  Neue Frage
+                </button>
+              </div>
             </div>
 
+            {focusLanguage && (
+              <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex flex-wrap items-center gap-6 animate-in slide-in-from-top-2">
+                <div className="flex items-center gap-3">
+                  <Globe size={20} className="text-blue-500" />
+                  <span className="font-bold text-blue-800">Übersetzungs-Fokus:</span>
+                  <select
+                    className="bg-white border border-blue-200 rounded-lg px-3 py-1.5 text-sm font-bold text-blue-700 outline-none focus:ring-2 focus:ring-blue-400"
+                    value={focusLanguage}
+                    onChange={(e) => setFocusLanguage(e.target.value)}
+                  >
+                    {config.languages.filter(l => l.id !== 'de').map(l => (
+                      <option key={l.id} value={l.id}>{l.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex-1 flex items-center gap-4">
+                  <div className="flex-1 h-2 bg-blue-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-blue-500 transition-all duration-500"
+                      style={{ width: `${getLanguageStats(focusLanguage).percent}%` }}
+                    />
+                  </div>
+                  <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
+                    {getLanguageStats(focusLanguage).translated} / {getLanguageStats(focusLanguage).total} übersetzt ({getLanguageStats(focusLanguage).percent}%)
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    if (window.confirm(`Möchten Sie alle leeren Übersetzungen für ${config.languages.find(l => l.id === focusLanguage)?.label} mit dem deutschen Text befüllen?`)) {
+                      setQuestions(questions.map(q => ({
+                        ...q,
+                        text: {
+                          ...q.text,
+                          [focusLanguage]: q.text[focusLanguage] || q.text.de
+                        }
+                      })));
+                    }
+                  }}
+                  className="bg-white text-blue-600 px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-200 hover:bg-blue-50 transition shadow-sm"
+                >
+                  Leere mit Deutsch befüllen
+                </button>
+              </div>
+            )}
+
             <div className="grid gap-6">
-              {questions.map((q: any) => (
+              {focusLanguage ? (
+                // Bulk Translation Mode
+                <div className="space-y-4">
+                  {filteredQuestions.map((q: any) => (
+                    <div key={q.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:border-blue-300 transition-colors">
+                      <div className="flex gap-6">
+                        <div className="w-16 shrink-0">
+                          <span className="text-[10px] font-mono font-bold bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded block text-center truncate" title={q.id}>
+                            {q.id}
+                          </span>
+                        </div>
+                        <div className="flex-1 space-y-2">
+                          <div className="text-xs text-gray-400 font-bold uppercase flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-blue-400" /> Deutsch
+                          </div>
+                          <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-100 italic">
+                            {q.text.de || '---'}
+                          </p>
+                        </div>
+                        <div className="flex-[1.5] space-y-2">
+                          <div className="text-xs text-blue-600 font-bold uppercase flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-blue-600" /> {config.languages.find(l => l.id === focusLanguage)?.label}
+                            </div>
+                            {q.text[focusLanguage] && (
+                              <CheckCircle2 size={14} className="text-green-500" />
+                            )}
+                          </div>
+                          <textarea
+                            className="w-full border border-blue-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none min-h-[80px] shadow-sm"
+                            placeholder={`Übersetzung eingeben...`}
+                            dir={['ar', 'fa', 'fa_af', 'ps', 'ur', 'ku_ckb'].includes(focusLanguage) ? 'rtl' : 'ltr'}
+                            value={q.text[focusLanguage] || ''}
+                            onChange={(e) => handleUpdateQuestion(q.id, {
+                              text: { ...q.text, [focusLanguage]: e.target.value }
+                            })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // Normal Mode
+                filteredQuestions.map((q: any) => (
                 <div key={q.id} className={`bg-white rounded-xl shadow-sm border transition-all ${editingId === q.id ? 'border-blue-400 ring-2 ring-blue-50' : 'border-gray-200'}`}>
                   {editingId === q.id ? (
                     <div className="p-6 space-y-6">
@@ -302,6 +557,7 @@ export const AdminControlCenter: React.FC = () => {
                               <textarea
                                 className="flex-1 border border-blue-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none min-h-[80px]"
                                 placeholder={`Text in ${lang.label}...`}
+                                dir={['ar', 'fa', 'fa_af', 'ps', 'ur', 'ku_ckb'].includes(lang.id) ? 'rtl' : 'ltr'}
                                 value={q.text[lang.id] || ''}
                                 onChange={(e) => handleUpdateQuestion(q.id, {
                                   text: { ...q.text, [lang.id]: e.target.value }
@@ -378,16 +634,28 @@ export const AdminControlCenter: React.FC = () => {
                     </div>
                   )}
                 </div>
-              ))}
+              )))}
             </div>
           </div>
         )}
 
         {activeTab === 'flows' && (
           <div className="space-y-8">
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex justify-between items-end">
-              <div className="flex-1">
-                <label className="block text-xs font-bold text-gray-400 uppercase mb-4">Gruppe Auswählen</label>
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+              <div className="flex-1 w-full">
+                <div className="flex justify-between items-center mb-4">
+                  <label className="block text-xs font-bold text-gray-400 uppercase">Gruppe Auswählen</label>
+                  <div className="relative w-64">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
+                    <input
+                      type="text"
+                      placeholder="Frage suchen..."
+                      className="w-full pl-8 pr-4 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {config.groups.map(g => (
                     <button
@@ -400,7 +668,7 @@ export const AdminControlCenter: React.FC = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex bg-gray-100 p-1 rounded-lg">
+              <div className="flex bg-gray-100 p-1 rounded-lg self-end md:self-auto">
                 <button
                   onClick={() => setFlowMode('visual')}
                   className={`px-4 py-2 rounded-md text-xs font-bold transition ${flowMode === 'visual' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
@@ -421,10 +689,16 @@ export const AdminControlCenter: React.FC = () => {
                 <div className="flex flex-col gap-6 relative">
                   {flows[activeGroup]?.map((step: any, index: number) => {
                     const q = questions.find(q => q.id === step.id);
+                    const isVisible = !searchTerm ||
+                      q?.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                      (q?.text.de || '').toLowerCase().includes(searchTerm.toLowerCase());
+
+                    if (!isVisible) return null;
+
                     return (
-                      <div key={index} className="flex items-start gap-6 group">
+                      <div key={index} className="flex items-start gap-6 group animate-in fade-in slide-in-from-left-4">
                         <div className="flex flex-col items-center">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-sm ${
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-sm transition-all group-hover:scale-110 ${
                             q?.type === 'Bewertung' ? 'bg-purple-600 text-white' :
                             q?.type === 'Beobachtung' ? 'bg-amber-500 text-white' :
                             'bg-blue-600 text-white'
@@ -435,26 +709,44 @@ export const AdminControlCenter: React.FC = () => {
                             <div className="w-0.5 h-full bg-gray-100 my-2 min-h-[40px]"></div>
                           )}
                         </div>
-                        <div className="flex-1 bg-gray-50 rounded-xl p-5 border border-gray-100 group-hover:border-blue-200 group-hover:bg-blue-50/30 transition-all">
-                          <div className="flex justify-between items-start mb-2">
-                            <span className="text-[10px] font-bold uppercase text-gray-400 bg-white px-2 py-0.5 rounded border border-gray-100">{step.id}</span>
-                            <span className="text-[10px] font-black text-blue-600/40 uppercase">{q?.type || 'System'}</span>
+                        <div className="flex-1 bg-gray-50 rounded-2xl p-6 border border-gray-100 group-hover:border-blue-200 group-hover:bg-blue-50/30 transition-all hover:shadow-md">
+                          <div className="flex justify-between items-start mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-bold uppercase text-gray-400 bg-white px-2 py-0.5 rounded border border-gray-100">{step.id}</span>
+                              <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
+                                q?.type === 'Bewertung' ? 'bg-purple-100 text-purple-600' :
+                                q?.type === 'Beobachtung' ? 'bg-amber-100 text-amber-600' :
+                                'bg-blue-100 text-blue-600'
+                              }`}>
+                                {q?.type || 'System'}
+                              </span>
+                            </div>
                           </div>
                           <p className="text-sm font-medium text-gray-700 leading-relaxed">
                             {q?.text.de || (step.id === 'END' ? 'Assessment Beendet' : step.id === 'ABBRUCH' ? 'Vorgang Abgebrochen' : 'Unbekannter Schritt')}
                           </p>
                           {(step.ja || step.nein) && (
-                            <div className="mt-4 flex gap-3">
-                              {step.ja && <span className="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded font-bold">JA → {step.ja}</span>}
-                              {step.nein && <span className="text-[10px] bg-red-100 text-red-700 px-2 py-1 rounded font-bold">NEIN → {step.nein}</span>}
+                            <div className="mt-5 pt-4 border-t border-gray-100 flex gap-4">
+                              {step.ja && (
+                                <div className="flex flex-col gap-1">
+                                  <span className="text-[9px] font-black text-green-500 uppercase tracking-tighter">Wenn JA →</span>
+                                  <span className="text-xs bg-green-50 text-green-700 px-3 py-1 rounded-lg font-bold border border-green-100">{step.ja}</span>
+                                </div>
+                              )}
+                              {step.nein && (
+                                <div className="flex flex-col gap-1">
+                                  <span className="text-[9px] font-black text-red-500 uppercase tracking-tighter">Wenn NEIN →</span>
+                                  <span className="text-xs bg-red-50 text-red-700 px-3 py-1 rounded-lg font-bold border border-red-100">{step.nein}</span>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
                         <button
                           onClick={() => setFlowMode('table')}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-blue-600 hover:bg-blue-100 rounded-lg"
+                          className="opacity-0 group-hover:opacity-100 transition-opacity p-3 text-blue-600 hover:bg-blue-100 rounded-xl"
                         >
-                          <Edit3 size={18} />
+                          <Edit3 size={20} />
                         </button>
                       </div>
                     );
@@ -462,91 +754,69 @@ export const AdminControlCenter: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                <div className="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-bold text-gray-700">Flow-Schritte: {config.groups.find(g => g.id === activeGroup)?.name}</h3>
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="p-5 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
+                      <Layout size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-800">Flow-Schritte</h3>
+                      <p className="text-[10px] text-gray-400 font-bold uppercase">{config.groups.find(g => g.id === activeGroup)?.name}</p>
+                    </div>
+                  </div>
                   <button
                     onClick={() => handleAddFlowStep(activeGroup)}
-                    className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition"
+                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition shadow-sm"
                   >
-                    <Plus size={14} />
+                    <Plus size={18} />
                     Schritt hinzufügen
                   </button>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
-                    <thead className="bg-gray-50 text-gray-400 text-[10px] uppercase font-black">
-                      <tr>
-                        <th className="px-6 py-3 w-16">#</th>
-                        <th className="px-6 py-3">Frage / ID</th>
-                        <th className="px-6 py-3 w-48">Wenn JA →</th>
-                        <th className="px-6 py-3 w-48">Wenn NEIN →</th>
-                        <th className="px-6 py-3 w-32">Aktionen</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100">
-                      {flows[activeGroup]?.map((step: any, index: number) => (
-                        <tr key={index} className="hover:bg-gray-50 transition-colors group">
-                          <td className="px-6 py-4 font-mono text-xs text-gray-400">{index + 1}</td>
-                          <td className="px-6 py-4">
-                            <select
-                              className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
-                              value={step.id}
-                              onChange={(e) => handleUpdateFlowStep(activeGroup, index, { id: e.target.value })}
-                            >
-                              {questions.map(q => (
-                                <option key={q.id} value={q.id}>
-                                  [{q.id}] {q.text.de?.substring(0, 50)}...
-                                </option>
-                              ))}
-                              <option value="END">ENDE</option>
-                              <option value="ABBRUCH">ABBRUCH</option>
-                            </select>
-                          </td>
-                          <td className="px-6 py-4">
-                            <input
-                              className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
-                              placeholder="Nächste ID (z.B. 5.1)"
-                              value={step.ja || ''}
-                              onChange={(e) => handleUpdateFlowStep(activeGroup, index, { ja: e.target.value })}
-                            />
-                          </td>
-                          <td className="px-6 py-4">
-                            <input
-                              className="w-full border border-gray-200 rounded-lg p-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
-                              placeholder="Nächste ID (z.B. ABBRUCH)"
-                              value={step.nein || ''}
-                              onChange={(e) => handleUpdateFlowStep(activeGroup, index, { nein: e.target.value })}
-                            />
-                          </td>
-                          <td className="px-6 py-4">
-                            <div className="flex items-center gap-2">
-                              <button
-                                onClick={() => moveFlowStep(activeGroup, index, 'up')}
-                                disabled={index === 0}
-                                className="p-1 hover:bg-gray-200 rounded disabled:opacity-30"
-                              >
-                                <ChevronUp size={16} />
-                              </button>
-                              <button
-                                onClick={() => moveFlowStep(activeGroup, index, 'down')}
-                                disabled={index === flows[activeGroup].length - 1}
-                                className="p-1 hover:bg-gray-200 rounded disabled:opacity-30"
-                              >
-                                <ChevronDown size={16} />
-                              </button>
-                              <button
-                                onClick={() => handleRemoveFlowStep(activeGroup, index)}
-                                className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded"
-                              >
-                                <Trash2 size={16} />
-                              </button>
-                            </div>
-                          </td>
+                  <DndContext
+                    sensors={sensors}
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <table className="w-full text-left text-sm">
+                      <thead className="bg-gray-50/50 text-gray-400 text-[10px] uppercase font-black border-b border-gray-100">
+                        <tr>
+                          <th className="px-6 py-4 w-24">#</th>
+                          <th className="px-6 py-4">Frage / ID</th>
+                          <th className="px-6 py-4 w-56">JA-Zweig</th>
+                          <th className="px-6 py-4 w-56">NEIN-Zweig</th>
+                          <th className="px-6 py-4 w-20 text-right">Aktionen</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        <SortableContext
+                          items={flows[activeGroup]?.map((s: any, i: number) => `${i}-${s.id}`) || []}
+                          strategy={verticalListSortingStrategy}
+                        >
+                          {flows[activeGroup]?.map((step: any, index: number) => {
+                             const q = questions.find(q => q.id === step.id);
+                             const isVisible = !searchTerm ||
+                               q?.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                               (q?.text.de || '').toLowerCase().includes(searchTerm.toLowerCase());
+
+                             if (!isVisible) return null;
+
+                             return (
+                              <SortableFlowStep
+                                key={`${index}-${step.id}`}
+                                step={step}
+                                index={index}
+                                questions={questions}
+                                onUpdate={(updatedStep) => handleUpdateFlowStep(activeGroup, index, updatedStep)}
+                                onRemove={() => handleRemoveFlowStep(activeGroup, index)}
+                              />
+                             );
+                          })}
+                        </SortableContext>
+                      </tbody>
+                    </table>
+                  </DndContext>
                 </div>
               </div>
             )}

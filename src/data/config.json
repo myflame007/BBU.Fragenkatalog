@@ -1,53 +1,104 @@
 {
   "languages": [
-    { "id": "de", "label": "Deutsch" },
-    { "id": "sq", "label": "Albanisch" },
-    { "id": "ar", "label": "Arabisch" },
-    { "id": "bks", "label": "BKS" },
-    { "id": "zh", "label": "Chinesisch" },
-    { "id": "fa_af", "label": "Dari" },
-    { "id": "en", "label": "Englisch" },
-    { "id": "fa", "label": "Farsi" },
-    { "id": "fr", "label": "Französisch" },
-    { "id": "ka", "label": "Georgisch" },
-    { "id": "hi", "label": "Hindi" },
-    { "id": "ku_kmr", "label": "Kurdisch (Nord)" },
-    { "id": "ku_ckb", "label": "Kurdisch (Zentral)" },
-    { "id": "pa", "label": "Panjabi" },
-    { "id": "ps", "label": "Pashto" },
-    { "id": "ru", "label": "Russisch" },
-    { "id": "so", "label": "Somali" },
-    { "id": "es", "label": "Spanisch" },
-    { "id": "tr", "label": "Türkisch" },
-    { "id": "uk", "label": "Ukrainisch" },
-    { "id": "ur", "label": "Urdu" },
-    { "id": "ro", "label": "Rumänisch" },
-    { "id": "mo", "label": "Moldawisch" }
-  ],
-  "groups": [
-    { "id": "ARF_ARM", "name": "ARF_ARM" },
-    { "id": "FAM_Erwachsene", "name": "FAM_Erwachsene" },
-    { "id": "ARF_K_ARM_K_Erwachsene", "name": "ARF (K), ARM(K) Erwachsene" },
-    { "id": "Kind_FAM_ARM_K_ARF_K_UMF_K", "name": "Kind_FAM, ARM(K), ARF(K), UMF(K)" },
-    { "id": "uUMF_Kind", "name": "(u)UMF (Kind)" },
-    { "id": "Kind_14plus", "name": "Fragen an begl. Kind ab 14J" }
-  ],
+     { "id": "de", "label": "Deutsch" },
+     { "id": "sq", "label": "Albanisch" },
+     { "id": "ar", "label": "Arabisch" },
+     { "id": "bks", "label": "BKS" },
+     { "id": "zh", "label": "Chinesisch" },
+     { "id": "fa_af", "label": "Dari" },
+     { "id": "en", "label": "Englisch" },
+     { "id": "fa", "label": "Farsi" },
+     { "id": "fr", "label": "Französisch" },
+     { "id": "ka", "label": "Georgisch" },
+     { "id": "hi", "label": "Hindi" },
+     { "id": "ku_kmr", "label": "Kurdisch (Nord)" },
+     { "id": "ku_ckb", "label": "Kurdisch (Zentral)" },
+     { "id": "pa", "label": "Panjabi" },
+     { "id": "ps", "label": "Pashto" },
+     { "id": "ru", "label": "Russisch" },
+     { "id": "so", "label": "Somali" },
+     { "id": "es", "label": "Spanisch" },
+     { "id": "tr", "label": "Türkisch" },
+     { "id": "uk", "label": "Ukrainisch" },
+     { "id": "ur", "label": "Urdu" },
+     { "id": "ro", "label": "Rumänisch" },
+     { "id": "mo", "label": "Moldawisch" }
+   ],
+   "groups": [
+     { "id": "ARF_ARM", "name": "ARF_ARM" },
+     { "id": "FAM_Erwachsene", "name": "FAM_Erwachsene" },
+     { "id": "ARF_K_ARM_K_Erwachsene", "name": "ARF (K), ARM(K) Erwachsene" },
+     { "id": "Kind_FAM_ARM_K_ARF_K_UMF_K", "name": "Kind_FAM, ARM(K), ARF(K), UMF(K)" },
+     { "id": "UMF_Kind", "name": "UMF" },
+     { "id": "uUMF_Kind", "name": "uUMF" },
+     { "id": "Kind_14plus", "name": "Fragen an begl. Kind ab 14J" }
+   ],
+
+
   "categories": [
-    { "id": "begruessung", "name": "Begrüßung" },
-    { "id": "zustimmung", "name": "Zustimmung des Klienten/der Klientin" },
-    { "id": "beurteilung_begleitet", "name": "Beurteilung bei begleiteten Kindern" },
-    { "id": "cat_1a", "name": "1a. Begleitete*r Minderjährige*r", "riskAssessmentId": "1a.13" },
-    { "id": "cat_1b", "name": "1b. Unbegleitete*r Minderjährige*r", "riskAssessmentId": "1b.14" },
-    { "id": "cat_5", "name": "5. LGBTI Personen", "riskAssessmentId": "5.8" },
-    { "id": "cat_6", "name": "6. Alleinerziehende*r", "riskAssessmentId": "6.6" },
-    { "id": "cat_7", "name": "7. Potenzielles Opfer von Menschenhandel", "riskAssessmentId": "7.23" },
-    { "id": "cat_9", "name": "9. Psychische Belastung", "riskAssessmentId": "9b.10" },
-    { "id": "cat_10a", "name": "10a. Opfer von Folter", "riskAssessmentId": "10a.7" },
-    { "id": "cat_10c", "name": "10c. Vergewaltigung", "riskAssessmentId": "10c.7" },
-    { "id": "cat_10d", "name": "10d. Zwangsehe", "riskAssessmentId": "10d.7" },
-    { "id": "cat_10e", "name": "10e. Schwere Gewalt", "riskAssessmentId": "10e.12" },
-    { "id": "sonstiges", "name": "Sonstiges" },
-    { "id": "abschluss", "name": "Abschluss" },
-    { "id": "einschaetzung", "name": "Einschätzung für die Betreuung" }
+    {
+      "id": "cat_1a",
+      "name": "1a. Begleitete*r Minderjährige*r",
+      "riskAssessmentId": "1a.13"
+    },
+    {
+      "id": "cat_1b",
+      "name": "1b. Unbegleitete*r/von Eltern getrennte*r Minderjährige*r",
+      "riskAssessmentId": "1b.14"
+    },
+    {
+      "id": "cat_5",
+      "name": "5. Homosexuelle, bisexuelle, inter- oder transgeschlechtliche Personen",
+      "riskAssessmentId": "5.8"
+    },
+    {
+      "id": "cat_6",
+      "name": "6. Alleinerziehende*r mit minderjährigem/n Kind(ern)",
+      "riskAssessmentId": "6.6"
+    },
+    {
+      "id": "cat_7",
+      "name": "7. Potenzielles Opfer von Menschen- oder Kinderhandel",
+      "riskAssessmentId": "7.23"
+    },
+    {
+      "id": "cat_9",
+      "name": "9b. Schwere psychische Erkrankung",
+      "riskAssessmentId": "9b.10"
+    },
+    {
+      "id": "cat_10a",
+      "name": "10a. Potenzielles Opfer von Folter",
+      "riskAssessmentId": "10a.7"
+    },
+    {
+      "id": "cat_10c",
+      "name": "10c. Person, die Vergewaltigung erlitten hat",
+      "riskAssessmentId": "10c.7"
+    },
+    {
+      "id": "cat_10d",
+      "name": "10d. Potenzielles Opfer von Zwangsehe oder Kinderheirat",
+      "riskAssessmentId": "10d.7"
+    },
+    {
+      "id": "cat_10e",
+      "name": "Person, die anderen schweren Formen von psychischer, physischer und sexueller Gewalt ausgesetzt war",
+      "riskAssessmentId": "10e.12"
+    },
+    {
+      "id": "sonstiges",
+      "name": "Sonstiges"
+    }
+  ],
+  "medicalNecessityIds": [
+    "5.9",
+    "10a.9"
+  ],
+  "psychologicalNecessityIds": [
+    "9b.10",
+    "10a.8",
+    "10c.8",
+    "10e.13"
   ]
 }

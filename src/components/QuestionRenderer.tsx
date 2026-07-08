@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import { Eye, Info, MessageSquare, ChevronRight, CornerDownRight, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Eye, Info, MessageSquare, ChevronRight, CornerDownRight, AlertCircle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import config from '../data/config.json';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from '../utils/cn';
 
 interface Question {
   id: string;
@@ -17,12 +12,12 @@ interface Question {
   answerType?: string;
 }
 
-import { ClientData } from '../services/crmService';
+import { ClientData, fetchFamilyMembers } from '../services/crmService';
 
 interface Props {
   question: Question;
   language: string;
-  onAnswer: (answer: string, notes?: string) => void;
+  onAnswer: (answer: string, notes?: string, selection?: string) => void;
   onBack?: () => void;
   canGoBack?: boolean;
   clientData?: ClientData | null;
@@ -41,7 +36,45 @@ const familyRoles = [
 export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer, onBack, canGoBack, clientData }) => {
   const [notes, setNotes] = useState('');
   const [dropdownValue, setDropdownValue] = useState('');
+
+  const interactiveEvaluations = ["7.11", "7.13"];
+  const isObservation = question.type && question.type.toLowerCase() === 'beobachtung';
+  const isInteractive = interactiveEvaluations.includes(question.id);
+
+  // Fallback logic: if observation or interactive, always 'de'. Otherwise try language, then Dari fallback, then 'de'.
+  const effectiveLanguage = (isObservation || isInteractive)
+    ? 'de'
+    : (question.text[language]
+        ? language
+        : (language === 'fa_af' && question.text['fa'] ? 'fa' : 'de')
+      );
+
+  const rtlLanguages = ['ar', 'fa', 'fa_af', 'ps', 'ur', 'ku_ckb'];
+  const isRtlLanguage = rtlLanguages.includes(effectiveLanguage);
+  // Only render RTL if the effective language is an RTL language AND it's not German (the fallback).
+  const actuallyRtl = isRtlLanguage && effectiveLanguage !== 'de';
+
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [dynamicFamilyMembers, setDynamicFamilyMembers] = useState<ClientData[]>([]);
+  const [loadingMembers, setLoadingMembers] = useState(false);
+
+  useEffect(() => {
+    if (question.id === '0.1a' && clientData?.familyId) {
+      setLoadingMembers(true);
+      fetchFamilyMembers(clientData.familyId, clientData.id)
+        .then(members => {
+          // Sonderregel für 0.1a: Wenn UMF_Kind (100000006) und Alter < 14, dann Filter ab 14 Jahre
+          const isUmfUnder14 = clientData.clientGroupCode === '100000006' && clientData.age < 14;
+          const minAge = isUmfUnder14 ? 14 : 18;
+          setDynamicFamilyMembers(members.filter(m => m.age >= minAge));
+        })
+        .catch(err => {
+          console.error("Failed to fetch family members:", err);
+          setDynamicFamilyMembers([]);
+        })
+        .finally(() => setLoadingMembers(false));
+    }
+  }, [question.id, clientData?.familyId, clientData?.id]);
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
@@ -57,31 +90,30 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
     }
   };
 
-  const interactiveEvaluations = ["0.5", "1a.5", "7.11", "7.13"];
-  let rawText = (
-    (question.type && question.type.toLowerCase() === 'beobachtung') ||
-    interactiveEvaluations.includes(question.id)
-  )
-    ? question.text['de']
-    : (question.text[language] || question.text['de']);
-
+  let rawText = question.text[effectiveLanguage] || question.text['de'];
   let text: React.ReactNode = rawText;
 
   // Metadata substitution for 0.4
   if (question.id === "0.4" && clientData) {
+    const questionText = question.text[language] || question.text['de'];
+    const baseText = questionText.replace('NAME', '').replace(':', '').trim();
+
     text = (
-      <span className="inline-block">
-        Wir führen das Gespräch nun für Ihr Kind{' '}
-        <span className="text-blue-600 font-extrabold underline decoration-blue-200 decoration-2 underline-offset-4">
-          {clientData.firstName} {clientData.lastName}
-        </span>{' '}
-        ({clientData.age} Jahre) und Geburtsdatum: {formatDate(clientData.birthDate)}
-      </span>
+      <div className="flex flex-col gap-4">
+        <span>{baseText}</span>
+        <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-2xl border border-blue-100 dark:border-blue-800">
+          <div className="text-blue-600 dark:text-blue-400 font-extrabold text-2xl">
+            {clientData.firstName} {clientData.lastName}
+          </div>
+          <div className="text-slate-500 dark:text-slate-400 font-bold mt-1">
+            {clientData.age} Jahre • Geburtsdatum: {formatDate(clientData.birthDate)} • IFA: {clientData.ifaNumber}
+          </div>
+        </div>
+      </div>
     );
   }
 
   const isInfo = question.type && (question.type.toLowerCase() === 'sprechtext' || question.type.toLowerCase() === 'info');
-  const isObservation = question.type && question.type.toLowerCase() === 'beobachtung';
   const answerType = question.answerType?.toLowerCase() || '';
 
   return (
@@ -111,7 +143,13 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
             </div>
 
             <div className="prose prose-blue max-w-none">
-              <p className="text-blue-900 dark:text-blue-100 text-xl font-medium leading-relaxed mb-10 whitespace-pre-wrap italic opacity-90">
+              <p
+                className={cn(
+                  "text-blue-900 dark:text-blue-100 text-xl font-medium leading-relaxed mb-10 whitespace-pre-wrap opacity-90",
+                  actuallyRtl && "font-['Amiri']"
+                )}
+                dir={actuallyRtl ? 'rtl' : 'ltr'}
+              >
                 "{text}"
               </p>
             </div>
@@ -172,26 +210,45 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
         <span className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-400">ID: {question.id}</span>
       </div>
 
-      <h3 className={cn(
-        "text-xl font-bold mb-10 leading-tight whitespace-pre-wrap tracking-tight",
-        isObservation ? "text-amber-900 dark:text-amber-200" : "text-slate-800 dark:text-slate-100"
-      )}>
+      <h3
+        className={cn(
+          "text-xl font-bold mb-10 leading-tight whitespace-pre-wrap tracking-tight",
+          isObservation ? "text-amber-900 dark:text-amber-200" : "text-slate-800 dark:text-slate-100",
+          actuallyRtl && "font-['Amiri']"
+        )}
+        dir={actuallyRtl ? 'rtl' : 'ltr'}
+      >
         {text}
       </h3>
 
       {answerType.includes('dropdown') && (
         <div className="mb-8">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Auswählen:</label>
-          <select
-            value={dropdownValue}
-            onChange={(e) => setDropdownValue(e.target.value)}
-            className="w-full border border-gray-300 rounded-xl p-4 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
-          >
-            <option value="">Bitte wählen...</option>
-            {familyRoles.map(role => (
-              <option key={role} value={role}>{role}</option>
-            ))}
-          </select>
+          <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Auswählen:</label>
+          {loadingMembers ? (
+            <div className="flex items-center gap-2 p-4 text-blue-600 font-medium">
+              <Loader2 className="animate-spin" size={20} />
+              Lade Familienmitglieder...
+            </div>
+          ) : (
+            <select
+              value={dropdownValue}
+              onChange={(e) => setDropdownValue(e.target.value)}
+              className="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl p-4 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+            >
+              <option value="">Bitte wählen...</option>
+              {question.id === '0.1a' ? (
+                dynamicFamilyMembers.map(member => (
+                  <option key={member.id} value={member.id}>
+                    {member.firstName} {member.lastName} ({member.age} J.)
+                  </option>
+                ))
+              ) : (
+                familyRoles.map(role => (
+                  <option key={role} value={role}>{role}</option>
+                ))
+              )}
+            </select>
+          )}
         </div>
       )}
 
@@ -234,7 +291,7 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
               <motion.button
                 whileHover={{ scale: 1.02, translateY: -2 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => onAnswer('Ja', notes || dropdownValue)}
+                onClick={() => onAnswer('Ja', notes, dropdownValue)}
                 disabled={answerType.includes('dropdown') && !dropdownValue}
                 className="flex-1 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-700 dark:to-blue-600 text-white py-5 rounded-2xl font-black text-lg hover:shadow-2xl hover:shadow-blue-200 dark:hover:shadow-blue-900/40 transition-all duration-300 disabled:opacity-50"
               >
