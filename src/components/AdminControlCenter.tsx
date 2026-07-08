@@ -36,6 +36,7 @@ import {
   useSortable
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { exportToJson } from '../services/exportService';
 
 const catalog = catalogData as any;
 
@@ -299,13 +300,13 @@ export const AdminControlCenter: React.FC = () => {
       questionsObj[q.id] = q;
     });
     const data = { ...catalog, questions: questionsObj, flows };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'questionCatalog.json';
-    link.click();
+    exportToJson(data, 'questionCatalog.json');
   };
+
+  const isQuestionVisible = (q: any) =>
+    !searchTerm ||
+    q?.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (q?.text.de || '').toLowerCase().includes(searchTerm.toLowerCase());
 
   const filteredQuestions = questions.filter(q => {
     const matchesSearch = q.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -639,7 +640,12 @@ export const AdminControlCenter: React.FC = () => {
           </div>
         )}
 
-        {activeTab === 'flows' && (
+        {activeTab === 'flows' && (() => {
+          const visibleSteps = (flows[activeGroup] || [])
+            .map((step: any, index: number) => ({ step, index, q: questions.find(q => q.id === step.id) }))
+            .filter(({ q }: any) => isQuestionVisible(q));
+
+          return (
           <div className="space-y-8">
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="flex-1 w-full">
@@ -687,14 +693,7 @@ export const AdminControlCenter: React.FC = () => {
             {flowMode === 'visual' ? (
               <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
                 <div className="flex flex-col gap-6 relative">
-                  {flows[activeGroup]?.map((step: any, index: number) => {
-                    const q = questions.find(q => q.id === step.id);
-                    const isVisible = !searchTerm ||
-                      q?.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                      (q?.text.de || '').toLowerCase().includes(searchTerm.toLowerCase());
-
-                    if (!isVisible) return null;
-
+                  {visibleSteps.map(({ step, index, q }: any) => {
                     return (
                       <div key={index} className="flex items-start gap-6 group animate-in fade-in slide-in-from-left-4">
                         <div className="flex flex-col items-center">
@@ -794,14 +793,7 @@ export const AdminControlCenter: React.FC = () => {
                           items={flows[activeGroup]?.map((s: any, i: number) => `${i}-${s.id}`) || []}
                           strategy={verticalListSortingStrategy}
                         >
-                          {flows[activeGroup]?.map((step: any, index: number) => {
-                             const q = questions.find(q => q.id === step.id);
-                             const isVisible = !searchTerm ||
-                               q?.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                               (q?.text.de || '').toLowerCase().includes(searchTerm.toLowerCase());
-
-                             if (!isVisible) return null;
-
+                          {visibleSteps.map(({ step, index }: any) => {
                              return (
                               <SortableFlowStep
                                 key={`${index}-${step.id}`}
@@ -821,7 +813,8 @@ export const AdminControlCenter: React.FC = () => {
               </div>
             )}
           </div>
-        )}
+          );
+        })()}
 
         {activeTab === 'assessments' && (
           <div className="space-y-6">

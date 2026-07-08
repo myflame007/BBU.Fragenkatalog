@@ -29,6 +29,11 @@ export const Ava_bbu_bedurfniskategoriesava_bbu_hinweisvondritten = {
   1: 'Ja'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_hinweisvondritten = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_hinweisvondritten;
+export const Ava_bbu_bedurfniskategoriesava_bbu_horbeeintrachtigung = {
+  100000000: 'ja',
+  100000001: 'nein'
+} as const;
+export type Ava_bbu_bedurfniskategoriesava_bbu_horbeeintrachtigung = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_horbeeintrachtigung;
 export const Ava_bbu_bedurfniskategoriesava_bbu_kategorie = {
   100000000: 'MenschmitBehinderung',
   100000001: '_lterePerson',
@@ -51,49 +56,31 @@ export const Ava_bbu_bedurfniskategoriesava_bbu_kategorie = {
   100000018: 'MenschmitBehinderungPsych_'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_kategorie = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_kategorie;
-export const Ava_bbu_bedurfniskategoriesava_bbu_manahmen = {
-  100000000: 'WeiterleitunganArzt_Fach_rztlicheUntersuchung',
-  100000001: 'Psychologische_PsychiatrischeAbkl_rungnotwendig',
-  100000002: '_berweisunganGyn_kologie_Hebamme',
-  100000003: 'Gesundheitsamt_Isolierungsma_nahmen',
-  100000004: 'PflegerischeMa_nahmen',
-  100000005: 'PalliativeTherapie',
-  100000006: 'Sucht_Drogenberatung_Substitution',
-  100000007: 'SpezialisierteBeratungsstelle_zBFGM_Fr_heHilfen_',
-  100000008: 'SchriftlicheMitteilungandieKinder_undJugendhilfebeiakutemVerdachtaufKindeswohlgef_hrdung',
-  100000009: 'AnpassungderUnterbringung_z_B_Zimmerbelegung_Verlegung__berstellung_',
-  100000010: 'AnpassungderVersorgungsleistungen_z_B_Hilfsmittel_Lebensmittel_Hygieneprodukte_',
-  100000011: 'InterneBetreuungsma_nahmen_z_B_Betreuungsgespr_ch_Remu_Anbindung_aufFocalPointshinweisen_',
-  100000012: 'VerweisanPsycholog_in_intern_',
-  100000013: 'Verweisanmed_Station_intern_',
-  100000014: 'VerweisanFachstelle_Schutz_oderBildungseinrichtung_extern_',
-  100000015: 'VerweisanRechtsauskunftoder_beratung_intern_extern_',
-  100000016: 'VerweisanR_ckkehrberatung_intern_'
-} as const;
-export type Ava_bbu_bedurfniskategoriesava_bbu_manahmen = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_manahmen;
 export const Ava_bbu_bedurfniskategoriesava_bbu_medizinischehinweiseliegenvor = {
   0: 'Nein',
   1: 'Ja'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_medizinischehinweiseliegenvor = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_medizinischehinweiseliegenvor;
+export const Ava_bbu_bedurfniskategoriesava_bbu_mobilitatseinschrankung = {
+  100000000: 'ja',
+  100000001: 'nein'
+} as const;
+export type Ava_bbu_bedurfniskategoriesava_bbu_mobilitatseinschrankung = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_mobilitatseinschrankung;
 export const Ava_bbu_bedurfniskategoriesava_bbu_psychologischehinweiseliegenvor = {
   0: 'Nein',
   1: 'Ja'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_psychologischehinweiseliegenvor = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_psychologischehinweiseliegenvor;
-export const Ava_bbu_bedurfniskategoriesava_bbu_qualitat = {
-  100000000: 'Selbstaussage',
-  100000001: 'Beobachtung',
-  100000002: 'Diagnose',
-  100000003: 'Nachweisdokument',
-  100000004: 'Screening'
-} as const;
-export type Ava_bbu_bedurfniskategoriesava_bbu_qualitat = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_qualitat;
 export const Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor = {
   0: 'Nein',
   1: 'Ja'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor;
+export const Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor1 = {
+  100000000: 'ja',
+  100000001: 'nein'
+} as const;
+export type Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor1 = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor1;
 export const Ava_bbu_bedurfniskategoriesava_bbu_sorgeuberdaskinddurchschuledritte = {
   0: 'Nein',
   1: 'Ja'
@@ -120,6 +107,14 @@ export const Ava_bbu_bedurfniskategoriesava_bbu_verdachtaufkindeswohlgefahrdungd
   1: 'Ja'
 } as const;
 export type Ava_bbu_bedurfniskategoriesava_bbu_verdachtaufkindeswohlgefahrdungdurch = keyof typeof Ava_bbu_bedurfniskategoriesava_bbu_verdachtaufkindeswohlgefahrdungdurch;
+export const Ava_bbu_bedurfniskategoriesava_qualitatcode = {
+  100000000: 'Selbstaussage',
+  100000001: 'Beobachtung',
+  100000002: 'Diagnose',
+  100000003: 'Nachweisdokument',
+  100000004: 'Screening'
+} as const;
+export type Ava_bbu_bedurfniskategoriesava_qualitatcode = keyof typeof Ava_bbu_bedurfniskategoriesava_qualitatcode;
 export const Ava_bbu_bedurfniskategoriesstatecode = {
   0: 'Aktiv',
   1: 'Inaktiv'
@@ -134,20 +129,25 @@ export type Ava_bbu_bedurfniskategoriesstatuscode = keyof typeof Ava_bbu_bedurfn
 export interface Ava_bbu_bedurfniskategoriesBase {
   ava_bbu_angabeverwandtebezugspersoneninoste?: Ava_bbu_bedurfniskategoriesava_bbu_angabeverwandtebezugspersoneninoste;
   ava_bbu_angabeverwandtebezugspersonineu?: Ava_bbu_bedurfniskategoriesava_bbu_angabeverwandtebezugspersonineu;
+  ava_bbu_anmerkungenbegleiteterminderjahriger?: string;
+  ava_bbu_anmerkungengewaltopfer?: string;
+  ava_bbu_anmerkungenunbegleiteterminderjahrig?: string;
   ava_bbu_artderbelastung?: string;
   ava_bbu_artdererkrankung?: string;
   ava_bbu_bedurfniskategorieid: string;
   ava_bbu_begleitetvonvolljahrigerperson?: Ava_bbu_bedurfniskategoriesava_bbu_begleitetvonvolljahrigerperson;
   ava_bbu_entsprechendebestatigungliegtvor?: Ava_bbu_bedurfniskategoriesava_bbu_entsprechendebestatigungliegtvor;
   ava_bbu_hinweisvondritten?: Ava_bbu_bedurfniskategoriesava_bbu_hinweisvondritten;
+  ava_bbu_horbeeintrachtigung?: Ava_bbu_bedurfniskategoriesava_bbu_horbeeintrachtigung;
   ava_bbu_infozuverwandtenbezugspersonen?: string;
   ava_bbu_kategorie?: Ava_bbu_bedurfniskategoriesava_bbu_kategorie;
   "ava_bbu_Klient@odata.bind"?: string;
-  ava_bbu_manahmen?: Ava_bbu_bedurfniskategoriesava_bbu_manahmen;
   ava_bbu_medizinischehinweiseliegenvor?: Ava_bbu_bedurfniskategoriesava_bbu_medizinischehinweiseliegenvor;
+  ava_bbu_mobilitatseinschrankung?: Ava_bbu_bedurfniskategoriesava_bbu_mobilitatseinschrankung;
+  ava_bbu_pronomen?: string;
   ava_bbu_psychologischehinweiseliegenvor?: Ava_bbu_bedurfniskategoriesava_bbu_psychologischehinweiseliegenvor;
-  ava_bbu_qualitat?: Ava_bbu_bedurfniskategoriesava_bbu_qualitat;
   ava_bbu_risikofaktorenliegenvor?: Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor;
+  ava_bbu_risikofaktorenliegenvor1?: Ava_bbu_bedurfniskategoriesava_bbu_risikofaktorenliegenvor1;
   ava_bbu_sorgeuberdaskinddurchschuledritte?: Ava_bbu_bedurfniskategoriesava_bbu_sorgeuberdaskinddurchschuledritte;
   ava_bbu_ssw?: string;
   ava_bbu_typ: Ava_bbu_bedurfniskategoriesava_bbu_typ;
@@ -156,6 +156,7 @@ export interface Ava_bbu_bedurfniskategoriesBase {
   ava_bbu_verdachtaufkindeswohlgefahrdungdurch?: Ava_bbu_bedurfniskategoriesava_bbu_verdachtaufkindeswohlgefahrdungdurch;
   "ava_BeurteilungbesondererBedurfnisseId@odata.bind"?: string;
   ava_name?: string;
+  ava_qualitatcode?: Ava_bbu_bedurfniskategoriesava_qualitatcode;
   importsequencenumber?: string;
   overriddencreatedon?: string;
   ownerid: string;
@@ -172,13 +173,14 @@ export interface Ava_bbu_bedurfniskategories extends Ava_bbu_bedurfniskategories
   ava_bbu_begleitetvonvolljahrigerpersonname?: string;
   ava_bbu_entsprechendebestatigungliegtvorname?: string;
   ava_bbu_hinweisvondrittenname?: string;
+  ava_bbu_horbeeintrachtigungname?: string;
   ava_bbu_kategoriename?: string;
   ava_bbu_klientname?: string;
   ava_bbu_klientyominame?: string;
-  ava_bbu_manahmenname?: string;
   ava_bbu_medizinischehinweiseliegenvorname?: string;
+  ava_bbu_mobilitatseinschrankungname?: string;
   ava_bbu_psychologischehinweiseliegenvorname?: string;
-  ava_bbu_qualitatname?: string;
+  ava_bbu_risikofaktorenliegenvor1name?: string;
   ava_bbu_risikofaktorenliegenvorname?: string;
   ava_bbu_sorgeuberdaskinddurchschuledrittename?: string;
   ava_bbu_typname?: string;
@@ -186,6 +188,7 @@ export interface Ava_bbu_bedurfniskategories extends Ava_bbu_bedurfniskategories
   ava_bbu_verdachtaufkindeswohlgefahrdungdurchname?: string;
   ava_bbu_verdachtaufkindeswohlgefahrdungname?: string;
   ava_beurteilungbesondererbedurfnisseidname?: string;
+  ava_qualitatcodename?: string;
   createdbyname?: string;
   createdbyyominame: string;
   createdon?: string;

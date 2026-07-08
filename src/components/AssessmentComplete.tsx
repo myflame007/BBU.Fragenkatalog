@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { submitAssessment, fetchFamilyMembers, ClientData } from '../services/crmService';
-import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart, ArrowRight, Eye, MessageSquare, AlertCircle, Database, ChevronDown, ChevronUp } from 'lucide-react';
+import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart, ArrowRight, Eye, MessageSquare, AlertCircle, Database } from 'lucide-react';
 import catalogData from '../data/questionCatalog.json';
 import config from '../data/config.json';
 import { cn } from '../utils/cn';

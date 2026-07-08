@@ -89,7 +89,7 @@ export const useWizard = (initialData: ClientData | null) => {
         goToNextStep(startStepId, startAssessments, initialData.groupId);
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Ein unerwarteter Fehler ist aufgetreten';
-        throw new Error(message);
+        throw new Error(message, { cause: error });
       }
     }
   }, [initialData, goToNextStep]);

@@ -3,6 +3,7 @@ import { Eye, Info, MessageSquare, ChevronRight, CornerDownRight, AlertCircle, L
 import { motion, AnimatePresence } from 'framer-motion';
 import config from '../data/config.json';
 import { cn } from '../utils/cn';
+import { formatDate } from '../utils/dateUtils';
 
 interface Question {
   id: string;
@@ -58,6 +59,7 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
   const [dynamicFamilyMembers, setDynamicFamilyMembers] = useState<ClientData[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (question.id === '0.1a' && clientData?.familyId) {
       setLoadingMembers(true);
@@ -74,21 +76,8 @@ export const QuestionRenderer: React.FC<Props> = ({ question, language, onAnswer
         })
         .finally(() => setLoadingMembers(false));
     }
-  }, [question.id, clientData?.familyId, clientData?.id]);
-
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return '';
-    try {
-      const date = new Date(dateStr);
-      if (isNaN(date.getTime())) return dateStr;
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}.${month}.${year}`;
-    } catch {
-      return dateStr;
-    }
-  };
+  }, [question.id, clientData?.familyId, clientData?.id, clientData?.age, clientData?.clientGroupCode]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   let rawText = question.text[effectiveLanguage] || question.text['de'];
   let text: React.ReactNode = rawText;

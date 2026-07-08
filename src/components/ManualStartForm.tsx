@@ -7,9 +7,10 @@ import {
   normalizeContactToClientData,
   getOptionSetLabel
 } from '../services/crmService';
-import { Search, Loader2, Users, ArrowRight, AlertCircle } from 'lucide-react';
+import { Search, Loader2, Users, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { calculateAge } from '../utils/dateUtils';
+import { AgeGateModal } from './AgeGateModal';
 import {
   Contactsgendercode,
   Contactsfamilystatuscode,
@@ -172,64 +173,28 @@ export const ManualStartForm: React.FC<Props> = ({ onStart }) => {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl w-full max-h-[90vh] transition-colors relative">
       <AnimatePresence>
         {showAgeModal.show && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-2xl max-w-lg w-full border border-slate-100 dark:border-slate-700"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-2xl text-blue-600 dark:text-blue-400">
-                  <AlertCircle size={32} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100">Jugendliche*r (14-18J)</h3>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">Bitte wählen Sie den passenden Fragenkatalog.</p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <button
-                  onClick={() => {
-                    if (showAgeModal.member) {
-                      const raw = {
-                        ...formData,
-                        ava_age: String(showAgeModal.member.age),
-                        ui_language: showAgeModal.member.language,
-                        familyMembers: showAgeModal.member.familyMembers
-                      };
-                      setFormData(raw);
-                      // Custom start with specific group
-                      onStart({ ...showAgeModal.member, groupId: 'Kind_14plus' });
-                    }
-                    setShowAgeModal({ show: false, member: null });
-                  }}
-                  className="w-full p-6 text-left rounded-2xl border-2 border-slate-100 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
-                >
-                  <div className="font-black text-lg text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">Direktbefragung (14+)</div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Fragen werden direkt an die/den Jugendliche*n gestellt.</p>
-                </button>
-
-                <button
-                  onClick={() => {
-                    if (showAgeModal.member) {
-                      onStart(showAgeModal.member);
-                    }
-                    setShowAgeModal({ show: false, member: null });
-                  }}
-                  className="w-full p-6 text-left rounded-2xl border-2 border-slate-100 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
-                >
-                  <div className="font-black text-lg text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">Befragung über Eltern</div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Fragen werden im Beisein der Eltern/Bezugspersonen geklärt.</p>
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
+          <AgeGateModal
+            onDirect={() => {
+              if (showAgeModal.member) {
+                const raw = {
+                  ...formData,
+                  ava_age: String(showAgeModal.member.age),
+                  ui_language: showAgeModal.member.language,
+                  familyMembers: showAgeModal.member.familyMembers
+                };
+                setFormData(raw);
+                // Custom start with specific group
+                onStart({ ...showAgeModal.member, groupId: 'Kind_14plus' });
+              }
+              setShowAgeModal({ show: false, member: null });
+            }}
+            onViaParents={() => {
+              if (showAgeModal.member) {
+                onStart(showAgeModal.member);
+              }
+              setShowAgeModal({ show: false, member: null });
+            }}
+          />
         )}
       </AnimatePresence>
 

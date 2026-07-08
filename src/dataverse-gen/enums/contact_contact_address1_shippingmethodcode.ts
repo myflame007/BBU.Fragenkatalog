@@ -6,7 +6,7 @@ export const enum contact_contact_address1_shippingmethodcode {
   UPS = 4,
   PostalMail = 5,
   Selbstabholer = 7,
-  _13 = 13,
-  _14 = 14,
+  DeutschePost = 13,
+  DPD = 14,
 }
   

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getContext } from '@microsoft/power-apps/app';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { AlertCircle } from 'lucide-react';
-import { ErrorBoundary } from './components/ErrorBoundary';
 import { useWizard } from './hooks/useWizard';
 import { WizardHeader } from './components/WizardHeader';
 import { QuestionRenderer } from './components/QuestionRenderer';
@@ -11,7 +10,9 @@ import { AssessmentComplete } from './components/AssessmentComplete';
 import { AdminControlCenter } from './components/AdminControlCenter';
 import { AdminLogin } from './components/AdminLogin';
 import { ManualStartForm } from './components/ManualStartForm';
+import { AgeGateModal } from './components/AgeGateModal';
 import { ClientData, fetchClientById, fetchClientByIfa } from './services/crmService';
+import { ava_bbu_qualitat } from './dataverse-gen/enums/ava_bbu_qualitat';
 
 const CONTACT_ID_QUERY_KEYS = ['contactId', 'contactid', 'id'] as const;
 const BEURTEILUNG_ID_QUERY_KEYS = ['beurteilungId', 'beurteilungid'] as const;
@@ -85,8 +86,22 @@ const DEBUG_ASSESSMENTS: Record<string, boolean> = {
   '7.23': true, '9b.10': true,
   '10a.7': true, '10a.8': true, '10a.9': true,
   '10c.7': true, '10c.8': true,
-  '10d.7': true, '10e.13': true,
-  'cat_1a': true, '11.3': true, '11.3.1': true
+  '10d.7': true, '10e.12': true, '10e.13': true,
+  'cat_1a': true, '11.3': true, '11.3.1': true, 'sonstiges': true
+};
+
+const DEBUG_QUALITIES: Record<string, number[]> = {
+  cat_1a: [ava_bbu_qualitat.Screening],
+  cat_1b: [ava_bbu_qualitat.Screening],
+  cat_5: [ava_bbu_qualitat.Selbstaussage],
+  cat_6: [ava_bbu_qualitat.Screening],
+  cat_7: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  cat_9: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  cat_10a: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  cat_10c: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  cat_10d: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  cat_10e: [ava_bbu_qualitat.Selbstaussage, ava_bbu_qualitat.Beobachtung],
+  sonstiges: [ava_bbu_qualitat.Selbstaussage],
 };
 
 function App() {
@@ -98,6 +113,7 @@ function App() {
   const [ageModalData, setAgeModalData] = useState<ClientData | null>(null);
   const [debugSkip, setDebugSkip] = useState(false);
   const [languageOverride, setLanguageOverride] = useState<string | null>(null);
+  const [clientLoadError, setClientLoadError] = useState<string | null>(null);
 
   const {
     clientData,
@@ -174,11 +190,15 @@ function App() {
 
       if (resolvedBeurteilungId && !cancelled) setBeurteilungId(resolvedBeurteilungId);
 
-      // Echtes Dataverse via ContactsService.get (Fallback Xrm.WebApi). Wenn beides
-      // fehlschlaegt (z.B. lokal ohne Power Apps), Mock-Daten mit URL-ID mergen.
+      // Echtes Dataverse via ContactsService.get (Fallback Xrm.WebApi).
       const real = await fetchClientById(contactId);
       if (cancelled) return;
       if (real) {
+        // Hinweis (nicht blockierend): Ohne aktuellen Standort muss beim Speichern
+        // ein Standort ermittelt werden. Das Laden darf daran aber nicht scheitern.
+        if (!real.currentSiteId) {
+          console.warn(`Klient*in ${contactId} hat keinen (lesbaren) aktuellen Standort (ava_currentsiteid).`);
+        }
         // Modal nur für begleitete Minderjährige (ARFKind, ARMKind, Familie) zwischen 14-18
         const isAccompaniedMinor = real.groupId === 'Kind_FAM_ARM_K_ARF_K_UMF_K';
         if (real.age >= 14 && real.age < 18 && isAccompaniedMinor) {
@@ -190,20 +210,12 @@ function App() {
         return;
       }
 
-      try {
-        const mock = await fetchClientByIfa('1468');
-        if (cancelled) return;
-        const merged = { ...mock, id: contactId };
-        const isAccompaniedMinor = merged.groupId === 'Kind_FAM_ARM_K_ARF_K_UMF_K';
-        if (merged.age >= 14 && merged.age < 18 && isAccompaniedMinor) {
-          setAgeModalData(merged);
-        } else {
-          setManualClientData(merged);
-          setStarted(true);
-        }
-      } catch (e: any) {
-        if (!cancelled) console.error('Klient konnte nicht geladen werden:', e);
-      }
+      // Kein stiller Fallback auf Mock-Daten hier: sonst wird faelschlich der
+      // Mock-Klient (MOCKTESTDATEN NICHT ECHT, 16J.) als echter Klient dargestellt.
+      console.error(`Klient mit Kontakt-ID ${contactId} konnte nicht geladen werden.`);
+      setClientLoadError(
+        `Klient*in mit der ID "${contactId}" konnte nicht geladen werden. Bitte pruefen Sie die Verbindung oder erfassen Sie die Daten manuell.`,
+      );
     })();
 
     return () => { cancelled = true; };
@@ -242,51 +254,18 @@ function App() {
   if (ageModalData) {
     return (
       <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
-        >
-          <motion.div
-            initial={{ scale: 0.9, y: 20 }}
-            animate={{ scale: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-2xl max-w-lg w-full border border-slate-100 dark:border-slate-700"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-2xl text-blue-600 dark:text-blue-400">
-                <AlertCircle size={32} />
-              </div>
-              <div>
-                <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100">Jugendliche*r (14-18J)</h3>
-                <p className="text-slate-500 dark:text-slate-400 font-medium">Bitte wählen Sie den passenden Fragenkatalog.</p>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <button
-                onClick={() => {
-                  setManualClientData({ ...ageModalData, groupId: 'Kind_14plus' });
-                  setAgeModalData(null);
-                  setStarted(true);
-                }}
-                className="w-full p-6 text-left rounded-2xl border-2 border-slate-100 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
-              >
-                <div className="font-black text-lg text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">Direktbefragung (14+)</div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Fragen werden direkt an die/den Jugendliche*n gestellt.</p>
-              </button>
-              <button
-                onClick={() => {
-                  setManualClientData(ageModalData);
-                  setAgeModalData(null);
-                  setStarted(true);
-                }}
-                className="w-full p-6 text-left rounded-2xl border-2 border-slate-100 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
-              >
-                <div className="font-black text-lg text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">Befragung über Eltern</div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Fragen werden im Beisein der Eltern/Bezugspersonen geklärt.</p>
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
+        <AgeGateModal
+          onDirect={() => {
+            setManualClientData({ ...ageModalData, groupId: 'Kind_14plus' });
+            setAgeModalData(null);
+            setStarted(true);
+          }}
+          onViaParents={() => {
+            setManualClientData(ageModalData);
+            setAgeModalData(null);
+            setStarted(true);
+          }}
+        />
       </AnimatePresence>
     );
   }
@@ -299,6 +278,12 @@ function App() {
           <p className="text-blue-700 font-medium">zur Erfassung besonderer Bedürfnisse</p>
           <p className="text-gray-600 mt-4">Bitte erfassen Sie die Basisdaten, um den Prozess zu starten.</p>
         </div>
+        {clientLoadError && (
+          <div className="mb-6 max-w-lg w-full bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 flex items-start gap-3">
+            <AlertCircle size={20} className="mt-0.5 shrink-0" />
+            <p className="text-sm font-medium">{clientLoadError}</p>
+          </div>
+        )}
         <ManualStartForm onStart={handleStartWizard} />
         <button
           onClick={() => setIsAdmin(true)}
@@ -351,7 +336,7 @@ function App() {
               <AssessmentComplete
                 answers={debugSkip ? {} : answers}
                 assessments={debugSkip ? DEBUG_ASSESSMENTS : assessments}
-                qualities={debugSkip ? {} : qualities}
+                qualities={debugSkip ? DEBUG_QUALITIES : qualities}
                 clientData={clientData ?? undefined}
                 beurteilungId={beurteilungId}
                 onStartFamilyMember={(member) => {
