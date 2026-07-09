@@ -43,6 +43,9 @@ export const ava_bbu_bedurfniskategorieMetadata = {
 export const enum ava_bbu_BedurfniskategorieAttributes {
   ava_bbu_AngabeVerwandteBezugspersoneninOste = "ava_bbu_angabeverwandtebezugspersoneninoste",
   ava_bbu_AngabeVerwandteBezugspersoninEU = "ava_bbu_angabeverwandtebezugspersonineu",
+  ava_bbu_AnmerkungenBegleiteterMinderjahriger = "ava_bbu_anmerkungenbegleiteterminderjahriger",
+  ava_bbu_AnmerkungenGewaltopfer = "ava_bbu_anmerkungengewaltopfer",
+  ava_bbu_AnmerkungenUnbegleiteterMinderjahrig = "ava_bbu_anmerkungenunbegleiteterminderjahrig",
   ava_bbu_ArtderBelastung = "ava_bbu_artderbelastung",
   ava_bbu_ArtderErkrankung = "ava_bbu_artdererkrankung",
   ava_bbu_BedurfniskategorieId = "ava_bbu_bedurfniskategorieid",
@@ -55,8 +58,8 @@ export const enum ava_bbu_BedurfniskategorieAttributes {
   ava_bbu_KlientName = "ava_bbu_klientname",
   ava_bbu_KlientYomiName = "ava_bbu_klientyominame",
   ava_bbu_MedizinischeHinweiseliegenvor = "ava_bbu_medizinischehinweiseliegenvor",
+  ava_bbu_Pronomen = "ava_bbu_pronomen",
   ava_bbu_PsychologischeHinweiseliegenvor = "ava_bbu_psychologischehinweiseliegenvor",
-  ava_bbu_Risikofaktorenliegenvor = "ava_bbu_risikofaktorenliegenvor",
   ava_bbu_SorgeuberdasKinddurchSchuleDritte = "ava_bbu_sorgeuberdaskinddurchschuledritte",
   ava_bbu_SSW = "ava_bbu_ssw",
   ava_bbu_Typ = "ava_bbu_typ",
@@ -67,6 +70,7 @@ export const enum ava_bbu_BedurfniskategorieAttributes {
   ava_BeurteilungbesondererBedurfnisseIdName = "ava_beurteilungbesondererbedurfnisseidname",
   ava_Name = "ava_name",
   ava_QualitatCode = "ava_qualitatcode",
+  ava_Risikofaktorenliegenvor = "ava_risikofaktorenliegenvor",
   ava_SonstigeBesondereBedurfnisse = "ava_sonstigebesonderebedurfnisse",
   CreatedBy = "createdby",
   CreatedByName = "createdbyname",
@@ -105,6 +109,12 @@ export interface ava_bbu_Bedurfniskategorie extends IEntity {
   ava_bbu_angabeverwandtebezugspersoneninoste?: boolean | null;
   // Angabe Verwandte/Bezugsperson in EU BooleanType
   ava_bbu_angabeverwandtebezugspersonineu?: boolean | null;
+  // Anmerkungen Begleitete*r Minderjährige*r MemoType
+  ava_bbu_anmerkungenbegleiteterminderjahriger?: string | null;
+  // Anmerkungen Gewaltopfer MemoType
+  ava_bbu_anmerkungengewaltopfer?: string | null;
+  // Anmerkungen Unbegleitete*r Minderjährige*r MemoType
+  ava_bbu_anmerkungenunbegleiteterminderjahrig?: string | null;
   // Art der Belastung MemoType
   ava_bbu_artderbelastung?: string | null;
   // Art der Erkrankung MemoType
@@ -129,10 +139,10 @@ export interface ava_bbu_Bedurfniskategorie extends IEntity {
   ava_bbu_klientyominame?: string | null;
   // Medizinische Hinweise liegen vor BooleanType
   ava_bbu_medizinischehinweiseliegenvor?: boolean | null;
+  // Pronomen MemoType
+  ava_bbu_pronomen?: string | null;
   // Psychologische Hinweise liegen vor BooleanType
   ava_bbu_psychologischehinweiseliegenvor?: boolean | null;
-  // Risikofaktoren liegen vor BooleanType
-  ava_bbu_risikofaktorenliegenvor?: boolean | null;
   // Sorge über das Kind durch Schule/Dritte BooleanType
   ava_bbu_sorgeuberdaskinddurchschuledritte?: boolean | null;
   // SSW MemoType
@@ -153,8 +163,10 @@ export interface ava_bbu_Bedurfniskategorie extends IEntity {
   ava_name?: string | null;
   // Qualität  ava_bbu_qualitat
   ava_qualitatcode?: import("../enums/ava_bbu_qualitat").ava_bbu_qualitat[] | null;
-  // Sonstige Besondere Bedürfnisse
-  ava_sonstigebesonderebedurfnisse?: import("../enums/ava_sonstigebesonderebedurfnisse").ava_sonstigebesonderebedurfnisse[] | null;
+  // Risikofaktoren liegen vor BooleanType
+  ava_risikofaktorenliegenvor?: boolean | null;
+  // Sonstige Besondere Bedürfnisse ava_sonstigebesonderebedurfnissecode
+  ava_sonstigebesonderebedurfnisse?: import("../enums/ava_sonstigebesonderebedurfnissecode").ava_sonstigebesonderebedurfnissecode[] | null;
   // Erstellt von LookupType Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat.
   createdby?: import("dataverse-ify").EntityReference | null;
   //  StringType

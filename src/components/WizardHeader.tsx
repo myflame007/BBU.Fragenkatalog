@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ClientData } from '../services/crmService';
 import { Sun, Moon, Type, Plus, Minus, Languages } from 'lucide-react';
 import config from '../data/config.json';
+import { formatDate } from '../utils/dateUtils';
 
 interface Props {
   clientData: ClientData;
@@ -27,20 +28,6 @@ export const WizardHeader: React.FC<Props> = ({ clientData, progress, language, 
     const newSize = Math.min(Math.max(fontSize + delta, 80), 150);
     setFontSize(newSize);
     document.documentElement.style.fontSize = `${newSize}%`;
-  };
-
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return '';
-    try {
-      const date = new Date(dateStr);
-      if (isNaN(date.getTime())) return dateStr;
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}.${month}.${year}`;
-    } catch {
-      return dateStr;
-    }
   };
 
   return (

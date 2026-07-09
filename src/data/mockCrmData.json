@@ -3,9 +3,10 @@
     
     {
       "@odata.etag": "W/\"2272\"",
+   "contactid": "mock-1468",
    "ava_ifanumbertext": 1468,  
-   "firstname": "Masoud",
-      "lastname": "EBR",
+   "firstname": "MOCKTESTDATEN",
+      "lastname": "NICHT ECHT",
       "ava_birthdate": "25.05.2013",
       "ava_mothertongue": "fa_af",
       "ava_age": 16,
@@ -31,7 +32,7 @@
       "_ava_familyid_value": "FAMILY1",
       "ava_clientgroup": "Familie",
       "ava_nationalitystateid": "ITAKA",
-      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+      "ava_familienmitglieder": "MOCKTESTDATEN NICHT ECHT (1468, Maennlich, 25.05.2013), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
     },
 
     {
@@ -48,7 +49,7 @@
       "_ava_familyid_value": "FAMILY1",
       "ava_clientgroup": "Familie",
       "ava_nationalitystateid": "ITAKA",
-      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+      "ava_familienmitglieder": "MOCKTESTDATEN NICHT ECHT (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
     },
 
     {
@@ -65,7 +66,7 @@
       "_ava_familyid_value": "FAMILY1",
       "ava_clientgroup": "Familie",
       "ava_nationalitystateid": "ITAKA",
-      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+      "ava_familienmitglieder": "MOCKTESTDATEN NICHT ECHT (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ben Jamil (125656999, Maennlich, 04.12.2024), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
     },
 
     {
@@ -82,7 +83,7 @@
       "_ava_familyid_value": "FAMILY1",
       "ava_clientgroup": "Familie",
       "ava_nationalitystateid": "ITAKA",
-      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
+      "ava_familienmitglieder": "MOCKTESTDATEN NICHT ECHT (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ahmad Kofta (87711, Maennlich, 03.06.1998)"
     },
 
     {
@@ -99,7 +100,7 @@
       "_ava_familyid_value": "FAMILY1",
       "ava_clientgroup": "Familie",
       "ava_nationalitystateid": "ITAKA",
-      "ava_familienmitglieder": "Masoud EBR (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024)"
+      "ava_familienmitglieder": "MOCKTESTDATEN NICHT ECHT (1468, Maennlich, 25.05.2013), Ahmed MOHAMMED (11223344556, Maennlich, 08.01.2003), Ben KABEL (123456999, Maennlich, 04.12.2024), Ahmad MUSTAFA (8111, Maennlich, 03.03.1978), Ben Jamil (125656999, Maennlich, 04.12.2024)"
     }
 
   ]

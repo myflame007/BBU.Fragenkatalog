@@ -24,12 +24,6 @@ export interface FamilyMember {
   isMinor?: boolean;
 }
 
-export interface UserData {
-  id: string;
-  fullName: string;
-  email?: string;
-}
-
 export interface ClientData {
   id: string;
   ifaNumber: string;
@@ -47,6 +41,8 @@ export interface ClientData {
   familyId?: string;
   familyMembers?: FamilyMember[];
   numFamilyMembers?: number;
+  currentSiteId?: string;
+  currentSiteName?: string;
 }
 
 // --- Helpers ---
@@ -69,8 +65,6 @@ interface XrmWebApi {
   deleteRecord(entityLogicalName: string, id: string): Promise<unknown>;
 }
 
-const FORMATTED_VALUE_SUFFIX = '@OData.Community.Display.V1.FormattedValue';
-
 function getXrmWebApi(): XrmWebApi | undefined {
   const hostWindow = window as unknown as { Xrm?: { WebApi?: XrmWebApi } };
   try {
@@ -79,15 +73,6 @@ function getXrmWebApi(): XrmWebApi | undefined {
   } catch {
     return hostWindow.Xrm?.WebApi;
   }
-}
-
-function getStringValue(record: XrmRecord, fieldName: string): string {
-  const value = record[fieldName];
-  return typeof value === 'string' ? value : '';
-}
-
-function getFormattedValue(record: XrmRecord, fieldName: string): string {
-  return getStringValue(record, `${fieldName}${FORMATTED_VALUE_SUFFIX}`);
 }
 
 export function getOptionSetLabel(
@@ -128,7 +113,7 @@ function formatDateForInput(dateStr: string): string {
   return dateStr;
 }
 
-export function mapSex(raw: string | number | null | undefined): string {
+function mapSex(raw: string | number | null | undefined): string {
   if (typeof raw === 'string') {
     const s = raw.toLowerCase();
     if (s.startsWith('m') || s === '1') return 'm';
@@ -141,7 +126,7 @@ export function mapSex(raw: string | number | null | undefined): string {
 
 // Mappt verschiedene Schreibweisen (Mock 'ARF (Kind)', Dataverse-Enum 'ARF_Kind_')
 // auf eine gueltige Flow-Gruppe basierend auf den neuen Anforderungen.
-export function mapClientGroup(avaClientGroup: string, age: number): string {
+function mapClientGroup(avaClientGroup: string, age: number): string {
   const isAdult = age >= 18;
   const isUnder14 = age < 14;
 
@@ -201,7 +186,7 @@ export function mapClientGroup(avaClientGroup: string, age: number): string {
   return isAdult ? 'ARF_ARM' : 'Kind_FAM_ARM_K_ARF_K_UMF_K';
 }
 
-export function mapMotherTongueToLanguage(motherTongue: string): string {
+function mapMotherTongueToLanguage(motherTongue: string): string {
   if (!motherTongue) return 'de';
   const mt = motherTongue.toLowerCase();
   const found = config.languages.find(l => l.label.toLowerCase() === mt || l.id === mt);
@@ -210,7 +195,7 @@ export function mapMotherTongueToLanguage(motherTongue: string): string {
 
 // --- Family parsing (legacy Mock-Format) ---
 
-export function parseSingleMember(part: string): FamilyMember {
+function parseSingleMember(part: string): FamilyMember {
   const match = part.match(/^(.*?)\s*\((.*?)\)$/);
   if (!match) return { name: part.trim(), ifaNumber: '' };
   const name = match[1].trim();
@@ -245,7 +230,7 @@ export function normalizeContactToClientData(record: Partial<Contacts>): ClientD
   const birthDate = formatDateForInput(rawBirthdate);
 
   // Alter: Prioritaet auf explizites Feld, sonst berechnen
-  let age = 0;
+  let age: number;
   if (record.ava_age !== undefined && record.ava_age !== null) {
     age = parseInt(String(record.ava_age));
   } else {
@@ -276,13 +261,17 @@ export function normalizeContactToClientData(record: Partial<Contacts>): ClientD
     sex: mapSex(record.gendercode || sexLabel),
     birthDate: birthDate,
     age,
-    nationality: record.ava_nationalitystateidname || (typeof record.ava_nationalitystateid === 'string' ? record.ava_nationalitystateid : ''),
+    nationality:
+      record.ava_nationalitystateidname ||
+      (typeof record._ava_nationalitystateid_value === 'string' ? record._ava_nationalitystateid_value : ''),
     familyStatus,
     motherTongue,
     groupId: mapClientGroup(clientGroupRaw || String(record.ava_clientgroup || ''), age),
     clientGroupCode: record.ava_clientgroup !== undefined && record.ava_clientgroup !== null ? String(record.ava_clientgroup) : undefined,
     language: mapMotherTongueToLanguage(motherTongue),
     familyId: record._ava_familyid_value,
+    currentSiteId: record._ava_currentsiteid_value || undefined,
+    currentSiteName: record.ava_currentsiteidname || undefined,
   };
 
   // Optionale Familieninfos (oft in Mock-Daten enthalten)
@@ -299,49 +288,65 @@ export function normalizeContactToClientData(record: Partial<Contacts>): ClientD
 
 // --- Echter Dataverse-Fetch ---
 
+// Kern-Select: nur skalare Felder und Optionsets. Diese sind IMMER gueltig und
+// koennen die Web-API-Abfrage nicht mit "property not found" (0x80060888) brechen.
+const CONTACT_CORE_SELECT = [
+  'contactid',
+  'ava_ifanumbertext',
+  'firstname',
+  'lastname',
+  'gendercode',
+  'ava_birthdate',
+  'ava_mothertongue',
+  'ava_clientgroup',
+  'familystatuscode',
+];
+// Lookup-Felder MUESSEN als _<feld>_value selektiert werden (nicht roh),
+// sonst liefert die Web API 0x80060888 "Could not find a property ...".
+const CONTACT_LOOKUP_SELECT = [
+  '_ava_familyid_value',
+  '_ava_nationalitystateid_value',
+  '_ava_currentsiteid_value',
+];
+const CONTACT_FULL_SELECT = [...CONTACT_CORE_SELECT, ...CONTACT_LOOKUP_SELECT];
+
 export async function fetchClientById(contactId: string): Promise<ClientData | null> {
   const id = normalizeContactId(contactId);
   if (!id) return null;
 
-  // 1. Power Apps SDK
-  try {
-    const result = await ContactsService.get(id, {
-      select: [
-        'contactid',
-        'ava_ifanumbertext',
-        'firstname',
-        'lastname',
-        'gendercode',
-        'ava_birthdate',
-        'ava_mothertongue',
-        'ava_clientgroup',
-        '_ava_familyid_value',
-        'familystatuscode',
-        'ava_nationalitystateid'
-      ],
-    });
-    if (result.success && result.data) {
-      return normalizeContactToClientData(result.data as Partial<Contacts>);
+  // 1. Power Apps SDK - erst vollstaendig, bei Misserfolg nur mit Kern-Feldern.
+  // Der Kern-Select enthaelt keine Lookups und kann daher nie an einem
+  // falsch geschriebenen Lookup-Feld scheitern -> der Klient laedt immer.
+  for (const select of [CONTACT_FULL_SELECT, CONTACT_CORE_SELECT]) {
+    try {
+      const result = await ContactsService.get(id, { select });
+      if (result.success && result.data) {
+        return normalizeContactToClientData(result.data as Partial<Contacts>);
+      }
+      console.warn(
+        `ContactsService.get erfolglos (success=false) mit select [${select.length} Felder]:`,
+        result.error,
+      );
+    } catch (err) {
+      console.warn(`ContactsService.get Exception mit select [${select.length} Felder]:`, err);
     }
-  } catch (err) {
-    console.warn('ContactsService.get failed', err);
   }
 
-  // 2. Xrm.WebApi Fallback (Modell-driven Apps)
+  // 2. Xrm.WebApi Fallback (nur in eingebetteten Model-driven Apps verfuegbar)
   const xrm = getXrmWebApi();
   if (xrm) {
-    try {
-      const record = await xrm.retrieveRecord(
-        'contact',
-        id,
-        '?$select=ava_ifanumbertext,firstname,lastname,gendercode,ava_birthdate,ava_mothertongue,ava_clientgroup,_ava_familyid_value,familystatuscode,ava_nationalitystateid',
-      );
-      // Xrm.WebApi returns formatted values in @OData.Community.Display.V1.FormattedValue
-      // normalizeContactToClientData handles this via getOptionSetLabel fallback if names are missing
-      return normalizeContactToClientData(record as unknown as Partial<Contacts>);
-    } catch (err) {
-      console.warn('Xrm.WebApi.retrieveRecord failed', err);
+    const xrmSelects = [CONTACT_FULL_SELECT.join(','), CONTACT_CORE_SELECT.join(',')];
+    for (const sel of xrmSelects) {
+      try {
+        const record = await xrm.retrieveRecord('contact', id, `?$select=${sel}`);
+        // Xrm.WebApi returns formatted values in @OData.Community.Display.V1.FormattedValue
+        return normalizeContactToClientData(record as unknown as Partial<Contacts>);
+      } catch (err) {
+        console.warn('Xrm.WebApi.retrieveRecord failed', err);
+      }
     }
+  } else {
+    console.warn('Xrm.WebApi ist in diesem Kontext nicht verfuegbar (Standalone Code App Player) - kein Fallback moeglich.');
   }
 
   return null;
@@ -602,8 +607,9 @@ async function replaceGeneralCategories(
     );
   }
 
+  // Exclude category 9 from writing general category records
   const activeCategories = config.categories.filter((c: any) =>
-    payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId])
+    c.id !== 'cat_9' && (payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId]))
   );
 
   console.log(
@@ -617,9 +623,8 @@ async function replaceGeneralCategories(
   const relativesInEuNotes = payload.answers['1b.9.1']?.notes || '';
   const relativesNotes = [relativesInAustriaNotes, relativesInEuNotes].filter(Boolean).join('\n').trim();
 
-  // Logic for Category 5: only fill pronouns if 5.3-5.7 has at least one "Ja"
-  const hasJaInCat5Range = ['5.3', '5.3.1', '5.4', '5.5', '5.6', '5.7', '5.7.1'].some(id => payload.answers[id]?.answer === 'Ja');
-  const pronounsValue = hasJaInCat5Range ? (payload.answers['5.7']?.notes || payload.answers['5.7.1']?.notes || '') : '';
+  // Directly use the pronoun notes if category 5 is active
+  const pronounsValue = payload.answers['5.7']?.notes || payload.answers['5.7.1']?.notes || '';
 
   for (const catConf of activeCategories) {
     const crmEnum = CATEGORY_ID_MAP[catConf.id];
@@ -637,27 +642,72 @@ async function replaceGeneralCategories(
 
     const isAnalphabetismus = payload.assessments['11.3'] === true || payload.assessments['11.3.1'] === true;
 
-    const base = {
+    // Kernfelder: muessen in jeder Umgebung schreibbar sein. Nur diese entscheiden,
+    // ob der Kategorie-Datensatz ueberhaupt angelegt werden kann.
+    const coreFields: Record<string, unknown> = {
       ava_name: catConf.name,
       ava_bbu_typ: ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung,
       ava_bbu_kategorie: crmEnum,
-      // Only write "other fields" (risk factors, relatives info, etc.) if they are actually TRUE
-      ava_bbu_risikofaktorenliegenvor: (catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId]) ? true : undefined,
-      ava_bbu_angabeverwandtebezugspersoneninoste: (catConf.id === 'cat_1b' && payload.assessments['1b.15']) ? true : undefined,
-      ava_bbu_angabeverwandtebezugspersonineu: (catConf.id === 'cat_1b' && payload.assessments['1b.16']) ? true : undefined,
-      ava_bbu_infozuverwandtenbezugspersonen: catConf.id === 'cat_1b' && relativesNotes ? relativesNotes : undefined,
-      ava_bbu_pronomen: catConf.id === 'cat_5' && pronounsValue ? pronounsValue : undefined,
-      ava_qualitatcode: qualityValues.length > 0 ? qualityValues : undefined,
-      ava_sonstigebesonderebedurfnisse: (catConf.id === 'sonstiges' && isAnalphabetismus) ? [100000004] : undefined, // Analphabetismus
+      // MultiSelect-Feld erwartet die Web API als kommagetrennten String, nicht als Array.
+      ava_qualitatcode: qualityValues.length > 0 ? qualityValues.join(',') : undefined,
       'ava_BeurteilungbesondererBedurfnisseId@odata.bind':
         `/${ava_bbu_beurteilungbesondererbedurfnisseMetadata.collectionName}(${assessmentId})`,
       'ava_bbu_Klient@odata.bind': `/${contactMetadata.collectionName}(${payload.contactId})`,
     };
 
-    const createCategory = base as unknown as Parameters<typeof Ava_bbu_bedurfniskategoriesService.create>[0];
+    const isRiskPresent = catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId];
+
+    // Optionale Zusatzfelder: schema-/umgebungsabhaengig. Fehlt eines davon in der
+    // Zielumgebung, darf das den Submit NICHT komplett abbrechen (siehe Retry unten).
+    const optionalFields: Record<string, unknown> = {
+      // Picklist "Risikofaktoren liegen vor" (Choice): ja = 100000000. Omit completely if false.
+      // ava_bbu_risikofaktorenliegenvor1: isRiskPresent ? 100000000 : undefined,
+      // Boolean "Risikofaktoren liegen vor" (ava_risikofaktorenliegenvor)
+      ava_risikofaktorenliegenvor: isRiskPresent ? true : undefined,
+
+      ava_bbu_angabeverwandtebezugspersoneninoste: (catConf.id === 'cat_1b' && payload.assessments['1b.15']) ? true : undefined,
+      ava_bbu_angabeverwandtebezugspersonineu: (catConf.id === 'cat_1b' && payload.assessments['1b.16']) ? true : undefined,
+      ava_bbu_infozuverwandtenbezugspersonen: catConf.id === 'cat_1b' && relativesNotes ? relativesNotes : undefined,
+      ava_bbu_pronomen: catConf.id === 'cat_5' && pronounsValue ? pronounsValue : undefined,
+      ava_sonstigebesonderebedurfnisse: (catConf.id === 'sonstiges' && isAnalphabetismus) ? '100000004' : undefined, // Analphabetismus
+
+      // Unterstützung notwendig boolean for cat_6
+      ava_bbu_unterstutzungnotwendig: (catConf.id === 'cat_6' && payload.assessments['6.6']) ? true : undefined,
+
+      // Medizinische Hinweise liegen vor (only write true for cat_10a if 10a.9, NOT for cat_5)
+      ava_bbu_medizinischehinweiseliegenvor: (
+        catConf.id === 'cat_10a' && payload.assessments['10a.9']
+      ) ? true : undefined,
+
+      // Psychologische Hinweise liegen vor (only write true for cat_10a if 10a.8, NOT for cat_10c or cat_10e)
+      ava_bbu_psychologischehinweiseliegenvor: (
+        catConf.id === 'cat_10a' && payload.assessments['10a.8']
+      ) ? true : undefined,
+    };
+
+    const cleanOptional = Object.fromEntries(
+      Object.entries(optionalFields).filter(([, value]) => value !== undefined),
+    );
 
     console.log('[CRM] Erstelle Kategorie:', catConf.name, '| assessmentId:', catConf.id, '| crmEnum:', crmEnum);
-    const createResult = await Ava_bbu_bedurfniskategoriesService.create(createCategory);
+
+    type CreateInput = Parameters<typeof Ava_bbu_bedurfniskategoriesService.create>[0];
+    let createResult = await Ava_bbu_bedurfniskategoriesService.create(
+      { ...coreFields, ...cleanOptional } as unknown as CreateInput,
+    );
+
+    // Wenn ein optionales Feld in dieser Umgebung ungueltig ist (z.B. Property-not-found),
+    // erneut nur mit den Kernfeldern versuchen, damit der Submit nicht komplett scheitert.
+    if (!createResult.success && Object.keys(cleanOptional).length > 0) {
+      console.warn(
+        `[CRM] Kategorie "${catConf.name}": Anlage mit Zusatzfeldern fehlgeschlagen, versuche erneut nur mit Kernfeldern. Fehler:`,
+        createResult.error,
+      );
+      createResult = await Ava_bbu_bedurfniskategoriesService.create(
+        { ...coreFields } as unknown as CreateInput,
+      );
+    }
+
     if (!createResult.success) {
       const details =
         createResult.error instanceof Error

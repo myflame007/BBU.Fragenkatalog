@@ -6,5 +6,6 @@ export const enum ava_bbu_statusbeurteilungbesondererbedurfniss {
   abgeschlossen = 100000002,
   abgelehnt = 100000003,
   nichtwahrgenommen = 100000004,
+  teilweiseabgeschlossen = 100000005,
 }
   

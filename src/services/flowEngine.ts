@@ -49,9 +49,3 @@ export const getNextStepId = (groupId: string, currentStepId: string | null, ans
 export const getQuestionById = (id: string) => {
   return catalog.questions[id];
 };
-
-export const getStepById = (groupId: string, stepId: string) => {
-  const groupFlow = catalog.flows[groupId];
-  if (!groupFlow) return null;
-  return groupFlow.find((s: any) => s.id === stepId);
-};
