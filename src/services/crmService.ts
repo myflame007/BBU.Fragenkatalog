@@ -607,7 +607,9 @@ async function replaceGeneralCategories(
     );
   }
 
-  // Exclude category 9 from writing general category records
+  // Cat_9 (psychische Erkrankung) bewusst von der allgemeinen Kategorie-Anlage ausgeschlossen.
+  // TODO: Grund im Code nicht dokumentiert - vor naechstem Release mit Messijan klaeren, ob das
+  // weiterhin so gewollt ist (z.B. weil Cat_9 anderswo separat abgebildet wird).
   const activeCategories = config.categories.filter((c: any) =>
     c.id !== 'cat_9' && (payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId]))
   );
@@ -625,6 +627,21 @@ async function replaceGeneralCategories(
 
   // Directly use the pronoun notes if category 5 is active
   const pronounsValue = payload.answers['5.7']?.notes || payload.answers['5.7.1']?.notes || '';
+
+  // Medizinische/Psychologische Hinweise liegen vor: je-Kategorie-Zusatzfragen, siehe
+  // config.json "medicalNecessityIds"/"psychologicalNecessityIds". Kategorie 7 (Menschen-
+  // /Kinderhandel) hat dort aktuell keine eigene Frage-ID hinterlegt - falls das noetig ist,
+  // muss config.json zuerst um eine passende ID ergaenzt werden (fachliche Klaerung noetig).
+  const MEDICAL_HINT_ID_BY_CATEGORY: Record<string, string> = {
+    cat_5: '5.9',
+    cat_10a: '10a.9',
+  };
+  const PSYCHOLOGICAL_HINT_ID_BY_CATEGORY: Record<string, string> = {
+    cat_9: '9b.10',
+    cat_10a: '10a.8',
+    cat_10c: '10c.8',
+    cat_10e: '10e.13',
+  };
 
   for (const catConf of activeCategories) {
     const crmEnum = CATEGORY_ID_MAP[catConf.id];
@@ -655,15 +672,20 @@ async function replaceGeneralCategories(
       'ava_bbu_Klient@odata.bind': `/${contactMetadata.collectionName}(${payload.contactId})`,
     };
 
-    const isRiskPresent = catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId];
+    const isRiskPresent = Boolean(catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId]);
+
+    const medicalHintId = MEDICAL_HINT_ID_BY_CATEGORY[catConf.id];
+    const isMedicalHintPresent = Boolean(medicalHintId && payload.assessments[medicalHintId]);
+    const psychologicalHintId = PSYCHOLOGICAL_HINT_ID_BY_CATEGORY[catConf.id];
+    const isPsychologicalHintPresent = Boolean(psychologicalHintId && payload.assessments[psychologicalHintId]);
 
     // Optionale Zusatzfelder: schema-/umgebungsabhaengig. Fehlt eines davon in der
     // Zielumgebung, darf das den Submit NICHT komplett abbrechen (siehe Retry unten).
     const optionalFields: Record<string, unknown> = {
-      // Picklist "Risikofaktoren liegen vor" (Choice): ja = 100000000. Omit completely if false.
-      // ava_bbu_risikofaktorenliegenvor1: isRiskPresent ? 100000000 : undefined,
-      // Boolean "Risikofaktoren liegen vor" (ava_risikofaktorenliegenvor)
-      ava_risikofaktorenliegenvor: isRiskPresent ? true : undefined,
+      // Boolean "Risikofaktoren liegen vor" (ava_risikofaktorenliegenvor). Immer explizit
+      // true/false setzen (nie undefined), da der Kategorie-Datensatz hier neu angelegt
+      // wird - ein weggelassenes Feld wuerde sonst als leer/undefiniert statt "Nein" erscheinen.
+      ava_risikofaktorenliegenvor: isRiskPresent,
 
       ava_bbu_angabeverwandtebezugspersoneninoste: (catConf.id === 'cat_1b' && payload.assessments['1b.15']) ? true : undefined,
       ava_bbu_angabeverwandtebezugspersonineu: (catConf.id === 'cat_1b' && payload.assessments['1b.16']) ? true : undefined,
@@ -674,15 +696,10 @@ async function replaceGeneralCategories(
       // Unterstützung notwendig boolean for cat_6
       ava_bbu_unterstutzungnotwendig: (catConf.id === 'cat_6' && payload.assessments['6.6']) ? true : undefined,
 
-      // Medizinische Hinweise liegen vor (only write true for cat_10a if 10a.9, NOT for cat_5)
-      ava_bbu_medizinischehinweiseliegenvor: (
-        catConf.id === 'cat_10a' && payload.assessments['10a.9']
-      ) ? true : undefined,
-
-      // Psychologische Hinweise liegen vor (only write true for cat_10a if 10a.8, NOT for cat_10c or cat_10e)
-      ava_bbu_psychologischehinweiseliegenvor: (
-        catConf.id === 'cat_10a' && payload.assessments['10a.8']
-      ) ? true : undefined,
+      // Medizinische/Psychologische Hinweise liegen vor: je-Kategorie-Zuordnung ueber
+      // MEDICAL_HINT_ID_BY_CATEGORY/PSYCHOLOGICAL_HINT_ID_BY_CATEGORY (siehe oben).
+      ava_bbu_medizinischehinweiseliegenvor: isMedicalHintPresent ? true : undefined,
+      ava_bbu_psychologischehinweiseliegenvor: isPsychologicalHintPresent ? true : undefined,
     };
 
     const cleanOptional = Object.fromEntries(
