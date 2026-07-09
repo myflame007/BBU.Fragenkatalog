@@ -131,8 +131,8 @@ export interface ava_bbu_Bedurfniskategorie extends IEntity {
   ava_bbu_infozuverwandtenbezugspersonen?: string | null;
   // Kategorie ava_bbu_kategoriebedurfniskategorie
   ava_bbu_kategorie?: import("../enums/ava_bbu_kategoriebedurfniskategorie").ava_bbu_kategoriebedurfniskategorie | null;
-  // Klient LookupType
-  ava_bbu_klient?: import("dataverse-ify").EntityReference | null;
+  // Klient [Required] LookupType
+  ava_bbu_klient?: import("dataverse-ify").EntityReference;
   //  StringType
   ava_bbu_klientname?: string | null;
   //  StringType
