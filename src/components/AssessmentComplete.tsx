@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { submitAssessment, fetchFamilyMembers, ClientData } from '../services/crmService';
-import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart, ArrowRight, Eye, MessageSquare, AlertCircle } from 'lucide-react';
+import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart, ArrowRight, Eye, MessageSquare, AlertCircle, Database } from 'lucide-react';
 import catalogData from '../data/questionCatalog.json';
 import config from '../data/config.json';
 import { cn } from '../utils/cn';
@@ -21,6 +21,7 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
   const [submittedId, setSubmittedId] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [familyMembers, setFamilyMembers] = useState<ClientData[]>([]);
+  const [showDataReport, setShowDataReport] = useState(false);
 
   useEffect(() => {
     if (!clientData?.familyId || !clientData?.id) return;
@@ -30,6 +31,30 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
   }, [clientData?.familyId, clientData?.id]);
 
   const isAbbruch = Object.values(answers).some(a => a.answer === 'Abbruch');
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const exportData = prepareExportData();
+      const result = await submitAssessment({
+        contactId: clientData?.id,
+        beurteilungId,
+        answers,
+        assessments,
+        qualities,
+        clientData,
+        exportData,
+      });
+      if (result.success) setSubmittedId(result.id || null);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setSubmitError(msg);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const prepareExportData = () => {
     const medicalIds = ['5.9', '10a.9'];
@@ -139,30 +164,6 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
       },
       evaluations
     };
-  };
-
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      const exportData = prepareExportData();
-      const result = await submitAssessment({
-        contactId: clientData?.id,
-        beurteilungId,
-        answers,
-        assessments,
-        qualities,
-        clientData,
-        exportData,
-      });
-      if (result.success) setSubmittedId(result.id || null);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setSubmitError(msg);
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const exportData = prepareExportData();
@@ -415,6 +416,33 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
             <div className="text-xs font-black uppercase tracking-widest mb-1">Übertragungsfehler</div>
             <div className="text-sm font-bold opacity-90">{submitError}</div>
           </div>
+        </div>
+      )}
+
+      {/* Floating CRM Data Report Icon */}
+      {!isAbbruch && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <button
+            onClick={() => setShowDataReport(!showDataReport)}
+            className="p-3 bg-slate-800 dark:bg-slate-700 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all border border-slate-700 dark:border-slate-600 group"
+            title="CRM Datenreport vorschau"
+          >
+            <Database size={18} />
+          </button>
+
+          {showDataReport && (
+            <div className="absolute bottom-16 right-0 w-[400px] max-w-[calc(100vw-3rem)] max-h-[60vh] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="font-black text-[10px] uppercase tracking-widest text-slate-400">CRM JSON Payload</h4>
+                <button onClick={() => setShowDataReport(false)} className="text-slate-400 hover:text-slate-600" aria-label="Schließen">
+                  <XCircle size={16} />
+                </button>
+              </div>
+              <pre className="text-[10px] font-mono text-slate-700 dark:text-slate-300 whitespace-pre-wrap">
+                {JSON.stringify(prepareExportData(), null, 2)}
+              </pre>
+            </div>
+          )}
         </div>
       )}
 

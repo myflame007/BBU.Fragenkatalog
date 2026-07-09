@@ -246,12 +246,7 @@ function App() {
         >
           ← Zurück zum Assistenten
         </button>
-        <AdminControlCenter
-          answers={answers}
-          assessments={assessments}
-          qualities={qualities}
-          clientData={clientData}
-        />
+        <AdminControlCenter />
       </div>
     );
   }
