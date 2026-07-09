@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { prepareExportData, prepareCrmPayloadPreview } from '../utils/reportUtils';
+import { ClientData } from '../services/crmService';
 import catalogData from '../data/questionCatalog.json';
 import config from '../data/config.json';
 import {
@@ -157,8 +159,20 @@ const SortableFlowStep: React.FC<{
   );
 };
 
-export const AdminControlCenter: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'editor' | 'flows' | 'assessments'>('editor');
+interface AdminControlCenterProps {
+  answers?: Record<string, any>;
+  assessments?: Record<string, boolean>;
+  qualities?: Record<string, number[]>;
+  clientData?: ClientData | null;
+}
+
+export const AdminControlCenter: React.FC<AdminControlCenterProps> = ({
+  answers = {},
+  assessments = {},
+  qualities = {},
+  clientData = null
+}) => {
+  const [activeTab, setActiveTab] = useState<'editor' | 'flows' | 'assessments' | 'report'>('editor');
   const [questions, setQuestions] = useState<any[]>(Object.values(catalog.questions));
   const [flows, setFlows] = useState<Record<string, any[]>>(catalog.flows);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -345,27 +359,34 @@ export const AdminControlCenter: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex bg-white p-1 rounded-2xl border border-gray-200 mb-8 w-fit shadow-sm">
+        <div className="flex bg-white p-1 rounded-2xl border border-gray-200 mb-8 w-fit shadow-sm flex-wrap gap-1">
           <button
             onClick={() => setActiveTab('editor')}
-            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'editor' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'editor' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
             <Edit3 size={18} />
             Fragen-Editor
           </button>
           <button
             onClick={() => setActiveTab('flows')}
-            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'flows' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'flows' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
             <Layout size={18} />
             Flow-Editor
           </button>
           <button
             onClick={() => setActiveTab('assessments')}
-            className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'assessments' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'assessments' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
           >
             <Eye size={18} />
             Bewertungs-Regeln
+          </button>
+          <button
+            onClick={() => setActiveTab('report')}
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'report' ? 'bg-blue-600 text-white shadow-lg scale-105' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'}`}
+          >
+            <Eye size={18} />
+            Report
           </button>
         </div>
 
@@ -898,6 +919,58 @@ export const AdminControlCenter: React.FC = () => {
             </div>
           </div>
         )}
+
+        {activeTab === 'report' && (() => {
+          if (!clientData) {
+            return (
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-12 text-center">
+                <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-100">
+                  <AlertCircle size={32} className="text-blue-500" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-800">Kein aktiver Klient gefunden</h3>
+                <p className="text-gray-500 text-sm mt-1 max-w-md mx-auto">
+                  Der Report zeigt die JSON-Export-Daten sowie die Dataverse API-Übermittlungspayloads für den aktuell geladenen Klienten. Bitte starten Sie eine Beurteilung für einen Klienten, um die Daten hier einzusehen.
+                </p>
+              </div>
+            );
+          }
+
+          const exportJson = prepareExportData(answers, assessments, clientData);
+          const crmPayloads = prepareCrmPayloadPreview(answers, assessments, qualities, clientData);
+
+          return (
+            <div className="space-y-8 animate-in fade-in duration-300">
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-800 mb-2">Live-Datenreport für {clientData.firstName} {clientData.lastName}</h2>
+                <p className="text-xs text-gray-400 font-mono">IFA: {clientData.ifaNumber} | Gruppe: {clientData.groupId}</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* JSON Export Payload */}
+                <div className="bg-slate-900 rounded-3xl p-6 shadow-xl text-slate-100 flex flex-col h-[70vh]">
+                  <div className="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-400">Standard JSON Export</span>
+                    <span className="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">file_export.json</span>
+                  </div>
+                  <pre className="text-[10px] font-mono whitespace-pre-wrap overflow-y-auto flex-1 custom-scrollbar">
+                    {JSON.stringify(exportJson, null, 2)}
+                  </pre>
+                </div>
+
+                {/* CRM Web API Payload Preview */}
+                <div className="bg-slate-900 rounded-3xl p-6 shadow-xl text-slate-100 flex flex-col h-[70vh]">
+                  <div className="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-400">Dataverse API / CRM Payloads</span>
+                    <span className="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">OData API Submit</span>
+                  </div>
+                  <pre className="text-[10px] font-mono whitespace-pre-wrap overflow-y-auto flex-1 custom-scrollbar">
+                    {JSON.stringify(crmPayloads, null, 2)}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

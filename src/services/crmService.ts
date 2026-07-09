@@ -607,8 +607,9 @@ async function replaceGeneralCategories(
     );
   }
 
+  // Exclude category 9 from writing general category records
   const activeCategories = config.categories.filter((c: any) =>
-    payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId])
+    c.id !== 'cat_9' && (payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId]))
   );
 
   console.log(
@@ -622,9 +623,8 @@ async function replaceGeneralCategories(
   const relativesInEuNotes = payload.answers['1b.9.1']?.notes || '';
   const relativesNotes = [relativesInAustriaNotes, relativesInEuNotes].filter(Boolean).join('\n').trim();
 
-  // Logic for Category 5: only fill pronouns if 5.3-5.7 has at least one "Ja"
-  const hasJaInCat5Range = ['5.3', '5.3.1', '5.4', '5.5', '5.6', '5.7', '5.7.1'].some(id => payload.answers[id]?.answer === 'Ja');
-  const pronounsValue = hasJaInCat5Range ? (payload.answers['5.7']?.notes || payload.answers['5.7.1']?.notes || '') : '';
+  // Directly use the pronoun notes if category 5 is active
+  const pronounsValue = payload.answers['5.7']?.notes || payload.answers['5.7.1']?.notes || '';
 
   for (const catConf of activeCategories) {
     const crmEnum = CATEGORY_ID_MAP[catConf.id];
@@ -655,18 +655,34 @@ async function replaceGeneralCategories(
       'ava_bbu_Klient@odata.bind': `/${contactMetadata.collectionName}(${payload.contactId})`,
     };
 
+    const isRiskPresent = catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId];
+
     // Optionale Zusatzfelder: schema-/umgebungsabhaengig. Fehlt eines davon in der
     // Zielumgebung, darf das den Submit NICHT komplett abbrechen (siehe Retry unten).
     const optionalFields: Record<string, unknown> = {
-      // Picklist "Risikofaktoren liegen vor": ja = 100000000 (das aeltere Boolean-Feld
-      // ava_bbu_risikofaktorenliegenvor existiert in Dev nicht -> 0x80048d19).
-      ava_bbu_risikofaktorenliegenvor1:
-        (catConf.riskAssessmentId && payload.assessments[catConf.riskAssessmentId]) ? 100000000 : undefined,
+      // Picklist "Risikofaktoren liegen vor" (Choice): ja = 100000000. Omit completely if false.
+      // ava_bbu_risikofaktorenliegenvor1: isRiskPresent ? 100000000 : undefined,
+      // Boolean "Risikofaktoren liegen vor" (ava_risikofaktorenliegenvor)
+      ava_risikofaktorenliegenvor: isRiskPresent ? true : undefined,
+
       ava_bbu_angabeverwandtebezugspersoneninoste: (catConf.id === 'cat_1b' && payload.assessments['1b.15']) ? true : undefined,
       ava_bbu_angabeverwandtebezugspersonineu: (catConf.id === 'cat_1b' && payload.assessments['1b.16']) ? true : undefined,
       ava_bbu_infozuverwandtenbezugspersonen: catConf.id === 'cat_1b' && relativesNotes ? relativesNotes : undefined,
       ava_bbu_pronomen: catConf.id === 'cat_5' && pronounsValue ? pronounsValue : undefined,
       ava_sonstigebesonderebedurfnisse: (catConf.id === 'sonstiges' && isAnalphabetismus) ? '100000004' : undefined, // Analphabetismus
+
+      // Unterstützung notwendig boolean for cat_6
+      ava_bbu_unterstutzungnotwendig: (catConf.id === 'cat_6' && payload.assessments['6.6']) ? true : undefined,
+
+      // Medizinische Hinweise liegen vor (only write true for cat_10a if 10a.9, NOT for cat_5)
+      ava_bbu_medizinischehinweiseliegenvor: (
+        catConf.id === 'cat_10a' && payload.assessments['10a.9']
+      ) ? true : undefined,
+
+      // Psychologische Hinweise liegen vor (only write true for cat_10a if 10a.8, NOT for cat_10c or cat_10e)
+      ava_bbu_psychologischehinweiseliegenvor: (
+        catConf.id === 'cat_10a' && payload.assessments['10a.8']
+      ) ? true : undefined,
     };
 
     const cleanOptional = Object.fromEntries(
