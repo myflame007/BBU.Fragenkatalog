@@ -590,11 +590,14 @@ async function replaceGeneralCategories(
   assessmentId: string,
   payload: AssessmentSubmitPayload,
 ): Promise<void> {
+  // Raeumt sowohl "Allgemeine Beurteilung"- als auch "Psychische Einschaetzung"-Datensaetze
+  // (Cat_9) dieser Beurteilung auf, damit ein erneuter Submit keine Duplikate anlegt.
   const existingResult = await Ava_bbu_bedurfniskategoriesService.getAll({
     select: [ava_bbu_bedurfniskategorieMetadata.primaryIdAttribute],
     filter:
       `_ava_beurteilungbesondererbedurfnisseid_value eq ${assessmentId}` +
-      ` and ava_bbu_typ eq ${ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung}`,
+      ` and (ava_bbu_typ eq ${ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung}` +
+      ` or ava_bbu_typ eq ${ava_bbu_typbedurfniskategorie.PsychischeEinschtzung})`,
   });
 
   if (existingResult.success && existingResult.data?.length) {
@@ -607,11 +610,11 @@ async function replaceGeneralCategories(
     );
   }
 
-  // Cat_9 (psychische Erkrankung) bewusst von der allgemeinen Kategorie-Anlage ausgeschlossen.
-  // TODO: Grund im Code nicht dokumentiert - vor naechstem Release mit Messijan klaeren, ob das
-  // weiterhin so gewollt ist (z.B. weil Cat_9 anderswo separat abgebildet wird).
+  // Cat_9 (9a. Psychosoziale Belastung + 9b. Schwere psychische Erkrankung) laeuft ueber denselben
+  // einzigen Trigger 9b.10 und ergibt genau EINEN Datensatz vom Typ "Psychische Einschaetzung"
+  // (statt "Allgemeine Beurteilung", siehe ava_bbu_typ weiter unten). Mit Messijan/Masoud bestaetigt.
   const activeCategories = config.categories.filter((c: any) =>
-    c.id !== 'cat_9' && (payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId]))
+    payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId])
   );
 
   console.log(
@@ -663,7 +666,10 @@ async function replaceGeneralCategories(
     // ob der Kategorie-Datensatz ueberhaupt angelegt werden kann.
     const coreFields: Record<string, unknown> = {
       ava_name: catConf.name,
-      ava_bbu_typ: ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung,
+      // Cat_9 gehoert fachlich zur "Psychischen Einschaetzung", nicht zur "Allgemeinen Beurteilung".
+      ava_bbu_typ: catConf.id === 'cat_9'
+        ? ava_bbu_typbedurfniskategorie.PsychischeEinschtzung
+        : ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung,
       ava_bbu_kategorie: crmEnum,
       // MultiSelect-Feld erwartet die Web API als kommagetrennten String, nicht als Array.
       ava_qualitatcode: qualityValues.length > 0 ? qualityValues.join(',') : undefined,
