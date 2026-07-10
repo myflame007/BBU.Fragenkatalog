@@ -441,7 +441,7 @@ export interface AssessmentSubmitPayload {
   };
 }
 
-const CATEGORY_ID_MAP: Record<string, ava_bbu_kategoriebedurfniskategorie> = {
+export const CATEGORY_ID_MAP: Record<string, ava_bbu_kategoriebedurfniskategorie> = {
   cat_1a: ava_bbu_kategoriebedurfniskategorie.BegleiteterMinderjhriger,
   cat_1b: ava_bbu_kategoriebedurfniskategorie.UnbegleitetervonElterngetrenntlebenderMinderjhriger,
   cat_5: ava_bbu_kategoriebedurfniskategorie.HomosexuellebisexuelleinterodertransgeschlechtlichePersonen,

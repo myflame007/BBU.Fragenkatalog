@@ -4,6 +4,7 @@ import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart,
 import catalogData from '../data/questionCatalog.json';
 import config from '../data/config.json';
 import { cn } from '../utils/cn';
+import { prepareExportData } from '../utils/reportUtils';
 
 const catalog = catalogData as any;
 
@@ -31,122 +32,12 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
 
   const isAbbruch = Object.values(answers).some(a => a.answer === 'Abbruch');
 
-  const prepareExportData = () => {
-    const medicalIds = ['5.9', '10a.9'];
-    const psychologicalIds = ['9b.10', '10a.8', '10c.8', '10e.13'];
-
-    const isMedicalNecessary = medicalIds.some(id => assessments[id]);
-    const isPsychologicalNecessary = psychologicalIds.some(id => assessments[id]);
-
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    const formattedDate = `${day}.${month}.${year}`;
-
-    const evaluations: Record<string, any> = {};
-
-    // 1. Special fields for CRM Export (aggregated fields)
-    if (isMedicalNecessary) {
-      evaluations.ava_medizinische_einschaetzung_notwendig = {
-        id: 'ava_medizinische_einschaetzung_notwendig',
-        text: 'Medizinische Einschätzung notwendig',
-        result: formattedDate,
-        isAggregatedField: true
-      };
-    }
-    if (isPsychologicalNecessary) {
-      evaluations.ava_psychologische_einschaetzung_notwendig = {
-        id: 'ava_psychologische_einschaetzung_notwendig',
-        text: 'Psychologische Einschätzung notwendig',
-        result: formattedDate,
-        isAggregatedField: true
-      };
-    }
-
-    // 2. Special items 1b.15 and 1b.16
-    evaluations['1b.15'] = {
-      id: '1b.15',
-      text: 'Verwandte/Bezugspersonen in Österreich',
-      result: assessments['1b.15'] ? 'Ja' : 'Nein',
-      anmerkung: answers['1b.8']?.notes || ''
-    };
-    evaluations['1b.16'] = {
-      id: '1b.16',
-      text: 'Verwandte/Bezugspersonen in EU',
-      result: assessments['1b.16'] ? 'Ja' : 'Nein',
-      anmerkung: answers['1b.9.1']?.notes || ''
-    };
-
-    // 2.1 Pronomen 5.7 / 5.7.1
-    const pronouns = answers['5.7']?.notes || answers['5.7.1']?.notes || '';
-    if (pronouns) {
-      evaluations['cat_5_pronouns'] = {
-        id: 'cat_5_pronouns',
-        text: 'Pronomen/Name',
-        result: 'Ja',
-        anmerkung: pronouns
-      };
-    }
-
-    // 3. Other assessments (standard)
-    Object.keys(catalog.questions).forEach(id => {
-      const q = catalog.questions[id];
-      if (q.type === 'Bewertung' &&
-          id !== '1b.15' &&
-          id !== '1b.16') {
-
-        evaluations[id] = {
-          id,
-          text: q.text.de,
-          result: assessments[id] ? "Ja" : "Nein"
-        };
-      }
-    });
-
-    // Add explicit illiteracy if triggered
-    if (assessments['11.3'] || assessments['11.3.1']) {
-      evaluations['risk_illiteracy'] = {
-        id: 'risk_illiteracy',
-        text: 'Analphabetismus',
-        result: 'Ja',
-        category: 'Sonstige Besondere Bedürfnisse'
-      };
-    }
-
-    // 4. Base categories (Immediate)
-    const baseCategoryIds = ['cat_1a', 'cat_1b', 'cat_5', 'cat_6'];
-    baseCategoryIds.forEach(id => {
-      if (assessments[id]) {
-        const category = config.categories.find((c: any) => c.id === id.replace('cat_', '')) ||
-                         config.categories.find((c: any) => c.id === id);
-        evaluations[id] = {
-          id,
-          text: category?.name || id,
-          result: "Ja"
-        };
-      }
-    });
-
-    return {
-      metadata: {
-        timestamp: new Date().toISOString(),
-        client: clientData ? {
-          name: `${clientData.firstName} ${clientData.lastName}`,
-          ifa: clientData.ifaNumber,
-          ava_clientgroup: clientData.groupId
-        } : undefined
-      },
-      evaluations
-    };
-  };
-
   const handleSubmit = async () => {
     setSubmitting(true);
     setSubmitError(null);
 
     try {
-      const exportData = prepareExportData();
+      const exportData = prepareExportData(answers, assessments, clientData);
       const result = await submitAssessment({
         contactId: clientData?.id,
         beurteilungId,
@@ -165,7 +56,7 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
     }
   };
 
-  const exportData = prepareExportData();
+  const exportData = prepareExportData(answers, assessments, clientData);
   const activeEvaluations = exportData.evaluations;
   const activeIds = Object.keys(activeEvaluations).filter(id => {
     const item = activeEvaluations[id];

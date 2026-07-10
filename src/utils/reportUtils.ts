@@ -1,26 +1,11 @@
 import catalogData from '../data/questionCatalog.json';
 import config from '../data/config.json';
-import { ClientData } from '../services/crmService';
+import { ClientData, CATEGORY_ID_MAP } from '../services/crmService';
 import { contactMetadata } from '../dataverse-gen/entities/Contact';
 import { ava_bbu_beurteilungbesondererbedurfnisseMetadata } from '../dataverse-gen/entities/ava_bbu_BeurteilungBesondererBedurfnisse';
-import { ava_bbu_kategoriebedurfniskategorie } from '../dataverse-gen/enums/ava_bbu_kategoriebedurfniskategorie';
 import { ava_bbu_typbedurfniskategorie } from '../dataverse-gen/enums/ava_bbu_typbedurfniskategorie';
 
 const catalog = catalogData as any;
-
-const CATEGORY_ID_MAP: Record<string, ava_bbu_kategoriebedurfniskategorie> = {
-  cat_1a: ava_bbu_kategoriebedurfniskategorie.BegleiteterMinderjhriger,
-  cat_1b: ava_bbu_kategoriebedurfniskategorie.UnbegleitetervonElterngetrenntlebenderMinderjhriger,
-  cat_5: ava_bbu_kategoriebedurfniskategorie.HomosexuellebisexuelleinterodertransgeschlechtlichePersonen,
-  cat_6: ava_bbu_kategoriebedurfniskategorie.AlleinerziehendermitminderjhrigeminKindern,
-  cat_7: ava_bbu_kategoriebedurfniskategorie.PotenziellesOpfervonMenschenoderKinderhandel,
-  cat_9: ava_bbu_kategoriebedurfniskategorie.PersondieaneinerkrankheitswertigenbelastungsabhngigenStrungeinerpsychischenErkrankungvonvergleichbaremGewichtodereinersonstigenschwerenErkrankungleidet,
-  cat_10a: ava_bbu_kategoriebedurfniskategorie.PotenziellesOpfervonFolter,
-  cat_10c: ava_bbu_kategoriebedurfniskategorie.PersondieVergewaltigungerlittenhat,
-  cat_10d: ava_bbu_kategoriebedurfniskategorie.PotenziellesOpfervonZwangseheoderKinderheirat,
-  cat_10e: ava_bbu_kategoriebedurfniskategorie.PersondieanderenschwerenFormenvonpsychischerphysischerundsexuellerGewaltausgesetztwar,
-  sonstiges: ava_bbu_kategoriebedurfniskategorie.Sonstiges,
-};
 
 export const prepareExportData = (
   answers: Record<string, any>,
