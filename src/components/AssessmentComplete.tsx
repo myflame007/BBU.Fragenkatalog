@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { submitAssessment, fetchFamilyMembers, ClientData } from '../services/crmService';
 import { XCircle, Users, CheckCircle2, AlertTriangle, FileText, Settings, Heart, ArrowRight, Eye, MessageSquare, AlertCircle } from 'lucide-react';
 import catalogData from '../data/questionCatalog.json';
@@ -22,6 +22,9 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
   const [submittedId, setSubmittedId] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [familyMembers, setFamilyMembers] = useState<ClientData[]>([]);
+  // Synchrone Sperre gegen Doppel-Submit bei schnellem Doppelklick: schliesst das Zeitfenster,
+  // bis der "disabled"-State des Buttons tatsaechlich neu gerendert ist.
+  const submitLockRef = useRef(false);
 
   useEffect(() => {
     if (!clientData?.familyId || !clientData?.id) return;
@@ -33,6 +36,8 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
   const isAbbruch = Object.values(answers).some(a => a.answer === 'Abbruch');
 
   const handleSubmit = async () => {
+    if (submitLockRef.current) return;
+    submitLockRef.current = true;
     setSubmitting(true);
     setSubmitError(null);
 
@@ -52,6 +57,7 @@ export const AssessmentComplete: React.FC<Props> = ({ answers, assessments, qual
       const msg = err instanceof Error ? err.message : String(err);
       setSubmitError(msg);
     } finally {
+      submitLockRef.current = false;
       setSubmitting(false);
     }
   };

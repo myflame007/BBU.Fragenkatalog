@@ -543,6 +543,7 @@ type AssessmentUpsertData = {
   ava_bbu_allgemeinebeurteilungdurchgefuhrtam: string;
   ava_bbu_medbeurteilungnotwendig?: string;
   ava_bbu_psycheinschatzungsbedarffestgestell?: string;
+  ava_bbu_zustimmung?: boolean;
   'ava_bbu_Klient@odata.bind'?: string;
   'ava_bbu_Standort@odata.bind'?: string;
   'ava_bbu_Gesprachsteilnehmerin@odata.bind'?: string;
@@ -570,6 +571,17 @@ function buildAssessmentUpdate(
     payload.assessments['10e.13']
   ) {
     update.ava_bbu_psycheinschatzungsbedarffestgestell = today;
+  }
+
+  // Zustimmungsfragen schliessen sich je nach Flow gegenseitig aus (0.1 = Erwachsene,
+  // 01.1 = Minderjaehrige, 0.3a = Eltern-Zustimmung fuers Kind) - pro Beurteilung ist nie
+  // mehr als eine davon beantwortet.
+  if (
+    payload.answers['0.1']?.answer === 'Ja' ||
+    payload.answers['01.1']?.answer === 'Ja' ||
+    payload.answers['0.3a']?.answer === 'Ja'
+  ) {
+    update.ava_bbu_zustimmung = true;
   }
 
   // Question 0.1a selection -> lookup to contact
@@ -610,11 +622,13 @@ async function replaceGeneralCategories(
     );
   }
 
-  // Cat_9 (9a. Psychosoziale Belastung + 9b. Schwere psychische Erkrankung) laeuft ueber denselben
-  // einzigen Trigger 9b.10 und ergibt genau EINEN Datensatz vom Typ "Psychische Einschaetzung"
-  // (statt "Allgemeine Beurteilung", siehe ava_bbu_typ weiter unten). Mit Messijan/Masoud bestaetigt.
+  // Cat_9 (9a. Psychosoziale Belastung + 9b. Schwere psychische Erkrankung) bewusst von der
+  // Kategorie-Anlage ausgeschlossen: App-User haben in Dataverse keine Berechtigung, Datensaetze
+  // vom Typ "Psychische Einschaetzung" anzulegen. 9b.10 dient nur der CMS-Anzeige und setzt dafuer
+  // bereits das Datumsfeld ava_bbu_psycheinschatzungsbedarffestgestell auf der Beurteilung (siehe
+  // buildAssessmentUpdate weiter unten) - ein zusaetzlicher Kategorie-Datensatz entsteht dafuer nicht.
   const activeCategories = config.categories.filter((c: any) =>
-    payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId])
+    c.id !== 'cat_9' && (payload.assessments[c.id] || (c.riskAssessmentId && payload.assessments[c.riskAssessmentId]))
   );
 
   console.log(
@@ -666,10 +680,7 @@ async function replaceGeneralCategories(
     // ob der Kategorie-Datensatz ueberhaupt angelegt werden kann.
     const coreFields: Record<string, unknown> = {
       ava_name: catConf.name,
-      // Cat_9 gehoert fachlich zur "Psychischen Einschaetzung", nicht zur "Allgemeinen Beurteilung".
-      ava_bbu_typ: catConf.id === 'cat_9'
-        ? ava_bbu_typbedurfniskategorie.PsychischeEinschtzung
-        : ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung,
+      ava_bbu_typ: ava_bbu_typbedurfniskategorie.AllgemeineBeurteilung,
       ava_bbu_kategorie: crmEnum,
       // MultiSelect-Feld erwartet die Web API als kommagetrennten String, nicht als Array.
       ava_qualitatcode: qualityValues.length > 0 ? qualityValues.join(',') : undefined,

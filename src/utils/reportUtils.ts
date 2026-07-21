@@ -157,6 +157,14 @@ export const prepareCrmPayloadPreview = (
     beurteilungUpdate.ava_bbu_psycheinschatzungsbedarffestgestell = today;
   }
 
+  if (
+    answers['0.1']?.answer === 'Ja' ||
+    answers['01.1']?.answer === 'Ja' ||
+    answers['0.3a']?.answer === 'Ja'
+  ) {
+    beurteilungUpdate.ava_bbu_zustimmung = true;
+  }
+
   const attendeeId = answers['0.1a']?.selection;
   if (attendeeId && attendeeId.length > 5) {
     beurteilungUpdate['ava_bbu_Gesprachsteilnehmerin@odata.bind'] = `/${contactMetadata.collectionName}(${attendeeId})`;
