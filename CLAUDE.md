@@ -17,7 +17,9 @@ Ist KEIN eigenständig gehostetes Web-Frontend und hat KEIN eigenes Auth-System.
 - `src/generated/` - von `pac code add-data-source` erzeugt, nicht manuell editieren
 - `power.config.json` - aktive Zielumgebung; `power.config.dev.json` /
   `power.config.live.json` sind die vorbereiteten Varianten dafür
-- Details zu Deployment: `README.md`, `DEV-DEPLOYMENT-ANLEITUNG.md`
+- Details zu Deployment: `README.md`, `DEV-DEPLOYMENT-ANLEITUNG.md` (deckt
+  Dev **und** Live ab, inkl. Troubleshooting zu `pac auth` - u.a. dass
+  `--deviceCode` vom BBU-Tenant per Conditional-Access-Policy blockiert wird)
 - Dataverse-Integrationsplan: `DATAVERSE-INTEGRATION.md`
 
 ## Arbeitsweise / Git
