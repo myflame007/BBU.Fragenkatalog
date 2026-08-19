@@ -73,7 +73,7 @@ export const calculateQualities = (answers: Record<string, any>, assessments: Re
     const configCat = config.categories.find((c: any) => c.id === catId);
     const isActive = assessments[catId] || (configCat?.riskAssessmentId && assessments[configCat.riskAssessmentId]);
     if (isActive) {
-      qualities[catId] = [ava_bbu_qualitat.Screening];
+      qualities[catId] = [];
     }
   });
 
